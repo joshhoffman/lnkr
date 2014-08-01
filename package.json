@@ -1,30 +1,33 @@
 {
-    "name": "lnkr",
-    "version": "0.0.1",
-    "dependencies": {
-        "express": "*",
-        "redis": "*",
-        "serve-favicon": "*",
-        "cookie-parser": "*",
-        "express-session": "1.x.x",
-        "express-json": "1.x.x",
-        "method-override": "*",
-        "errorhandler": "1.x.x",
-        "body-parser": "*",
-        "morgan": "*"
-    },
-    "devDependencies": {
-        "chai": "*",
-        "grunt": "*",
-        "grunt-cafe-mocha": "*",
-        "grunt-cli": "*",
-        "grunt-coffeelint": "*",
-        "grunt-contrib-coffee": "*",
-        "grunt-contrib-jshint": "*",
-        "grunt-contrib-less": "*",
-        "grunt-contrib-watch": "*",
-        "less": "*",
-        "mocha": "*",
-        "zombie": "*"
-    }
+  "name": "lnkr",
+  "version": "0.0.1",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "errorhandler": "1.x.x",
+    "express": "*",
+    "express-json": "1.x.x",
+    "express-session": "1.x.x",
+    "jquery": "^2.1.1",
+    "method-override": "*",
+    "morgan": "*",
+    "redis": "*",
+    "serve-favicon": "*",
+    "underscore": "^1.6.0"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "grunt": "*",
+    "grunt-cafe-mocha": "*",
+    "grunt-cli": "*",
+    "grunt-coffeelint": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-watch": "*",
+    "less": "*",
+    "mocha": "*",
+    "zombie": "*"
+  }
 }

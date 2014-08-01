@@ -1,4 +1,8 @@
-var Backbone = require('Backbone');
+
+var $ = require('jquery')(window);
+var Backbone = require('backbone');
+Backbone.$ = $;
+
 
 ReadItem = Backbone.Model.extend({
     url: '/readitem',

@@ -5,7 +5,7 @@ Backbone.$ = $;
 
 
 ReadItem = Backbone.Model.extend({
-    url: '/readitem',
+    //url: '/readitem',
     defaults: {
         name: '',
         link: ''

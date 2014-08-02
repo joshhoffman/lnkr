@@ -1,4 +1,3 @@
-
 var $ = require('jquery')(window);
 var Backbone = require('backbone');
 Backbone.$ = $;
@@ -9,7 +8,7 @@ Items = Backbone.Collection.extend({
     url: '/readitems',
     model: ReadItem,
     initialize: function(models, options) {
-        this.bind("add", options.view.addItemLi);
+        //this.bind("add", options.view.addItemLi);
     }
 });
 

@@ -11,6 +11,7 @@
     "express-session": "1.x.x",
     "jquery": "^2.1.1",
     "method-override": "*",
+    "mongoose": "^3.8.14",
     "morgan": "*",
     "redis": "*",
     "serve-favicon": "*",

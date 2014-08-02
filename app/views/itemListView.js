@@ -1,12 +1,12 @@
-var $ = require('jquery')(window);
-var Backbone = require('Backbone');
+var $ = require('jquery');
+var Backbone = require('backbone');
 Backbone.$ = $;
-var Items = require('./collections/items');
+var ReadItemView = require('views/readItemView');
 
-module.exports = Backbone.View.extend({
-    el: $("body"),
+var ItemListView = Backbone.View.extend({
+    //el: $("body"),
     initialize: function (models, options) {
-        me = this;
+        /*me = this;
         itemList = new Items(null, { view: this });
         this.items = itemList;
         itemList.fetch({
@@ -15,14 +15,22 @@ module.exports = Backbone.View.extend({
                 console.log(itemList.models.count);
                 me.render();
             }
-        });
+        });*/
+        console.log('init item list view')
     },
+    render: function() {
+        var readItemView = this.collection.map(function(readItem) {
+            return (new ReadItemView({model: readItem})).render().el;
+        });
+        this.$el.html(readItemView);
+        return this;
+    }//,
     /*render: function () {
             //var self = this;
             _(this.items.models).each(function(item) {
              self.appendItem(item)
              }, this);
-        },*/
+        },
     events: {
         "click #addItem": "addItem"
     },
@@ -46,11 +54,7 @@ module.exports = Backbone.View.extend({
     addItemLi: function (model) {
         console.log('additemli');
         $('<li>').text(model.get('name') + ' ' + model.get('link')).appendTo("#readingList");
-    },
-    appendItem: function (model) {
-        console.log('calling append item');
-        $('<li>').text(model.get('name') + ' ' + model.get('link')).appendTo("#readingList");
-    }
+    }*/
 });
 
-var appView = new AppView;
+module.exports = ItemListView;

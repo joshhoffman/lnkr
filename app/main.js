@@ -2,7 +2,23 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
 
-var Items = require('collections/items');
+var ItemsRouter = require('routers/itemRouter');
+
+$(document).ready(function() {
+    console.log("Init app");
+    var router = new ItemsRouter({
+        el: $('#items')
+    });
+
+    console.log('in ready');
+
+    Backbone.history.start({
+        pushState: true,
+        root: '/'
+    });
+});
+
+/*var Items = require('collections/items');
 
 var ReadItemView = require('views/readItemView');
 var ItemListView = require('views/itemListView');
@@ -19,4 +35,4 @@ module.exports = {
 };
 
 Monitor = require('./monitor');
-monitor = new Monitor(items);
+monitor = new Monitor(items);*/

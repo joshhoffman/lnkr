@@ -1,11 +1,14 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
+
 var ReadItemView = require('views/readItemView');
 
 var ItemListView = Backbone.View.extend({
     //el: $("body"),
-    initialize: function (models, options) {
+    tagName: 'section',
+    initialize: function (options) {
+        this.router = options.router;
         /*me = this;
         itemList = new Items(null, { view: this });
         this.items = itemList;
@@ -19,8 +22,9 @@ var ItemListView = Backbone.View.extend({
         console.log('init item list view')
     },
     render: function() {
+        var that = this;
         var readItemView = this.collection.map(function(readItem) {
-            return (new ReadItemView({model: readItem})).render().el;
+            return (new ReadItemView({model: readItem, router: that.router})).render().el;
         });
         this.$el.html(readItemView);
         return this;
@@ -56,5 +60,16 @@ var ItemListView = Backbone.View.extend({
         $('<li>').text(model.get('name') + ' ' + model.get('link')).appendTo("#readingList");
     }*/
 });
+
+var instance;
+ItemListView.getInstance = function(options) {
+    if(!instance) {
+        instance = new ItemListView({
+            el: options.el,
+            collection: options.collection,
+            router: options.router
+        });
+    }
+};
 
 module.exports = ItemListView;

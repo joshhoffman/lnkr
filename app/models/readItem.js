@@ -7,7 +7,8 @@ ReadItem = Backbone.Model.extend({
         link: '',
         selected: false,
         dateAdded: 'L2Dates',
-        description: 'desc'
+        description: 'desc',
+        tags: ''
     }
     //initialize: function() {
     //    console.log('creating new ReadItem');

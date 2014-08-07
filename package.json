@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "backbone": "^1.1.2",
+    "backbone.obscura": "^0.1.7",
     "body-parser": "*",
     "cookie-parser": "*",
     "errorhandler": "1.x.x",

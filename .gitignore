@@ -44,3 +44,5 @@ app.js
 
 .idea
 bundle.js
+bundleprod.js
+templates.js

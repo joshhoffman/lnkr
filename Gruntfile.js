@@ -5,12 +5,37 @@ module.exports = function(grunt) {
         'grunt-contrib-less',
         'grunt-contrib-watch',
         'grunt-contrib-coffee',
-        'grunt-coffeelint'
+        'grunt-contrib-jshint',
+        'grunt-coffeelint',
+        'grunt-browserify',
+        'grunt-contrib-handlebars'
     ].forEach(function(task) {
             grunt.loadNpmTasks(task);
         });
 
     grunt.initConfig({
+        jshint: {
+            options: {
+                multistr: true
+            },
+            all: ['app/**/*.js']
+        },
+        browserify: {
+            options: {
+                debug: true
+            },
+            dev: {
+                src: ['app/main.js'],
+                dest: 'public/static/bundle.js'
+            },
+            production: {
+                options: {
+                    debug: false
+                },
+                src: ['app/main.js'],
+                dest: 'public/static/bundleprod.js'
+            }
+        },
         cafemocha: {
             all: {
                 src: 'qa/**/tests-unit*.js',
@@ -45,7 +70,22 @@ module.exports = function(grunt) {
                   //'controllers/*.coffee'
               ]
           },
+        handlebars: {
+            all: {
+                files: {
+                    "public/static/templates.js": ["public/templates/**/*.hbs"]
+                }
+            }
+        },
         watch: {
+            browserify: {
+                files: [
+                    'app/**/*.js'
+                ],
+                tasks: [
+                    'browserify'
+                ]
+            },
             jshint: {
                 files: [
                     //'app.js',
@@ -55,7 +95,8 @@ module.exports = function(grunt) {
                     'webAPI.js',
                     'public/qa/**/*.js',
                     'public/js/**/*.js',
-                    'qa/**/*.js'
+                    'qa/**/*.js',
+                    'app/**/*.js'
                 ],
                 tasks: [
                     'jshint'
@@ -94,6 +135,14 @@ module.exports = function(grunt) {
                     'coffeelint',
                     'coffee'
                 ]
+            },
+            handlebars: {
+                files: [
+                    'public/templates/**/*.hbs'
+                ],
+                tasks: [
+                    'handlebars'
+                ]
             }
         },
         notify: {
@@ -104,7 +153,9 @@ module.exports = function(grunt) {
     });
 
     //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
-    grunt.registerTask('default', ['cafemocha', 'coffee', 'coffeelint'])
+    grunt.registerTask('compile', ['coffee', 'browserify', 'handlebars', 'cafemocha'])
+    grunt.registerTask('lint', ['jshint', 'coffeelint']);
+    grunt.registerTask('default', ['lint', 'compile']);
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'node',

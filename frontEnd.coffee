@@ -1,15 +1,9 @@
 express = require 'express'
 path = require 'path'
-redis = require 'redis'
 fs = require 'fs'
 config = require './configure/config'
 
 app = express()
-
-db = redis.createClient()
-
-db.on "error", (err) ->
-    console.log("Error " + err)
 
 config.config(app)
 

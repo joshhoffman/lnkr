@@ -23,7 +23,7 @@ Items = Backbone.Collection.extend({
     selectById: function(id) {
         console.log(id);
         var item = this.get(id);
-        item.set({"selected": true})
+        item.set({"selected": true});
         return item.id;
     }
 });

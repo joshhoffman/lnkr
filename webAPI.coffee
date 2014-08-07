@@ -4,12 +4,17 @@ redis = require 'redis'
 fs = require 'fs'
 config = require './configure/config'
 
+mongoose = require 'mongoose'
+
 app = express()
 
-db = redis.createClient()
+#db = redis.createClient()
+db = mongoose.connection
 
 db.on "error", (err) ->
-    console.log("Error " + err)
+    console.log("Mongo Error " + err)
+
+mongoose.connect('mongodb://localhost/lnkr')
 
 config.config(app)
 

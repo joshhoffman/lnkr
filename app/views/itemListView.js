@@ -2,10 +2,14 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
+var Handlebars = require('handlebars');
+Handlebars.getTemplate = require('utils/utils');
+
 var ReadItemView = require('views/readItemView');
 
 var ItemListView = Backbone.View.extend({
     //el: $("body"),
+    template: Handlebars.getTemplate('index'),
     tagName: 'section',
     initialize: function (options) {
         this.router = options.router;
@@ -19,14 +23,15 @@ var ItemListView = Backbone.View.extend({
                 me.render();
             }
         });*/
-        console.log('init item list view')
+        console.log('init item list view');
     },
     render: function() {
-        var that = this;
+        /*var that = this;
         var readItemView = this.collection.map(function(readItem) {
             return (new ReadItemView({model: readItem, router: that.router})).render().el;
         });
-        this.$el.html(readItemView);
+        this.$el.html(readItemView);*/
+        this.$el.html(this.template({name: 'world'}));
         return this;
     }//,
     /*render: function () {

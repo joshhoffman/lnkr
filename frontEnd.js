@@ -1,23 +1,15 @@
 (function() {
-  var app, config, db, express, fs, path, port, redis, ret;
+  var app, config, express, fs, path, port, ret;
 
   express = require('express');
 
   path = require('path');
-
-  redis = require('redis');
 
   fs = require('fs');
 
   config = require('./configure/config');
 
   app = express();
-
-  db = redis.createClient();
-
-  db.on("error", function(err) {
-    return console.log("Error " + err);
-  });
 
   config.config(app);
 

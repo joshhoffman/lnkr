@@ -1,5 +1,5 @@
 (function() {
-  var app, config, db, express, fs, path, port, redis, ret;
+  var app, config, db, express, fs, mongoose, path, port, redis, ret;
 
   express = require('express');
 
@@ -11,13 +11,17 @@
 
   config = require('./configure/config');
 
+  mongoose = require('mongoose');
+
   app = express();
 
-  db = redis.createClient();
+  db = mongoose.connection;
 
   db.on("error", function(err) {
-    return console.log("Error " + err);
+    return console.log("Mongo Error " + err);
   });
+
+  mongoose.connect('mongodb://localhost/lnkr');
 
   config.config(app);
 

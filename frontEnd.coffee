@@ -17,10 +17,11 @@ app.get '/', (req, res) ->
     fs.readFile '/public/index.html', (err, html) ->
         if err
             throw err
-        res.writeHeader(200, {"Content-Type": "text/html"});
-        res.write(html);
-        res.end();
+        res.writeHeader(200, {"Content-Type": "text/html"})
+        res.write(html)
+        res.end()
 
+###
 app.get '/readitem', (req, res) ->
     console.log('')
 
@@ -38,6 +39,7 @@ app.post '/readitem', (req, res) ->
     console.log db.hmset 'test1', 'name', req.body.name, 'link', req.body.link, (err, obj) ->
         console.log('saved')
         res.json({ status: 'success' })
+###
 
 port = app.get 'port'
 ret = app.listen port, () ->

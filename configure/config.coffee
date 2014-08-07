@@ -10,11 +10,15 @@ errorHandler = require 'errorhandler'
 bodyParser = require 'body-parser'
 path = require 'path'
 express = require 'express'
+proxy = require 'proxy-middleware'
+url = require 'url'
 
 exports.config = (app) ->
-    app.set 'port', process.env.PORT || 3001
+    app.set 'port', process.argv[2] || 5001
     app.use favicon(path.join(__dirname, '../public/favicon.ico'))
-    app.use morgan('dev', {})
+    app.use morgan('dev', {immediate: true})
+    # proxy
+    app.use('/api', proxy(url.parse('http://0.0.0.0:' + app.get 'port' + '/api')))
     app.use expressJson()
     app.use bodyParser.urlencoded({extended: true})
     app.use bodyParser.json()

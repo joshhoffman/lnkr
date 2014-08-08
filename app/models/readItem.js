@@ -1,6 +1,7 @@
 var Backbone = require('backbone');
 
 ReadItem = Backbone.Model.extend({
+    url: '/api/links',
     defaults: {
         name: '',
         title: '',

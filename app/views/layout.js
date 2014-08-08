@@ -4,6 +4,7 @@ var Backbone = require('backbone');
 var ItemListView = require('views/itemListView');
 var DetailsView = require('views/details');
 var ChoseView = require('views/chose');
+var NewLinkView = require('views/newLink');
 
 var Handlebars = require('handlebars');
 Handlebars.getTemplate = require('utils/utils');
@@ -14,6 +15,7 @@ var Layout = Backbone.View.extend({
         this.$el.html(this.template());
         this.currentDetails.setElement(this.$('#details')).render();
         this.overview.setElement(this.$('#overview')).render();
+        this.newItem.setElement(this.$('#newLink')).render();
         return this;
     },
     initialize: function(options) {
@@ -22,6 +24,7 @@ var Layout = Backbone.View.extend({
             collection: options.router.items,
             router: options.router
         });
+        this.newItem = new NewLinkView();
     },
     setDetails: function(item) {
         if(this.currentDetails) this.currentDetails.remove();

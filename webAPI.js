@@ -25,16 +25,9 @@
 
   config.config(app);
 
-  app.get('/', function(req, res) {
-    return fs.readFile('/public/index.html', function(err, html) {
-      if (err) {
-        throw err;
-      }
-      res.writeHeader(200, {
-        "Content-Type": "text/html"
-      });
-      res.write(html);
-      return res.end();
+  app.get('/api/test', function(req, res) {
+    return res.json({
+      'test': 'testdata'
     });
   });
 
@@ -62,7 +55,7 @@
   port = app.get('port');
 
   ret = app.listen(port, function() {
-    return console.log('connected on port ' + port);
+    return console.log('api connected on port ' + port);
   });
 
 }).call(this);

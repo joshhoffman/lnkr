@@ -158,7 +158,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['lint', 'compile']);
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
-            cmd: 'node',
+            cmd: 'nodemon',
             args: ['frontEnd.js', '5000'],
             opts: {
                 stdio: 'inherit'
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('runAPI', function() {
         grunt.util.spawn({
-            cmd: 'node',
+            cmd: 'nodemon',
             args: ['webAPI.js', '5001'],
             opts: {
                 stdio: 'inherit'
@@ -182,5 +182,5 @@ module.exports = function(grunt) {
         )
     });
 
-    grunt.registerTask('server', ['coffee', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('server', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
 }

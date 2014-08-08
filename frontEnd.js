@@ -1,5 +1,5 @@
 (function() {
-  var app, config, express, fs, path, port, ret;
+  var app, config, express, fs, path, port, proxy, ret, url;
 
   express = require('express');
 
@@ -9,7 +9,13 @@
 
   config = require('./configure/config');
 
+  proxy = require('proxy-middleware');
+
+  url = require('url');
+
   app = express();
+
+  app.use('/api', proxy(url.parse('http://0.0.0.0:5001/api')));
 
   config.config(app);
 
@@ -26,31 +32,10 @@
     });
   });
 
-
-  /*
-  app.get '/readitem', (req, res) ->
-      console.log('')
-  
-  app.get '/readitems', (req, res) ->
-      console.log('readitems')
-       *db.set('key', 'val', redis.print)
-      db.hgetall 'test1', (err, obj) ->
-          console.log 'getting all'
-          console.log(obj)
-          res.json(obj)
-  
-  app.post '/readitem', (req, res) ->
-      console.log 'post readitem'
-      console.log(req.body)
-      console.log db.hmset 'test1', 'name', req.body.name, 'link', req.body.link, (err, obj) ->
-          console.log('saved')
-          res.json({ status: 'success' })
-   */
-
   port = app.get('port');
 
   ret = app.listen(port, function() {
-    return console.log('connected on port ' + port);
+    return console.log('front endconnected on port ' + port);
   });
 
 }).call(this);

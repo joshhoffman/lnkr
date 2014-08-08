@@ -18,13 +18,8 @@ mongoose.connect('mongodb://localhost/lnkr')
 
 config.config(app)
 
-app.get '/', (req, res) ->
-    fs.readFile '/public/index.html', (err, html) ->
-        if err
-            throw err
-        res.writeHeader(200, {"Content-Type": "text/html"})
-        res.write(html)
-        res.end()
+app.get '/api/test', (req, res) ->
+    res.json({'test': 'testdata'})
 
 ###
 app.get '/readitem', (req, res) ->
@@ -48,4 +43,4 @@ app.post '/readitem', (req, res) ->
 
 port = app.get 'port'
 ret = app.listen port, () ->
-    console.log 'connected on port ' + port
+    console.log 'api connected on port ' + port

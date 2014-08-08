@@ -1,5 +1,5 @@
 (function() {
-  var bodyParser, cookieParser, errorHandler, express, expressJson, favicon, methodOverride, morgan, path, proxy, session, url;
+  var bodyParser, cookieParser, errorHandler, express, expressJson, favicon, methodOverride, morgan, path, session, url;
 
   favicon = require('serve-favicon');
 
@@ -21,8 +21,6 @@
 
   express = require('express');
 
-  proxy = require('proxy-middleware');
-
   url = require('url');
 
   exports.config = function(app) {
@@ -31,7 +29,6 @@
     app.use(morgan('dev', {
       immediate: true
     }));
-    app.use('/api', proxy(url.parse('http://0.0.0.0:' + app.get('port' + '/api'))));
     app.use(expressJson());
     app.use(bodyParser.urlencoded({
       extended: true

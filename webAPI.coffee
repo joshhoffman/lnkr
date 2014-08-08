@@ -3,10 +3,9 @@ path = require 'path'
 redis = require 'redis'
 fs = require 'fs'
 config = require './configure/config'
+routes = require './apiRoutes/apiRoutes'
 
 mongoose = require 'mongoose'
-
-link = require('./models/link').linkModel
 
 app = express()
 
@@ -20,20 +19,7 @@ mongoose.connect('mongodb://localhost/lnkr')
 
 config.config(app)
 
-app.get '/api/test', (req, res) ->
-    res.json({'test': 'testdata'})
-
-app.post '/api/links', (req, res) ->
-    console.log('test')
-    console.log req.body
-
-app.get '/api/links', (req, res) ->
-    link.find (err, links) ->
-        if err
-            console.log err
-            return
-
-        console.log links
+routes.routes(app)
 
 ###
 app.get '/readitem', (req, res) ->

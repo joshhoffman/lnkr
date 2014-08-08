@@ -47,9 +47,12 @@ module.exports = function(grunt) {
                 files: {
                     'frontEnd.js': 'frontEnd.coffee',
                     'webAPI.js': 'webAPI.coffee',
+                    'configure/controller.js': 'configure/controller.coffee',
                     //'routes/login.js': 'routes/login.coffee',
                     //'routes/user.js': 'routes/user.coffee',
                     //'models/user.js': 'models/user.coffee',
+                    'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
+                    'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
                     'configure/config.js': 'configure/config.coffee',
                     //'lib/config/configureRoutes.js': 'lib/config/configureRoutes.coffee',
                     //'lib/config/configurePassport.js': 'lib/config/configurePassport.coffee',
@@ -67,6 +70,8 @@ module.exports = function(grunt) {
                   //'routes/*.coffee',
                   //'models/*.coffee',
                   'configure/*.coffee',
+                  'APIRoutes/*.coffee',
+                  'APIControllers/*.coffee'
                   //'controllers/*.coffee'
               ]
           },
@@ -91,8 +96,8 @@ module.exports = function(grunt) {
                     //'app.js',
                     //'routes/**/*.js',
                     //'controllers/**/*.js',
-                    'frontEnd.js',
-                    'webAPI.js',
+                    //'frontEnd.js',
+                    //'webAPI.js',
                     'public/qa/**/*.js',
                     'public/js/**/*.js',
                     'qa/**/*.js',
@@ -107,7 +112,7 @@ module.exports = function(grunt) {
                     'app.js',
                     'controllers/**/*.js',
                     'routes/**/*.js',
-                    'lib/**/*.js'
+                    'configure/*.js'
                 ],
                 tasks: [
                     'cafemocha'
@@ -125,11 +130,10 @@ module.exports = function(grunt) {
                 files: [
                     'test/*.coffee',
                     '*.coffee',
-                    'routes/*.coffee',
+                    'APIRoutes/*.coffee',
                     'models/*.coffee',
-                    'socket/*.coffee',
-                    'lib/**/*.coffee',
-                    'controllers/*.coffee'
+                    'configure/*.coffee',
+                    'APIControllers/*.coffee'
                 ],
                 tasks: [
                     'coffeelint',
@@ -156,6 +160,7 @@ module.exports = function(grunt) {
     grunt.registerTask('compile', ['coffee', 'browserify', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
+    
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',

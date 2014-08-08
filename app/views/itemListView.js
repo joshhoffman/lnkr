@@ -9,10 +9,11 @@ var ReadItemView = require('views/readItemView');
 
 var ItemListView = Backbone.View.extend({
     //el: $("body"),
-    template: Handlebars.getTemplate('index'),
+    //template: Handlebars.getTemplate('index'),
     tagName: 'section',
     initialize: function (options) {
         this.router = options.router;
+        this.listenTo(this.collection, 'reset', this.render);
         /*me = this;
         itemList = new Items(null, { view: this });
         this.items = itemList;
@@ -31,7 +32,11 @@ var ItemListView = Backbone.View.extend({
             return (new ReadItemView({model: readItem, router: that.router})).render().el;
         });
         this.$el.html(readItemView);*/
-        this.$el.html(this.template({name: 'world'}));
+        var that = this;
+        var itemsView = this.collection.map(function(item) {
+            return (new ReadItemView({model: item, router: that.router})).render().el;
+        });
+        this.$el.html(itemsView);
         return this;
     }//,
     /*render: function () {

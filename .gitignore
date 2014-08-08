@@ -44,5 +44,5 @@ app.js
 
 .idea
 bundle.js
-bundleprod.js
+public/static/bundleprod.js
 templates.js

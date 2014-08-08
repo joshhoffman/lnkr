@@ -1,5 +1,5 @@
 Controller = require '../configure/controller'
-link = require('./models/link').linkModel
+Link = require('./models/link').linkModel
 
 class LinkController extends Controller
     initialize: (app) ->
@@ -7,7 +7,7 @@ class LinkController extends Controller
         super app
     
     _get: (req, res, next) ->
-        link.find (err, links) ->
+        Link.find (err, links) ->
             if err
                 console.log err
                 return

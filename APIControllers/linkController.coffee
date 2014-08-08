@@ -19,4 +19,14 @@ class LinkController extends Controller
         console.log('post test')
         console.log req.body
 
+        newLink = new Link({
+            name: req.body.name,
+            link: req.body.link,
+            description: req.body.description
+        });
+
+        newLink.save (err, data) ->
+            console.log(data)
+            res.json({'success': true})
+
 module.exports = LinkController

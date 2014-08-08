@@ -35,9 +35,9 @@ app.js
 */socket/*.js
 */lib/config/*.js
 */controllers/*.js
-*/APIControllers/*.js
-*/APIRoutes/*.js
-*/configure/*.js
+APIControllers/*.js
+APIRoutes/*.js
+configure/*.js
 
 #test stuff
 */test

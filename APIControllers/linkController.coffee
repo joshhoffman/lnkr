@@ -1,9 +1,10 @@
 Controller = require '../configure/controller'
-Link = require('./models/link').linkModel
+Link = require('../models/link').linkModel
 
 class LinkController extends Controller
-    initialize: (app) ->
-        this._name = 'link'
+    constructor: (app) ->
+        console.log('link controller init')
+        this._name = 'links'
         super app
     
     _get: (req, res, next) ->
@@ -17,3 +18,5 @@ class LinkController extends Controller
     _post: (req, res, next) ->
         console.log('post test')
         console.log req.body
+
+module.exports = LinkController

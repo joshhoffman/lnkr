@@ -18,8 +18,9 @@ Controller.prototype._post = (req, res, next) ->
     
 class Controller
     constructor: (app) ->
-        var self = this;
-        var name = '/api/' + this._name;
+        console.log('controller init')
+        self = this
+        name = '/api/' + this._name
         app.post name, (req, res, next) ->
             self._post req, res, next
         app.get name, (req,res,next) ->

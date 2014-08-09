@@ -10,7 +10,7 @@ var ReadItemView = Backbone.View.extend({
     className: 'readItem',
     template: Handlebars.getTemplate('readItemView'),
     initialize: function(options) {
-        console.log("Init ReadItemView");
+        console.log("Init ReadItemView " + this.model.get('name'));
         this.listenTo(this.model, 'change', this.render);
         this.router = options.router;
     },

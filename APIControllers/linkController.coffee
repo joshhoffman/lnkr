@@ -8,13 +8,15 @@ class LinkController extends Controller
         super app
     
     _get: (req, res, next) ->
-        Link.find (err, links) ->
+        Link.find().exec (err, links) ->
             if err
                 console.log err
                 return
 
-            console.log links
-    
+            console.log 'find success'
+            console.log links.length
+            res.json(links)
+
     _post: (req, res, next) ->
         console.log('post test')
         console.log req.body
@@ -23,10 +25,23 @@ class LinkController extends Controller
             name: req.body.name,
             link: req.body.link,
             description: req.body.description
-        });
+        })
 
         newLink.save (err, data) ->
+            console.log err if err
             console.log(data)
             res.json({'success': true})
+
+    _put: (req, res, next) ->
+        console.log('put test')
+        console.log req.body
+
+        newLink = new Link({
+            name: req.body.name,
+            link: req.body.link,
+            description: req.body.description
+        })
+
+        newLink.save()
 
 module.exports = LinkController

@@ -14,6 +14,16 @@ var ItemListView = Backbone.View.extend({
     initialize: function (options) {
         this.router = options.router;
         this.listenTo(this.collection, 'reset', this.render);
+        var that = this;
+        this.collection.fetch({
+            success: function(models) {
+                console.log(models.models.length);
+                models.each(function(model) { console.log('in each'); console.log(model); });
+                //that.collection = models;
+                that.render();
+            }
+        });
+        //this.listenTo(this.collection, 'add', this.render);
         /*me = this;
         itemList = new Items(null, { view: this });
         this.items = itemList;
@@ -32,8 +42,11 @@ var ItemListView = Backbone.View.extend({
             return (new ReadItemView({model: readItem, router: that.router})).render().el;
         });
         this.$el.html(readItemView);*/
+        console.log('list view render');
+        console.log(this.collection.length);
         var that = this;
         var itemsView = this.collection.map(function(item) {
+            console.log('!!!! ' + item.get('name'));
             return (new ReadItemView({model: item, router: that.router})).render().el;
         });
         this.$el.html(itemsView);

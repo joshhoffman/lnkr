@@ -24,8 +24,9 @@ var NewLinkView = Backbone.View.extend({
         readItem = new ReadItem({
             name: $('#newName').val(),
             description: $('#newDescription').val(),
-            link: $('#newLink').val()
+            link: $('#newLinkItem').val()
         });
+        console.log(readItem);
         readItem.save();
     }
 });

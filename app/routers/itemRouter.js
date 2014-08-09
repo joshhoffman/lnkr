@@ -3,8 +3,8 @@ var _ = require('underscore');
 
 // data
 var Items = require('collections/items');
-var data = require('./items.json');
-var items = new Items(data);
+//var data = require('./items.json');
+var items = new Items();
 
 // views
 var Layout = require('views/layout');

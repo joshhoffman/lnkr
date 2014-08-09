@@ -6,8 +6,18 @@ var ReadItem = require('../models/readItem');
 
 Items = Backbone.Collection.extend({
     model: ReadItem,
+    url: '/api/links',
     initialize: function(models, options) {
         //this.bind("add", options.view.addItemLi);
+        this.bind('add', this.test);
+    },
+
+    test: function() {
+        console.log('testing');
+        this.each(function(model) {
+            console.log('in testing each');
+            console.log(model.get('name'));
+        });
     },
 
     resetSelected: function() {

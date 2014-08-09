@@ -34,6 +34,13 @@ module.exports = function(grunt) {
                 },
                 src: ['app/main.js'],
                 dest: 'public/static/bundleprod.js'
+            },
+            marionette: {
+                options: {
+                    debug: true
+                },
+                src: ['marionette/app.js'],
+                dest: 'public/static/bundle.js'
             }
         },
         cafemocha: {
@@ -58,6 +65,11 @@ module.exports = function(grunt) {
                     //'lib/config/configurePassport.js': 'lib/config/configurePassport.coffee',
                     //'controllers/user.js': 'controllers/user.coffee',
                     //'controllers/login.js': 'controllers/login.coffee'
+                }
+            },
+            marionette: {
+                files: {
+                    'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
                 }
             }
         },
@@ -157,6 +169,7 @@ module.exports = function(grunt) {
     });
 
     //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
+    grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette'])
     grunt.registerTask('compile', ['coffee', 'browserify', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);

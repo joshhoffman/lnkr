@@ -23,6 +23,7 @@
     "underscore": "^1.6.0"
   },
   "devDependencies": {
+    "backbone.localstorage": "^1.1.13",
     "chai": "*",
     "grunt": "*",
     "grunt-browserify": "^2.1.4",

@@ -5,7 +5,8 @@ var LinkModel = require('./link');
 
 module.exports = Backbone.Collection.extend({
     model: LinkModel,
-    url: '/api/links',
+    //url: '/api/links',
+    localStorage: new Backbone.LocalStorage('links-backbone'),
 
     getRead: function () {
         return this.filter(this._isRead);

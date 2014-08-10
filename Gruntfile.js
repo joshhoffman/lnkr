@@ -13,6 +13,8 @@ module.exports = function(grunt) {
             grunt.loadNpmTasks(task);
         });
 
+    var vendors = 'jquery backbone backbone.marionette backbone.localstorage'.split(' ');
+
     grunt.initConfig({
         jshint: {
             options: {
@@ -36,11 +38,32 @@ module.exports = function(grunt) {
                 dest: 'public/static/bundleprod.js'
             },
             marionette: {
-                options: {
-                    debug: true
+                app: {
+                    options: {
+                        debug: true,
+                        extensions: ['.coffee', '.hbs'],
+                        transform: ['coffeeify', 'hbsfy'],
+                        external: vendors
+                    },
+                    src: ['marionette/app.js'],
+                    dest: 'public/static/app.js'
                 },
-                src: ['marionette/app.js'],
-                dest: 'public/static/bundle.js'
+                vendors: {
+                    files: {
+                        'public/static/vendors.js': []
+                    },
+                    options: {
+                        'require': vendors
+                    }
+                },
+                bundle: {
+                    src: 'public/static/app.js',
+                    dest: 'public/static/bundle.js',
+                    options: {
+                        extensions: ['.coffee', '.hbs'],
+                        transform: ['coffeeify', 'hbsfy']
+                    }
+                }
             }
         },
         cafemocha: {
@@ -69,7 +92,7 @@ module.exports = function(grunt) {
             },
             marionette: {
                 files: {
-                    'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
+                    //'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
                 }
             }
         },
@@ -169,7 +192,7 @@ module.exports = function(grunt) {
     });
 
     //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
-    grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette'])
+    grunt.registerTask('mari', ['lint', 'browserify:marionette:app', 'browserify:marionette:vendors'])
     grunt.registerTask('compile', ['coffee', 'browserify', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);

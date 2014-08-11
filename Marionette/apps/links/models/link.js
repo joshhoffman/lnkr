@@ -10,7 +10,9 @@ module.exports = Backbone.Model.extend({
     },
 
     initialize: function() {
+        console.log('new item');
         if(this.isNew()) {
+            console.log('is new');
             this.set('created', Date.now());
         }
     },

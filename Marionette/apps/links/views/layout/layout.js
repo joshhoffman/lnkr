@@ -5,7 +5,7 @@ var LinksView = require('../links/collection');
 var FooterView = require('./footer/footer');
 var tmpl = require('./layout.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
     template: tmpl,
 
     ui: {
@@ -24,6 +24,7 @@ module.exports = Marionette.Layout.extend({
 
     onShow: function () {
         var options = {collection: this.options.linksCollection};
+        console.log(this.options);
 
         this.header.show(new HeaderView(options));
         this.main.show(new LinksView(options));

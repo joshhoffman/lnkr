@@ -50,6 +50,7 @@ module.exports = Marionette.ItemView.extend({
     },
     
     onEditFocusout: function() {
+        console.log('on edit focus out');
         var nameText = this.ui.edit.val().trim();
         if(linkText) {
             this.model.set('name', nameText).save();

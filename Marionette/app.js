@@ -6,7 +6,7 @@ var Marionette = require('backbone.marionette');
 // create app module
 var LinkModule = require('./apps/links/module');
 
-var app = Marionette.Application();
+var app = new Marionette.Application();
 
 // register module
 app.module('link', LinkModule);

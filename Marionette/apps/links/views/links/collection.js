@@ -30,11 +30,14 @@ module.exports = Marionette.CompositeView.extend({
         function reduceRead(left, right) {
             return left && right.get('read');
         }
+        console.log('in collection');
+        console.log(this.collection);
         
-        var allRead = this.collection.reduce(reduceRead, true);
+        //var allRead = this.collection.reduce(reduceRead, true);
+        allRead = false;
         
         this.ui.toggle.prop('read', allRead);
-        this.$el.parent().toggle(!!this.collection.length);
+        //this.$el.parent().toggle(!!this.collection.length);
     },
     
     onToggleAllClick: function(e) {

@@ -6,9 +6,10 @@ var LinksCollection = require('./models/links');
 module.exports = Marionette.Controller.extend({
     onStart: function () {
         this.linksCollection = new LinksCollection();
-        this.linkLayout = new LinkLayout({linksCollection: this.linksCollection});
+        this.linksLayout = new LinkLayout({linksCollection: this.linksCollection});
 
         var onSuccess = function() {
+            console.log('on success');
             this.options.linkRegion.show(this.linksLayout);
         }.bind(this);
         this.linksCollection.fetch({success: onSuccess});

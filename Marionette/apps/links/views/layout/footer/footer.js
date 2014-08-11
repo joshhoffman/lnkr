@@ -22,7 +22,7 @@ module.exports = Marionette.ItemView.extend({
     },
 
     serializeData: function () {
-        var active = this.colleciton.getActive().length;
+        var active = this.collection.getActive().length;
         var total = this.collection.length;
 
         return {
@@ -48,6 +48,6 @@ module.exports = Marionette.ItemView.extend({
     },
     
     update: function () {
-        this.$el.parent.toggle(this.collection.length > 0);
+        this.$el.parent().toggle(this.collection.length > 0);
     }
 });

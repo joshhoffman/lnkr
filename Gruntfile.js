@@ -42,7 +42,7 @@ module.exports = function(grunt) {
                 dest: 'public/static/bundleprod.js'
             },
             marionette: {
-                app: {
+                /*app: {
                     src: ['Marionette/app.js'],
                     dest: 'public/static/app.js',
                     options: {
@@ -60,14 +60,14 @@ module.exports = function(grunt) {
                         'require': vendors
                     }
                 },
-                bundle: {
+                bundle: {*/
                     src: ['Marionette/app.js'],
                     dest: 'public/static/bundle.js',
                     options: {
                         extensions: ['.coffee', '.hbs'],
                         transform: ['coffeeify', 'hbsfy']
                     }
-                }
+                //}
             }
         },
         cafemocha: {
@@ -199,7 +199,8 @@ module.exports = function(grunt) {
 
     //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
     //grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette:app', 'browserify:marionette:vendors'])
-    grunt.registerTask('mari', ['lint', 'browserify:marionette:app', 'browserify:marionette:vendors'])
+    //grunt.registerTask('mari', ['lint', 'browserify:marionette:app', 'browserify:marionette:vendors'])
+    grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette']);
     grunt.registerTask('compile', ['coffee', 'browserify:dev', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);

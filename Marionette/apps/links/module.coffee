@@ -25,24 +25,24 @@ class LinkModule extends Marionette.Module
 
     _createContainer: ->
         node = document.createElement 'div'
-        node.id = this.todoRegionId
+        node.id = this.linkRegionId
         document.body.appendChild node
 
     _addRegion: ->
-        this.app.addRegions todoRegion: '#' + this.todoRegionId
+        this.app.addRegions linkRegion: '#' + this.linkRegionId
 
     _startMediator: ->
-        this.controller = new Controller todoRegion: this.app.todoRegion
+        this.controller = new Controller linkRegion: this.app.linkRegion
         router = new Router controller: this.controller
 
     _destroyContainer: ->
-        node = document.getElementById this.todoRegionId
+        node = document.getElementById this.linkRegionId
         node?.parentElement.removeChild node
 
     _removeRegion: ->
-        this.app.removeRegion 'todoRegion'
+        this.app.removeRegion 'linkRegion'
 
     _stopMediator: ->
         this.controller.stop()
 
-module.exports = TodoModule
+module.exports = LinkModule

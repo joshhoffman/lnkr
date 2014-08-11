@@ -20,7 +20,11 @@ module.exports = function(grunt) {
             options: {
                 multistr: true
             },
-            all: ['app/**/*.js']
+            all: [
+                'app/**/*.js',
+                'Marionette/**/*.js',
+                '!Marionette/apps/links/module.js'
+            ]
         },
         browserify: {
             options: {
@@ -39,14 +43,14 @@ module.exports = function(grunt) {
             },
             marionette: {
                 app: {
+                    src: ['Marionette/app.js'],
+                    dest: 'public/static/app.js',
                     options: {
                         debug: true,
                         extensions: ['.coffee', '.hbs'],
                         transform: ['coffeeify', 'hbsfy'],
                         external: vendors
-                    },
-                    src: ['marionette/app.js'],
-                    dest: 'public/static/app.js'
+                    }
                 },
                 vendors: {
                     files: {
@@ -57,7 +61,7 @@ module.exports = function(grunt) {
                     }
                 },
                 bundle: {
-                    src: 'public/static/app.js',
+                    src: ['Marionette/app.js'],
                     dest: 'public/static/bundle.js',
                     options: {
                         extensions: ['.coffee', '.hbs'],
@@ -93,7 +97,7 @@ module.exports = function(grunt) {
             },
             marionette: {
                 files: {
-                    //'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
+                    'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
                 }
             }
         },
@@ -107,8 +111,9 @@ module.exports = function(grunt) {
                   //'models/*.coffee',
                   'configure/*.coffee',
                   'APIRoutes/*.coffee',
-                  'APIControllers/*.coffee'
-                  //'controllers/*.coffee'
+                  'APIControllers/*.coffee',
+                  'Marionette/apps/links/module.coffee'
+                  //'controllers/*.coffeeo
               ]
           },
         handlebars: {
@@ -193,8 +198,9 @@ module.exports = function(grunt) {
     });
 
     //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
+    //grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette:app', 'browserify:marionette:vendors'])
     grunt.registerTask('mari', ['lint', 'browserify:marionette:app', 'browserify:marionette:vendors'])
-    grunt.registerTask('compile', ['coffee', 'browserify', 'handlebars', 'cafemocha'])
+    grunt.registerTask('compile', ['coffee', 'browserify:dev', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
     

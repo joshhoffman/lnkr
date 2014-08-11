@@ -1,4 +1,4 @@
-var Marionette = require('marionette');
+var Marionette = require('backbone.marionette');
 
 var LinkItemView = require('./link');
 var tmpl = require('./collection.hbs');
@@ -42,6 +42,6 @@ module.exports = Marionette.CompositeView.extend({
         
         this.collection.each(function(link){
             link.save({ 'read': isRead });
-        })
+        });
     }
 });

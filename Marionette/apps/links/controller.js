@@ -1,7 +1,7 @@
-var Marionette = require('marionette');
+var Marionette = require('backbone.marionette');
 
-var LinkLayout = require('./views/layout/layout')
-var LinksCollection = require('./models/todos')
+var LinkLayout = require('./views/layout/layout');
+var LinksCollection = require('./models/links');
 
 module.exports = Marionette.Controller.extend({
     onStart: function () {
@@ -15,7 +15,7 @@ module.exports = Marionette.Controller.extend({
     },
 
     filterItems: function(filter) {
-        filter = (filter && filter.trim() || 'all')
+        filter = (filter && filter.trim() || 'all');
         this.linksLayout.updateFilter(filter);
     }
 });

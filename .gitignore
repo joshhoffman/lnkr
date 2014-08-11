@@ -50,3 +50,6 @@ bundle.js
 public/static/bundleprod.js
 templates.js
 Marionette/apps/links/module.js
+frontEnd.js
+public/static
+webAPI.js

@@ -16,7 +16,7 @@ module.exports = Backbone.Model.extend({
     },
 
     toggle: function() {
-        return this.set('read', !this.isRead())
+        return this.set('read', !this.isRead());
     },
 
     isRead: function() {

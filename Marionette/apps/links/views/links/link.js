@@ -44,6 +44,32 @@ module.exports = Marionette.ItemView.extend({
     },
     
     onEditClick: function () {
+        this.$el.addClass('editing');
+        this.ui.edit.focus();
+        this.ui.edit.val(this.ui.edit.val());
+    },
+    
+    onEditFocusout: function() {
+        var nameText = this.ui.edit.val().trim();
+        if(linkText) {
+            this.model.set('name', nameText).save();
+            this.$el.removeClass('editing');
+        } else {
+            this.destroy();
+        }
+    },
+    
+    onEditKeypress: function(e) {
+        var ENTER_KEY = 13, ESC_KEY = 27;
         
+        if(e.which === ENTER_KEY) {
+            this.onEditFocusout();
+            return;
+        }
+        
+        if(e.which === ESC_KEY) {
+            this.ui.edit.val(this.model.get('link'));
+            this.$el.removeClass('editing');
+        }
     }
 });

@@ -29,6 +29,7 @@ module.exports = function(List, LinkManager,
         },
         
         remove: function() {
+            console.log('remove');
             var self = this;
             this.$el.fadeOut(function() {
                 Marionette.ItemView.prototype.remove.call(self);

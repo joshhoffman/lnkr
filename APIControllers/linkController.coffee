@@ -22,6 +22,7 @@ class LinkController extends Controller
         console.log req.body
 
         newLink = new Link({
+            id: req.body.name,
             name: req.body.name,
             link: req.body.link,
             description: req.body.description
@@ -36,12 +37,16 @@ class LinkController extends Controller
         console.log('put test')
         console.log req.body
 
-        newLink = new Link({
-            name: req.body.name,
-            link: req.body.link,
-            description: req.body.description
-        })
+        Link.findById req.body.name, (err, link) ->
+            res.json {"success":false} if err
+            link.name = req.body.name
+            link.link = req.body.link
+            link.description = req.body.description
+            link.save (err, data) ->
+                res.json {"success":false} if err
+                res.json(data)
 
-        newLink.save()
+    _delete: (req, res, next) ->
+        console.log('delete test')
 
 module.exports = LinkController

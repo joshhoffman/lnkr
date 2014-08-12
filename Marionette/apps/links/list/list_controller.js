@@ -14,7 +14,15 @@ module.exports = function(List, LinkManager,
                 });
                 
                 linksListView.on("childview:link:delete", function(childView, model) {
-                    model.destroy();
+                    console.log('in delete');
+                    model.destroy({
+                        success: function() {
+                            console.log('delete success');
+                        },
+                        error: function() {
+                            console.log('error');
+                        }
+                    });
                 });
                 
                 linksListView.on("childview:link:show", function(childview, model) {

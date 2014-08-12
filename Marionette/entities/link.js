@@ -7,11 +7,23 @@ module.exports = function(Entities, LinkManager,
         defaults: {
             name: '',
             description: '',
-            link: ''
+            link: '',
+            createdOn: ''
         },
         
         validate: function(attrs, options) {
-            
+            var errors = {};
+
+            if(!attrs.name) {
+                errors.name = "can't be blank";
+            }
+            if(!attrs.link) {
+                errors.link = "can't be blank";
+            }
+
+            if(!_.isEmpty(errors)) {
+                return errors;
+            }
         }
     });
     
@@ -25,12 +37,16 @@ module.exports = function(Entities, LinkManager,
     var initializeLinks = function() {
         var links = new Entities.LinkCollection([
             {
-                id: 1,
                 name: 'test',
                 description: 'test desc',
                 link: 'google.com'
             }
         ]);
+
+        links.forEach(function(model) {
+            console.log(model);
+            model.save();
+        });
         
         return links.models;
     };

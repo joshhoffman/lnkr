@@ -30,7 +30,7 @@ The repository contains app files for a UI in both pure Backbone, as well as one
 Compiles the Backbone front end code and starts the front end/back end servers. The front end and back end servers will start on ports 5000 and 5001 respectively by default.
 
 `grunt mariserver`
-Compiles the Marionette front end code and starts the servers liek above
+Compiles the Marionette front end code and starts the servers like above
 
 ## Future work
 After I get the Marionette front end working, the next step is to add authentication as well as adding tags for each link to allow for quick sorting the list

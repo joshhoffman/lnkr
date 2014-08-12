@@ -10,6 +10,7 @@ module.exports = Marionette.Controller.extend({
 
         var onSuccess = function() {
             console.log('on success');
+            console.log(this.linksCollection);
             this.options.linkRegion.show(this.linksLayout);
         }.bind(this);
         this.linksCollection.fetch({success: onSuccess});

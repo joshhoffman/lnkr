@@ -26,6 +26,8 @@ module.exports = Marionette.ItemView.extend({
     },
 
     onRender: function () {
+        console.log('on render item');
+        console.log(tmpl);
         this.$el.removeClass('active read');
 
         if (this.model.get('read')) {

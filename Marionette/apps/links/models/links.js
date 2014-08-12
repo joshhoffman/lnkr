@@ -1,12 +1,12 @@
 var Backbone = require('backbone');
-Backbone.LocalStorage = require('backbone.localstorage');
+//Backbone.LocalStorage = require('backbone.localstorage');
 
 var LinkModel = require('./link');
 
 module.exports = Backbone.Collection.extend({
     model: LinkModel,
-    //url: '/api/links',
-    localStorage: new Backbone.LocalStorage('links-backbone'),
+    url: '/api/links',
+    //localStorage: new Backbone.LocalStorage('lnkr-backbone'),
 
     getRead: function () {
         return this.filter(this._isRead);

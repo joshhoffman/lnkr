@@ -20,7 +20,7 @@ module.exports = Marionette.ItemView.extend({
         if(linkText) {
             console.log('before create ' + linkText);
             console.log(this.collection);
-            this.collection.create({
+            this.options.collection.create({
                 name: linkText
             });
             console.log('after cretea');

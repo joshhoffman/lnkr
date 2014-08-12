@@ -24,7 +24,8 @@ module.exports = Marionette.LayoutView.extend({
 
     onShow: function () {
         var options = {collection: this.options.linksCollection};
-        console.log(this.options);
+        console.log('onShow');
+        console.log(options);
 
         this.header.show(new HeaderView(options));
         this.main.show(new LinksView(options));

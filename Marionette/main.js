@@ -1,3 +1,5 @@
-/**
- * Created by joshhoffman on 8/12/14.
- */
+var Marionette = require('backbone.marionette');
+
+var app = require('./app');
+
+app.start();

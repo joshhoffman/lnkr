@@ -22,6 +22,7 @@ exports.config = (app) ->
     app.use bodyParser.urlencoded({extended: true})
     app.use bodyParser.json()
     app.use methodOverride()
+    # TODO: change secrets to use environment vars
     app.use cookieParser('totes secret')
     app.use session({
         secret: 'yeaaaboy',

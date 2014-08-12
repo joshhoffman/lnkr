@@ -61,7 +61,7 @@ module.exports = function(grunt) {
                     }
                 },
                 bundle: {*/
-                    src: ['Marionette/app.js'],
+                    src: ['Marionette/main.js'],
                     dest: 'public/static/bundle.js',
                     options: {
                         extensions: ['.coffee', '.hbs'],
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
             },
             marionette: {
                 files: {
-                    'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
+                    //'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
                 }
             }
         },

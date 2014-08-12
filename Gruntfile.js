@@ -252,5 +252,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('bbserver', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
-    grunt.registerTask('mariserver', ['mari', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('mariserver', ['compile', 'mari', 'runFrontEnd', 'runAPI', 'watch']);
 }

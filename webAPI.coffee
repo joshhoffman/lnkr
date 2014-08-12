@@ -3,7 +3,7 @@ path = require 'path'
 redis = require 'redis'
 fs = require 'fs'
 config = require './configure/config'
-routes = require './apiRoutes/apiRoutes'
+routes = require './APIRoutes/apiRoutes'
 
 mongoose = require 'mongoose'
 

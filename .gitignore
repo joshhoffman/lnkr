@@ -53,3 +53,4 @@ Marionette/apps/links/module.js
 frontEnd.js
 public/static
 webAPI.js
+configure/config.js

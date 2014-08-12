@@ -132,6 +132,24 @@ module.exports = function(grunt) {
                     'browserify'
                 ]
             },
+            maribrowserify: {
+                files: [
+                    'Marionette/**/*.js'
+                ],
+                tasks: [
+                    'browserify:marionette'
+                ]
+            },
+            maricoffee:{
+                files: [
+                    'Marionette/**/*.coffee',
+                    '!Marionette/apps/links/module.js'
+                ],
+                tasks: [
+                    'coffee:marionette',
+                    'coffeelint'
+                ]
+            },
             jshint: {
                 files: [
                     //'app.js',
@@ -142,7 +160,9 @@ module.exports = function(grunt) {
                     'public/qa/**/*.js',
                     'public/js/**/*.js',
                     'qa/**/*.js',
-                    'app/**/*.js'
+                    'app/**/*.js',
+                    'Marionette/**/*.js',
+                    '!Marionette/apps/links/module.js'
                 ],
                 tasks: [
                     'jshint'
@@ -231,5 +251,6 @@ module.exports = function(grunt) {
         )
     });
 
-    grunt.registerTask('server', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('bbserver', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('mariserver', ['mari', 'runFrontEnd', 'runAPI', 'watch']);
 }

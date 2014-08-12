@@ -13,7 +13,7 @@ express = require 'express'
 url = require 'url'
 
 exports.config = (app) ->
-    app.set 'port', process.argv[2] || process.env.port || 5001
+    app.set 'port', process.env.port || process.argv[2] || 5001
     app.use favicon(path.join(__dirname, '../public/favicon.ico'))
     app.use morgan('dev', {immediate: true})
     # proxy

@@ -7,8 +7,8 @@ var tmpl = require('./collection.hbs');
 // including filtering
 module.exports = Marionette.CompositeView.extend({
     template: tmpl,
-    itemView: LinkItemView,
-    itemViewContainer: "#link-list",
+    childView: LinkItemView,
+    childViewContainer: "#link-list",
 
     /*initialize: function(options) {
         console.log('in collection init');

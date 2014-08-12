@@ -8,7 +8,7 @@ class LinkModule extends Marionette.Module
     initialize: () ->
         this.linkRegionId = 'link-app-region'
         
-        onStart: ->
+    onStart: ->
         # encapsulate each module in a container
         # so you can do what you want without
         # affecting other modules

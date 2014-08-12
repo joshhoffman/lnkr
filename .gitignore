@@ -49,7 +49,7 @@ configure/*.js
 bundle.js
 public/static/bundleprod.js
 templates.js
-Marionette/apps/links/module.js
+Marionette_old/apps/links/module.js
 frontEnd.js
 public/static
 webAPI.js

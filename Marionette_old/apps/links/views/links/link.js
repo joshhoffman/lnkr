@@ -26,8 +26,6 @@ module.exports = Marionette.ItemView.extend({
     },
 
     onRender: function () {
-        console.log('on render item');
-        console.log(tmpl);
         this.$el.removeClass('active read');
 
         if (this.model.get('read')) {
@@ -52,9 +50,8 @@ module.exports = Marionette.ItemView.extend({
     },
     
     onEditFocusout: function() {
-        console.log('on edit focus out');
         var nameText = this.ui.edit.val().trim();
-        if(linkText) {
+        if(nameText) {
             this.model.set('name', nameText).save();
             this.$el.removeClass('editing');
         } else {

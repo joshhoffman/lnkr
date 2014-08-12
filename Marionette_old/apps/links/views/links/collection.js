@@ -36,25 +36,16 @@ module.exports = Marionette.CompositeView.extend({
         function reduceRead(left, right) {
             return left && right.get('read');
         }
-        console.log('in collection update');
-        console.log(this.options.collection);
+        var allRead = this.collection.reduce(reduceRead, true);
 
-        //var allRead = this.collection.reduce(reduceRead, true);
-        var allRead = false;
-        
         this.ui.toggle.prop('read', allRead);
-        //this.$el.parent().toggle(!!this.collection.length);
+        this.$el.parent().toggle(!!this.collection.length);
     },
     
     onToggleAllClick: function(e) {
         var isRead = e.currentTarget.checked;
 
-        console.log('onToggleAllClick');
-        console.log(this.options.collection);
-        //console.log(this.template);
-        
         this.collection.each(function(link){
-            console.log('in collection each');
             link.save({ 'read': isRead });
         });
     }

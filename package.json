@@ -5,6 +5,7 @@
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.1.0",
     "backbone.obscura": "^0.1.7",
+    "backbone.syphon": "^0.5.0",
     "body-parser": "^1.6.3",
     "coffeeify": "^0.7.0",
     "cookie-parser": "*",

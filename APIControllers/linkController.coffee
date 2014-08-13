@@ -20,7 +20,7 @@ class LinkController extends Controller
         console.log('put test')
         console.log req.body
 
-        Link.findById req.body.name, (err, link) ->
+        Link.findOne {name: req.body.name}, (err, link) ->
             if err
                 res.status 404
                 res.json {"success":false}
@@ -31,8 +31,16 @@ class LinkController extends Controller
             link.save (err, data) ->
                 if err
                     res.status 404
-                    res.json {"success":false}
+                    res.json {"success": false}
                     return
                 res.json(data)
+
+    _delete: (req, res, next) ->
+        Link.findOneAndRemove {name: req.body.name}, (err, link) ->
+            if err
+                res.status 404
+                res.json {"success": false}
+                return
+            res.json {"success": true}
 
 module.exports = LinkController

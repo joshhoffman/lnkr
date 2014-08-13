@@ -12,6 +12,7 @@ module.exports = function(Entities, LinkManager,
         },
         
         validate: function(attrs, options) {
+            console.log('in validate');
             var errors = {};
 
             if(!attrs.name) {
@@ -22,6 +23,7 @@ module.exports = function(Entities, LinkManager,
             }
 
             if(!_.isEmpty(errors)) {
+                console.log('errors not empty');
                 return errors;
             }
         }

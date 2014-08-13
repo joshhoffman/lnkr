@@ -34,15 +34,18 @@ module.exports = function(List, LinkManager,
 
                 linksListView.on("childview:link:edit", function(childView, model) {
                     var view = new LinkManager.LinksModule.Edit.Link({
-                        model: model
+                        model: model,
+                        asModal: true
                     });
-
-                    view.on("show", function() {
-                        this.$el.dialog({
-                            modal: true,
-                            width: "auto"
-                        });
-                    });
+                    
+                    view.on("form:submit", function(data) {
+                        if(model.save(data)) {
+                            childView.render();
+                            LinksModule.dialogRegion.empty();
+                        } else {
+                            view.triggerMethod("form:data:invalid", model.validationError);
+                        }
+                    })
 
                     LinkManager.dialogRegion.show(view);
                 });

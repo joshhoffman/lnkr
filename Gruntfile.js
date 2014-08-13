@@ -87,6 +87,7 @@ module.exports = function(grunt) {
                     //'models/user.js': 'models/user.coffee',
                     'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
                     'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
+                    'APIControllers/linksController.js': 'APIControllers/linksController.coffee',
                     'configure/config.js': 'configure/config.coffee',
                     'models/link.js': 'models/link.coffee'
                     //'lib/config/configureRoutes.js': 'lib/config/configureRoutes.coffee',
@@ -220,7 +221,7 @@ module.exports = function(grunt) {
     //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
     //grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette:app', 'browserify:marionette:vendors'])
     //grunt.registerTask('mari', ['lint', 'browserify:marionette:app', 'browserify:marionette:vendors'])
-    grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette']);
+    grunt.registerTask('mari', ['lint', 'coffee', 'browserify:marionette']);
     grunt.registerTask('compile', ['coffee', 'browserify:dev', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);

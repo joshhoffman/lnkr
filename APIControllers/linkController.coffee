@@ -1,5 +1,5 @@
-Link = require('../models/link');
-Controller = require('../configure/controller');
+Link = require('../models/link').linkModel
+Controller = require('../configure/controller')
 
 class LinkController extends Controller
     constructor: (app) ->

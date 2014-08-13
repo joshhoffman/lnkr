@@ -8,6 +8,8 @@ var LinkManager = require('./app');
 var LinksApp = require('./apps/links/links_app');
 var Entities = require('./entities/link');
 var Views = require('./common/views');
+var MenuController = require('./common/menu_controller');
+var MenuView = require('./common/menu_view');
 
 var ListController = require('./apps/links/list/list_controller');
 var ListView = require('./apps/links/list/list_view');
@@ -18,7 +20,8 @@ var ShowView = require('./apps/links/show/show_view');
 
 LinkManager.addRegions({
     mainRegion: "#main-region",
-    dialogRegion: "#dialog-region"
+    dialogRegion: "#dialog-region",
+    menuRegion: "#menu-region"
 });
 
 LinkManager.navigate = function(route, options) {
@@ -39,11 +42,16 @@ LinkManager.on("start", function() {
         console.log("triggering event");
         LinkManager.trigger("links:list");
     }
+    LinkManager.Common.Views.Menu.Controller.showMenu();
+    
     console.log("LinkManager has started");
 });
 
 LinkManager.module("Entities", Entities);
 LinkManager.module("Common.Views", Views);
+LinkManager.module("Common.Views.Menu", MenuView);
+LinkManager.module("Common.Views.Menu", MenuController);
+
 LinkManager.module("LinksModule", LinksApp);
 LinkManager.module("LinksModule.List", ListView);
 LinkManager.module("LinksModule.List", ListController);

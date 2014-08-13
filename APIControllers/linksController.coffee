@@ -3,7 +3,7 @@ Link = require('../models/link').linkModel
 
 class LinksController extends Controller
     constructor: (app) ->
-        console.log('link controller init')
+        console.log('links controller init')
         this._name = 'links'
         super app
     

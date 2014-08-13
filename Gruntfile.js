@@ -141,7 +141,8 @@ module.exports = function(grunt) {
             },
             maribrowserify: {
                 files: [
-                    'Marionette/**/*.js'
+                    'Marionette/**/*.js',
+                    'Marionette/**/*.hbs'
                 ],
                 tasks: [
                     'browserify:marionette'

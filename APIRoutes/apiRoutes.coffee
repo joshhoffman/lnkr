@@ -4,9 +4,9 @@ LinkController = require('../APIControllers/linkController')
 exports.routes = (app) ->
     app.get '/api/test', (req, res) ->
         res.json({'test': 'testdata'})
-    
-    linksController = new LinksController app
+
     linkController = new LinkController app
+    linksController = new LinksController app
 
 ###
     app.post '/api/links', (req, res) ->

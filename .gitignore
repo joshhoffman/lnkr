@@ -51,6 +51,6 @@ public/static/bundleprod.js
 templates.js
 Marionette_old/apps/links/module.js
 frontEnd.js
-public/static
+public/static/*.js
 webAPI.js
 configure/config.js

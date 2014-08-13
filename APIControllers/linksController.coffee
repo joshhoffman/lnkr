@@ -33,19 +33,6 @@ class LinksController extends Controller
             console.log(data)
             res.json({'success': true})
 
-    _put: (req, res, next) ->
-        console.log('put test')
-        console.log req.body
-
-        Link.findById req.body.name, (err, link) ->
-            res.json {"success":false} if err
-            link.name = req.body.name
-            link.link = req.body.link
-            link.description = req.body.description
-            link.save (err, data) ->
-                res.json {"success":false} if err
-                res.json(data)
-
     _delete: (req, res, next) ->
         console.log('delete test')
 

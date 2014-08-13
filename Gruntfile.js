@@ -65,7 +65,13 @@ module.exports = function(grunt) {
                     dest: 'public/static/bundle.js',
                     options: {
                         extensions: ['.coffee', '.hbs'],
-                        transform: ['coffeeify', 'hbsfy']
+                        transform: ['coffeeify', 'hbsfy'],
+                        shim: {
+                            jquery: {
+                                path: 'node_modules/jquery/src/jquery.js',
+                                exports: '$'
+                            }
+                        }
                     }
                 //}
             }

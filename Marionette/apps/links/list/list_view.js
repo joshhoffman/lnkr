@@ -9,7 +9,8 @@ module.exports = function(List, LinkManager,
         events: {
             "click": "linkClicked",
             "click button.js-delete": "deleteClicked",
-            "click td a.js-show": "showClicked"
+            "click td a.js-show": "showClicked",
+            "click td a.js-edit": "editClicked"
         },
         
         linkClicked: function() {
@@ -26,6 +27,12 @@ module.exports = function(List, LinkManager,
             e.preventDefault();
             e.stopPropagation();
             this.trigger("link:show", this.model);
+        },
+
+        editClicked: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger("link:edit", this.model);
         },
         
         remove: function() {

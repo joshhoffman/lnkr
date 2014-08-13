@@ -17,7 +17,8 @@ var ShowController = require('./apps/links/show/show_controller');
 var ShowView = require('./apps/links/show/show_view');
 
 LinkManager.addRegions({
-    mainRegion: "#main-region"
+    mainRegion: "#main-region",
+    dialogRegion: "#dialog-region"
 });
 
 LinkManager.navigate = function(route, options) {

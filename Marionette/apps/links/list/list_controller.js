@@ -1,3 +1,6 @@
+var $ = require('jquery');
+require('jquery-ui');
+
 module.exports = function(List, LinkManager,
                           Backbone, Marionette, $, _) {
     List.Controller = {
@@ -25,8 +28,23 @@ module.exports = function(List, LinkManager,
                     });
                 });
                 
-                linksListView.on("childview:link:show", function(childview, model) {
+                linksListView.on("childview:link:show", function(childView, model) {
                     LinkManager.trigger("link:show", model.get("id"));
+                });
+
+                linksListView.on("childview:link:edit", function(childView, model) {
+                    var view = new LinkManager.LinksModule.Edit.Link({
+                        model: model
+                    });
+
+                    view.on("show", function() {
+                        this.$el.dialog({
+                            modal: true,
+                            width: "auto"
+                        });
+                    });
+
+                    LinkManager.dialogRegion.show(view);
                 });
                 
                 LinkManager.mainRegion.show(linksListView);

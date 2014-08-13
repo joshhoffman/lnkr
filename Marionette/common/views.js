@@ -6,7 +6,7 @@ module.exports = function(Views, LinkManager,
         template: loadingTemplate,
         title: "Loading Data",
         message: "test loading",
-        serialzeData: function() {
+        serializeData: function() {
             return {
                 title: Marionette.getOption(this, "title"),
                 message: Marionette.getOption(this, "message")

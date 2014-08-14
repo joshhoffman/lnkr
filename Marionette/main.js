@@ -16,8 +16,10 @@ var ListController = require('./apps/links/list/list_controller');
 var ListView = require('./apps/links/list/list_view');
 var EditController = require('./apps/links/edit/edit_controller');
 var EditView = require('./apps/links/edit/edit_view');
+var NewView = require('./apps/links/new/new_view');
 var ShowController = require('./apps/links/show/show_controller');
 var ShowView = require('./apps/links/show/show_view');
+var ListCommonViews = require('./apps/links/common/form_view');
 
 LinkManager.addRegions({
     mainRegion: "#main-region",
@@ -54,11 +56,13 @@ LinkManager.module("Common.Views.Menu", MenuView);
 LinkManager.module("Common.Views.Menu", MenuController);
 
 LinkManager.module("LinksModule", LinksApp);
+LinkManager.module("LinksModule.Common.Views", ListCommonViews);
 LinkManager.module("LinksModule.List", ListLayout) ;
 LinkManager.module("LinksModule.List", ListView);
 LinkManager.module("LinksModule.List", ListController);
 LinkManager.module("LinksModule.Edit", EditView);
 LinkManager.module("LinksModule.Edit", EditController);
+LinkManager.module("LinksModule.New", NewView);
 LinkManager.module("LinksModule.Show", ShowView);
 LinkManager.module("LinksModule.Show", ShowController);
 

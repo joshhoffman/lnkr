@@ -7,6 +7,9 @@ module.exports = function(List, LinkManager,
         listLinks: function() {
             var loadingView = new LinkManager.Common.Views.Loading();
             LinkManager.mainRegion.show(loadingView);
+
+            var linksLayoutView = new List.Layout();
+            var linksListPanel = new List.Panel();
             
             var fetchingLinks = LinkManager.request("link:entities");
             
@@ -15,7 +18,12 @@ module.exports = function(List, LinkManager,
                 var linksListView = new List.Links({
                     collection: links
                 });
-                
+
+                linksLayoutView.on("show", function() {
+                    linksLayoutView.panelRegion.show(linksListPanel);
+                    linksLayoutView.linksRegion.show(linksListView);
+                });
+
                 linksListView.on("childview:link:delete", function(childView, model) {
                     console.log('in delete');
                     model.destroy({
@@ -51,7 +59,7 @@ module.exports = function(List, LinkManager,
                     LinkManager.dialogRegion.show(view);
                 });
                 
-                LinkManager.mainRegion.show(linksListView);
+                LinkManager.mainRegion.show(linksLayoutView);
             });
         }
     };

@@ -11,6 +11,7 @@ var Views = require('./common/views');
 var MenuController = require('./common/menu_controller');
 var MenuView = require('./common/menu_view');
 
+var ListLayout = require('./apps/links/list/list_layout');
 var ListController = require('./apps/links/list/list_controller');
 var ListView = require('./apps/links/list/list_view');
 var EditController = require('./apps/links/edit/edit_controller');
@@ -53,6 +54,7 @@ LinkManager.module("Common.Views.Menu", MenuView);
 LinkManager.module("Common.Views.Menu", MenuController);
 
 LinkManager.module("LinksModule", LinksApp);
+LinkManager.module("LinksModule.List", ListLayout) ;
 LinkManager.module("LinksModule.List", ListView);
 LinkManager.module("LinksModule.List", ListController);
 LinkManager.module("LinksModule.Edit", EditView);

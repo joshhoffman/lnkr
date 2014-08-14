@@ -11,7 +11,7 @@ module.exports = function(Edit, LinkManager,
             "click button.js-submit": "submitClicked"
         },
         
-        initialize() {
+        initialize: function() {
             this.title = "Edit " + this.model.get("name");
         },
 

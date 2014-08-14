@@ -236,7 +236,7 @@ module.exports = function(grunt) {
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['frontEnd.js', '3000'],
+            args: ['frontEnd.js', '4000'],
             opts: {
                 stdio: 'inherit'
             }

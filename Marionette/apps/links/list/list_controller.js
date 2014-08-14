@@ -41,11 +41,12 @@ module.exports = function(List, LinkManager,
                     view.on("form:submit", function(data) {
                         if(model.save(data)) {
                             childView.render();
-                            LinksModule.dialogRegion.empty();
+                            LinkManager.dialogRegion.empty();
+                            childView.flash("success");
                         } else {
                             view.triggerMethod("form:data:invalid", model.validationError);
                         }
-                    })
+                    });
 
                     LinkManager.dialogRegion.show(view);
                 });

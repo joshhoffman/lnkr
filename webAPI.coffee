@@ -7,6 +7,8 @@ routes = require './APIRoutes/apiRoutes'
 
 mongoose = require 'mongoose'
 
+Link = require('./models/link')
+
 app = express()
 
 #db = redis.createClient()
@@ -17,29 +19,9 @@ db.on "error", (err) ->
 
 mongoose.connect('mongodb://localhost/lnkr')
 
-config.config(app)
+config.config app
 
-routes.routes(app)
-
-###
-app.get '/readitem', (req, res) ->
-    console.log('')
-
-app.get '/readitems', (req, res) ->
-    console.log('readitems')
-    #db.set('key', 'val', redis.print)
-    db.hgetall 'test1', (err, obj) ->
-        console.log 'getting all'
-        console.log(obj)
-        res.json(obj)
-
-app.post '/readitem', (req, res) ->
-    console.log 'post readitem'
-    console.log(req.body)
-    console.log db.hmset 'test1', 'name', req.body.name, 'link', req.body.link, (err, obj) ->
-        console.log('saved')
-        res.json({ status: 'success' })
-###
+routes.routes app, Link
 
 port = app.get 'port'
 ret = app.listen port, () ->

@@ -1,14 +1,14 @@
 Controller = require '../configure/controller'
-Link = require('../models/link').linkModel
 
 class LinksController extends Controller
-    constructor: (app) ->
+    constructor: (app, Link) ->
         console.log('links controller init')
         this._name = 'links'
+        this.Link = Link
         super app
     
     _get: (req, res, next) ->
-        Link.find().exec (err, links) ->
+        this.Link.find().exec (err, links) ->
             if err
                 console.log err
                 return
@@ -21,7 +21,7 @@ class LinksController extends Controller
         console.log('post test')
         console.log req.body
 
-        newLink = new Link({
+        newLink = new this.Link({
             id: req.body.name,
             name: req.body.name,
             link: req.body.link,

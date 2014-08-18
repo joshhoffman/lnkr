@@ -1,14 +1,14 @@
-Link = require('../models/link').linkModel
 Controller = require '../configure/controller'
 
 class LinkController extends Controller
-    constructor: (app) ->
+    constructor: (app, Link) ->
         console.log('link controller init')
         this._name = 'links/:id'
+        this.Link = Link
         super app
 
     _get: (req, res, next) ->
-        Link.findOne {name: req.params.id}, (err, model) ->
+        this.Link.findOne {name: req.params.id}, (err, model) ->
             if err
                 console.log 'find failed'
                 res.status 404
@@ -20,7 +20,7 @@ class LinkController extends Controller
         console.log('put test')
         console.log req.body
 
-        Link.findOne {name: req.body.name}, (err, link) ->
+        this.Link.findOne {name: req.body.name}, (err, link) ->
             if err
                 res.status 404
                 res.json {"success":false}
@@ -36,7 +36,7 @@ class LinkController extends Controller
                 res.json(data)
 
     _delete: (req, res, next) ->
-        Link.findOneAndRemove {name: req.body.name}, (err, link) ->
+        this.Link.findOneAndRemove {name: req.body.name}, (err, link) ->
             if err
                 res.status 404
                 res.json {"success": false}

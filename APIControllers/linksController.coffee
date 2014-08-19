@@ -2,7 +2,6 @@ Controller = require '../configure/controller'
 
 class LinksController extends Controller
     constructor: (app, Link) ->
-        console.log('links controller init')
         this._name = 'links'
         this.Link = Link
         super app
@@ -32,8 +31,5 @@ class LinksController extends Controller
             console.log err if err
             console.log(data)
             res.json({'success': true})
-
-    _delete: (req, res, next) ->
-        console.log('delete test')
 
 module.exports = LinksController

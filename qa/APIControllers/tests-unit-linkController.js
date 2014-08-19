@@ -46,12 +46,12 @@ describe("linkController", function() {
     describe("constructor", function() {
         it("should set put", function() {
             //app.get.should.have.been.calledWith("/api/links/:id", lc._get);
-            expect(app.put.calledOnce).to.equal(true);
+            expect(app.put.calledOnce).to.be.true;
         });
 
         it("should set get", function() {
             //app.get.should.have.been.calledWith("/api/links/:id", lc._get);
-            expect(app.get.calledOnce).to.equal(true);
+            expect(app.get.calledOnce).to.be.true;
         });
 
         it("should contain api prefix", function() {
@@ -81,7 +81,7 @@ describe("linkController", function() {
         it("should call findOne", function() {
             lc._get(req, res, {});
 
-            expect(Link.findOne.calledOnce).to.equal(true);
+            expect(Link.findOne.calledOnce).to.be.true;
         });
 
         it("should use id parameter", function() {
@@ -103,7 +103,7 @@ describe("linkController", function() {
 
             retFunc(null, expectedSuccess);
 
-            expect(res.json.calledOnce).to.equal(true);
+            expect(res.json.calledOnce).to.be.true;
             expect(res.json).to.be.calledWith(expectedSuccess);
         });
 
@@ -114,7 +114,7 @@ describe("linkController", function() {
 
             retFunc({fail: "failure"}, expectedFail);
 
-            expect(res.status.calledOnce).to.equal(true);
+            expect(res.status.calledOnce).to.be.true;
             expect(res.status).to.be.calledWith(404);
         });
 
@@ -157,17 +157,19 @@ describe("linkController", function() {
         });
 
         it("should find the item", function() {
-            expect(Link.findOne.calledOnce).to.equal(true);
+            expect(Link.findOne.calledOnce).to.be.true;
         });
 
-        it("should set status to fail on failure", function() {
-            retFunc({fail: "failure"}, expectedFail);
+        it("should set status to fail on find failure", function() {
+            retFunc({fail: "failure"}, linkModel);
 
             expect(res.status.calledOnce).to.equal(true);
             expect(res.status).to.be.calledWith(404);
+
+            expect(linkModel.save.called).to.not.be.true;
         });
 
-        it("should respond with status false", function() {
+        it("should respond with status false if find fails", function() {
             retFunc({fail: "failure"}, expectedFail);
 
             expect(res.json).to.be.calledWith({ "status": false});
@@ -184,7 +186,7 @@ describe("linkController", function() {
         it("should call the model's save method", function() {
             retFunc(null, linkModel);
 
-            expect(linkModel.save.calledOnce).to.equal(true);
+            expect(linkModel.save.calledOnce).to.be.true;
         });
 
         it("should set an error if save fails", function() {
@@ -194,7 +196,7 @@ describe("linkController", function() {
 
             saveRetFunc({fail: "failure"}, null);
 
-            expect(res.status.calledOnce).to.equal(true);
+            expect(res.status.calledOnce).to.be.true;
             expect(res.status).to.be.calledWith(404);
         });
 
@@ -208,12 +210,59 @@ describe("linkController", function() {
             expect(res.json).to.be.calledWith({"status": false});
         });
 
-        it("should respond model on save success", function() {
+        it("should respond with the model on save success", function() {
             retFunc(null, linkModel);
 
             var saveRetFunc = linkModel.save.args[0][0];
 
             saveRetFunc(null, expectedSuccess);
+
+            expect(res.json).to.be.calledWith(expectedSuccess);
+        });
+    });
+
+    describe("delete", function() {
+        var req = {
+            body: {
+                name: "name",
+                link: "link",
+                description: "desc"
+            }
+        };
+
+        var expectedSuccess = { "status": true };
+
+        var retFunc;
+
+        beforeEach(function() {
+            lc._delete(req, res, {});
+
+            retFunc = Link.findOneAndRemove.args[0][1];
+        });
+
+        it("should call findOneAndRemove", function() {
+            expect(Link.findOneAndRemove.calledOnce).to.be.true;
+        });
+
+        it("should use the correct parameter", function() {
+            expect(Link.findOneAndRemove.args[0][0]).to.contain({name: req.body.name});
+        });
+
+        it("should set an error if delete fails", function() {
+            retFunc({status: "false"}, null);
+
+            expect(res.status.calledOnce).to.be.true;
+            expect(res.status).to.be.calledWith(404);
+        });
+
+        it("should respond with error on delete failure", function() {
+            retFunc({fail: "failure"}, null);
+
+            expect(res.json).to.be.calledWith({"status": false});
+        });
+
+        it("should respond with status on delete success", function() {
+            retFunc(null, {});
 
             expect(res.json).to.be.calledWith(expectedSuccess);
         });

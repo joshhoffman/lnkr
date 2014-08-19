@@ -17,15 +17,19 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         jshint: {
-            options: {
-                multistr: true
-            },
-            all: [
+            files: [
                 'app/**/*.js',
                 'Marionette/**/*.js',
-                '!Marionette/apps/links/module.js',
-                'qa/**/*.js'
-            ]
+                '!Marionette/apps/links/module.js'
+            ],
+            tests: {
+                options: {
+                    '-W030': true
+                },
+                files: {
+                    src: ['qa/**/*.js']
+                }
+            }
         },
         browserify: {
             options: {
@@ -168,13 +172,20 @@ module.exports = function(grunt) {
                     //'webAPI.js',
                     'public/qa/**/*.js',
                     'public/js/**/*.js',
-                    'qa/**/*.js',
                     'app/**/*.js',
                     'Marionette/**/*.js',
                     '!Marionette/apps/links/module.js'
                 ],
                 tasks: [
                     'jshint'
+                ]
+            },
+            testhint: {
+                files: [
+                    'qa/**/*.js'
+                ],
+                tasks: [
+                    'jshint:tests'
                 ]
             },
             mocha: {

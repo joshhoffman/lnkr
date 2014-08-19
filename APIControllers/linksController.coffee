@@ -7,6 +7,7 @@ class LinksController extends Controller
         super app
     
     _get: (req, res, next) ->
+        console.log(this.Link)
         this.Link.find().exec (err, links) ->
             if err
                 console.log err
@@ -17,9 +18,6 @@ class LinksController extends Controller
             res.json(links)
 
     _post: (req, res, next) ->
-        console.log('post test')
-        console.log req.body
-
         newLink = new this.Link({
             id: req.body.name,
             name: req.body.name,

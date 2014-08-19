@@ -7,7 +7,7 @@ routes = require './APIRoutes/apiRoutes'
 
 mongoose = require 'mongoose'
 
-Link = require('./models/link')
+Link = require('./models/link').linkModel
 
 app = express()
 

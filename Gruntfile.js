@@ -23,7 +23,8 @@ module.exports = function(grunt) {
             all: [
                 'app/**/*.js',
                 'Marionette/**/*.js',
-                '!Marionette/apps/links/module.js'
+                '!Marionette/apps/links/module.js',
+                'qa/**/*.js'
             ]
         },
         browserify: {
@@ -179,9 +180,11 @@ module.exports = function(grunt) {
             mocha: {
                 files: [
                     'app.js',
-                    'controllers/**/*.js',
-                    'routes/**/*.js',
-                    'configure/*.js'
+                    'APIControllers/**/*.js',
+                    'APIRoutes/**/*.js',
+                    'configure/*.js',
+                    'models/*.js',
+                    'qa/**/*.js'
                 ],
                 tasks: [
                     'cafemocha'
@@ -232,7 +235,7 @@ module.exports = function(grunt) {
     grunt.registerTask('compile', ['coffee', 'browserify:dev', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
-    
+
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',

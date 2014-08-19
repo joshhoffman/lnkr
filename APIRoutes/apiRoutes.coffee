@@ -7,17 +7,3 @@ exports.routes = (app, Link) ->
 
     linkController = new LinkController app, Link
     linksController = new LinksController app, Link
-
-###
-    app.post '/api/links', (req, res) ->
-        console.log('test')
-        console.log req.body
-
-    app.get '/api/links', (req, res) ->
-        link.find (err, links) ->
-            if err
-                console.log err
-                return
-
-            console.log links
-###

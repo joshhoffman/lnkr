@@ -35,7 +35,7 @@ module.exports = function(Entities, LinkManager,
         comparator: 'name'
     });
     
-    var links;
+    /*var links;
     var initializeLinks = function() {
         var links = new Entities.LinkCollection([
             {
@@ -51,7 +51,7 @@ module.exports = function(Entities, LinkManager,
         });
         
         return links.models;
-    };
+    };*/
     
     var API = {
         getLinkEntities: function() {
@@ -63,15 +63,7 @@ module.exports = function(Entities, LinkManager,
                 }
             });
             
-            var promise = defer.promise();
-            
-            $.when(promise).done(function(links) {
-                if(links.length === 0) {
-                    var models = initializeLinks();
-                    links.reset(models);
-                }
-            });
-            return promise;
+            return defer.promise();
         },
         
         getLinkEntity: function(linkId) {

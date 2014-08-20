@@ -35,7 +35,7 @@ module.exports = function(List, LinkManager,
                     view.on("form:submit", function(data) {
                         if(newLink.save(data)) {
                             links.add(newLink);
-                            LinkManager.dialogRegion.empty();
+                            view.trigger("dialog:close");
                             linksListView.children.findByModel(newLink).flash("success");
                         } else {
                             view.triggerMethod("form:data:invalid", newLink.validationError);
@@ -45,7 +45,8 @@ module.exports = function(List, LinkManager,
                     LinkManager.dialogRegion.show(view);
                 });
 
-                linksListView.on("childview:link:delete", function(childView, model) {
+                linksListView.on("childview:link:delete", function(childView, args) {
+                    var model = args.model;
                     console.log('in delete');
                     model.destroy({
                         success: function() {
@@ -57,20 +58,20 @@ module.exports = function(List, LinkManager,
                     });
                 });
                 
-                linksListView.on("childview:link:show", function(childView, model) {
-                    LinkManager.trigger("link:show", model.get("id"));
+                linksListView.on("childview:link:show", function(childView, args) {
+                    LinkManager.trigger("link:show", args.model.get("id"));
                 });
 
-                linksListView.on("childview:link:edit", function(childView, model) {
+                linksListView.on("childview:link:edit", function(childView, args) {
+                    var model = args.model;
                     var view = new LinkManager.LinksModule.Edit.Link({
-                        model: model,
-                        asModal: true
+                        model: model
                     });
                     
                     view.on("form:submit", function(data) {
                         if(model.save(data)) {
                             childView.render();
-                            LinkManager.dialogRegion.empty();
+                            view.trigger("dialog:close");
                             childView.flash("success");
                         } else {
                             view.triggerMethod("form:data:invalid", model.validationError);

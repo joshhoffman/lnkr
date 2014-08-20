@@ -21,9 +21,15 @@ var ShowController = require('./apps/links/show/show_controller');
 var ShowView = require('./apps/links/show/show_view');
 var ListCommonViews = require('./apps/links/common/form_view');
 
+var dialog = require('./apps/config/marionette/dialog');
+
+Marionette.Region.Dialog = Marionette.Region.extend(dialog);
+
 LinkManager.addRegions({
     mainRegion: "#main-region",
-    dialogRegion: "#dialog-region",
+    dialogRegion: Marionette.Region.Dialog.extend({
+        el: "#dialog-region"
+    }),
     menuRegion: "#menu-region"
 });
 

@@ -16,7 +16,8 @@ module.exports = function(Edit, LinkManager,
                 var view;
                 if(link !== undefined) {
                     view = new Edit.Link({
-                        model: link
+                        model: link,
+                        generateTitle: true
                     });
 
                     view.on("form:submit", function(data) {

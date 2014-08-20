@@ -42,23 +42,6 @@ module.exports = function(Views, LinkManager,
 
             clearFormErrors();
             _.each(errors, markError);
-        },
-
-        onRender: function () {
-            if (!this.options.asModal) {
-                var $title = $("<h1>", {text: this.title});
-                this.$el.prepend($title);
-            }
-        },
-
-        onShow: function () {
-            if (this.options.asModal) {
-                this.$el.dialog({
-                    modal: true,
-                    title: this.title,
-                    width: "auto"
-                });
-            }
         }
     });
 };

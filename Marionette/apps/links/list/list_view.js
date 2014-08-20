@@ -6,11 +6,13 @@ module.exports = function(List, LinkManager,
     List.Link = Marionette.ItemView.extend({
         tagName: "tr",
         template: LinkTemplate,
+        triggers: {
+            "click button.js-delete": "link:delete",
+            "click td a.js-show": "link:show",
+            "click td a.js-edit": "link:edit"
+        },
         events: {
-            "click": "linkClicked",
-            "click button.js-delete": "deleteClicked",
-            "click td a.js-show": "showClicked",
-            "click td a.js-edit": "editClicked"
+            "click": "linkClicked"
         },
         
         linkClicked: function() {
@@ -58,6 +60,20 @@ module.exports = function(List, LinkManager,
         className: "table table-hover",
         template: LinksTemplate,
         childView: List.Link,
-        childViewContainer: "tbody"
+        childViewContainer: "tbody",
+
+        initialize: function() {
+            this.listenTo(this.collection, "reset", function() {
+                this.attachHtml = function(collectionView, childView, index) {
+                    collectionView.$el.append(childView.el);
+                };
+            });
+        },
+
+        onRenderCollection: function() {
+            this.attachHtml = function(collectionView, childView, index) {
+                collectionView.$el.prepend(childView.el);
+            };
+        }
     });
 };

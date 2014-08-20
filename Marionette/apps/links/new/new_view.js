@@ -4,6 +4,9 @@ module.exports = function(New, LinkManager,
                           Backbone, Marionette, $, _) {
     New.Link = LinkManager.LinksModule.Common.Views.Form.extend({
         template: newTemplate,
-        title: "New Contact"
+
+        initialize: function() {
+            this.title = "New Link";
+        }
     });
 };

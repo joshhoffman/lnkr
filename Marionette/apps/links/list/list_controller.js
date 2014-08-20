@@ -24,6 +24,27 @@ module.exports = function(List, LinkManager,
                     linksLayoutView.linksRegion.show(linksListView);
                 });
 
+                linksListPanel.on("link:new", function() {
+                    var newLink = new LinkManager.Entities.Link();
+
+                    var view = new LinkManager.LinksModule.New.Link({
+                        model: newLink,
+                        asModal: true
+                    });
+
+                    view.on("form:submit", function(data) {
+                        if(newLink.save(data)) {
+                            links.add(newLink);
+                            LinkManager.dialogRegion.empty();
+                            linksListView.children.findByModel(newLink).flash("success");
+                        } else {
+                            view.triggerMethod("form:data:invalid", newLink.validationError);
+                        }
+                    });
+
+                    LinkManager.dialogRegion.show(view);
+                });
+
                 linksListView.on("childview:link:delete", function(childView, model) {
                     console.log('in delete');
                     model.destroy({

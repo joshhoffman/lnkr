@@ -12,6 +12,9 @@ module.exports = function(List, LinkManager,
     });
 
     List.Panel = Marionette.ItemView.extend({
-        template: PanelTemplate
+        template: PanelTemplate,
+        triggers: {
+            "click button.js-new": "link:new"
+        }
     });
 };

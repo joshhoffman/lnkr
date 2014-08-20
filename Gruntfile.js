@@ -14,6 +14,19 @@ module.exports = function(grunt) {
         });
 
     var vendors = 'jquery backbone backbone.marionette backbone.localstorage'.split(' ');
+    
+    var qaFiles = ['qa/**/*.js']
+    
+    var coffeeScriptCompile = {
+        'frontEnd.js': 'frontEnd.coffee',
+        'webAPI.js': 'webAPI.coffee',
+        'configure/controller.js': 'configure/controller.coffee',
+        'configure/config.js': 'configure/config.coffee',
+        'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
+        'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
+        'APIControllers/linksController.js': 'APIControllers/linksController.coffee',
+        'models/link.js': 'models/link.coffee'
+    }
 
     grunt.initConfig({
         jshint: {
@@ -27,7 +40,7 @@ module.exports = function(grunt) {
                     '-W030': true
                 },
                 files: {
-                    src: ['qa/**/*.js']
+                    src: qaFiles
                 }
             }
         },
@@ -47,38 +60,18 @@ module.exports = function(grunt) {
                 dest: 'public/static/bundleprod.js'
             },
             marionette: {
-                /*app: {
-                    src: ['Marionette/app.js'],
-                    dest: 'public/static/app.js',
-                    options: {
-                        debug: true,
-                        extensions: ['.coffee', '.hbs'],
-                        transform: ['coffeeify', 'hbsfy'],
-                        external: vendors
-                    }
-                },
-                vendors: {
-                    files: {
-                        'public/static/vendors.js': []
-                    },
-                    options: {
-                        'require': vendors
-                    }
-                },
-                bundle: {*/
-                    src: ['Marionette/main.js'],
-                    dest: 'public/static/bundle.js',
-                    options: {
-                        extensions: ['.coffee', '.hbs'],
-                        transform: ['coffeeify', 'hbsfy'],
-                        shim: {
-                            jquery: {
-                                path: 'node_modules/jquery/src/jquery.js',
-                                exports: '$'
-                            }
+                src: ['Marionette/app.js'],
+                dest: 'public/static/bundle.js',
+                options: {
+                    extensions: ['.coffee', '.hbs'],
+                    transform: ['coffeeify', 'hbsfy'],
+                    shim: {
+                        jquery: {
+                            path: 'node_modules/jquery/src/jquery.js',
+                            exports: '$'
                         }
                     }
-                //}
+                }
             }
         },
         cafemocha: {
@@ -89,28 +82,7 @@ module.exports = function(grunt) {
         },
         coffee: {
             compile: {
-                files: {
-                    'frontEnd.js': 'frontEnd.coffee',
-                    'webAPI.js': 'webAPI.coffee',
-                    'configure/controller.js': 'configure/controller.coffee',
-                    //'routes/login.js': 'routes/login.coffee',
-                    //'routes/user.js': 'routes/user.coffee',
-                    //'models/user.js': 'models/user.coffee',
-                    'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
-                    'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
-                    'APIControllers/linksController.js': 'APIControllers/linksController.coffee',
-                    'configure/config.js': 'configure/config.coffee',
-                    'models/link.js': 'models/link.coffee'
-                    //'lib/config/configureRoutes.js': 'lib/config/configureRoutes.coffee',
-                    //'lib/config/configurePassport.js': 'lib/config/configurePassport.coffee',
-                    //'controllers/user.js': 'controllers/user.coffee',
-                    //'controllers/login.js': 'controllers/login.coffee'
-                }
-            },
-            marionette: {
-                files: {
-                    //'Marionette/apps/links/module.js': 'Marionette/apps/links/module.coffee'
-                }
+                files: coffeeScriptCompile
             }
         },
         coffeelint: {
@@ -119,15 +91,11 @@ module.exports = function(grunt) {
               },
               app: [
                   '*.coffee',
-                  //'routes/*.coffee',
-                  //'models/*.coffee',
                   'configure/*.coffee',
                   'APIRoutes/*.coffee',
-                  'APIControllers/*.coffee',
-                  'Marionette/apps/links/module.coffee'
-                  //'controllers/*.coffeeo
+                  'APIControllers/*.coffee'
               ]
-          },
+        },
         handlebars: {
             all: {
                 files: {
@@ -165,11 +133,6 @@ module.exports = function(grunt) {
             },
             jshint: {
                 files: [
-                    //'app.js',
-                    //'routes/**/*.js',
-                    //'controllers/**/*.js',
-                    //'frontEnd.js',
-                    //'webAPI.js',
                     'public/qa/**/*.js',
                     'public/js/**/*.js',
                     'app/**/*.js',
@@ -211,7 +174,6 @@ module.exports = function(grunt) {
             },
             coffee: {
                 files: [
-                    'test/*.coffee',
                     '*.coffee',
                     'APIRoutes/*.coffee',
                     'models/*.coffee',
@@ -250,7 +212,7 @@ module.exports = function(grunt) {
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['frontEnd.js', '4000'],
+            args: ['frontEnd.js', '3000'],
             opts: {
                 stdio: 'inherit'
             }

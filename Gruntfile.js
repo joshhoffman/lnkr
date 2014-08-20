@@ -11,11 +11,14 @@ module.exports = function(grunt) {
         'grunt-contrib-handlebars'
     ].forEach(function(task) {
             grunt.loadNpmTasks(task);
-        });
+    });
 
-    var vendors = 'jquery backbone backbone.marionette backbone.localstorage'.split(' ');
+    var vendors = 'jquery backbone backbone.marionette'.split(' ');
     
-    var qaFiles = ['qa/**/*.js']
+    var jsFiles = ['app/**/*.js'];
+    var qaFiles = ['qa/**/*.js'];
+    
+    var mariApp = ['app/app/.js'];
     
     var coffeeScriptCompile = {
         'frontEnd.js': 'frontEnd.coffee',
@@ -26,15 +29,18 @@ module.exports = function(grunt) {
         'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
         'APIControllers/linksController.js': 'APIControllers/linksController.coffee',
         'models/link.js': 'models/link.coffee'
-    }
+    };
+    
+    var coffeeScriptFiles = [
+        '*.coffee',
+        'configure/*.coffee',
+        'APIRoutes/*.coffee',
+        'APIControllers/*.coffee'
+    ];
 
     grunt.initConfig({
         jshint: {
-            files: [
-                'app/**/*.js',
-                'Marionette/**/*.js',
-                '!Marionette/apps/links/module.js'
-            ],
+            files: jsFiles,
             tests: {
                 options: {
                     '-W030': true
@@ -46,37 +52,31 @@ module.exports = function(grunt) {
         },
         browserify: {
             options: {
-                debug: true
+                debug: true,
+                extensions: ['.coffee', '.hbs'],
+                transform: ['coffeeify', 'hbsfy'],
+                shim: {
+                    jquery: {
+                        path: 'node_modules/jquery/src/jquery.js',
+                        exports: '$'
+                    }
+                }
             },
             dev: {
-                src: ['app/main.js'],
+                src: mariApp,
                 dest: 'public/static/bundle.js'
             },
             production: {
                 options: {
                     debug: false
                 },
-                src: ['app/main.js'],
+                src: mariApp,
                 dest: 'public/static/bundleprod.js'
-            },
-            marionette: {
-                src: ['Marionette/app.js'],
-                dest: 'public/static/bundle.js',
-                options: {
-                    extensions: ['.coffee', '.hbs'],
-                    transform: ['coffeeify', 'hbsfy'],
-                    shim: {
-                        jquery: {
-                            path: 'node_modules/jquery/src/jquery.js',
-                            exports: '$'
-                        }
-                    }
-                }
             }
         },
         cafemocha: {
             all: {
-                src: 'qa/**/tests-unit*.js',
+                src: qaFiles,
                 options: {ui: 'tdd'}
             }
         },
@@ -89,12 +89,7 @@ module.exports = function(grunt) {
             options: {
                 configFile: 'coffeelint.json'
               },
-              app: [
-                  '*.coffee',
-                  'configure/*.coffee',
-                  'APIRoutes/*.coffee',
-                  'APIControllers/*.coffee'
-              ]
+              app: coffeeScriptFiles
         },
         handlebars: {
             all: {
@@ -106,38 +101,18 @@ module.exports = function(grunt) {
         watch: {
             browserify: {
                 files: [
-                    'app/**/*.js'
-                ],
-                tasks: [
-                    'browserify'
-                ]
-            },
-            maribrowserify: {
-                files: [
-                    'Marionette/**/*.js',
+                    'app/**/*.js',
                     'Marionette/**/*.hbs'
                 ],
                 tasks: [
-                    'browserify:marionette'
-                ]
-            },
-            maricoffee:{
-                files: [
-                    'Marionette/**/*.coffee',
-                    '!Marionette/apps/links/module.js'
-                ],
-                tasks: [
-                    'coffee:marionette',
-                    'coffeelint'
+                    'browserify:dev'
                 ]
             },
             jshint: {
                 files: [
                     'public/qa/**/*.js',
                     'public/js/**/*.js',
-                    'app/**/*.js',
-                    'Marionette/**/*.js',
-                    '!Marionette/apps/links/module.js'
+                    'app/**/*.js'
                 ],
                 tasks: [
                     'jshint'
@@ -201,18 +176,18 @@ module.exports = function(grunt) {
         }
     });
 
-    //grunt.registerTask('default', ['cafemocha', 'jshint', 'less', 'notify:cafemocha'])
-    //grunt.registerTask('mari', ['lint', 'coffee:marionette', 'browserify:marionette:app', 'browserify:marionette:vendors'])
-    //grunt.registerTask('mari', ['lint', 'browserify:marionette:app', 'browserify:marionette:vendors'])
-    grunt.registerTask('mari', ['lint', 'coffee', 'browserify:marionette']);
     grunt.registerTask('compile', ['coffee', 'browserify:dev', 'handlebars', 'cafemocha'])
+    grunt.registerTask('compileProd', ['coffee', 'browserify:prod', 'handlebars', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
+    
+    // TODO: add copying required js files to a release directory
+    grunt.registerTask('release', ['lint', 'compileProd']);
 
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['frontEnd.js', '3000'],
+            args: ['frontEnd.js', '4000'],
             opts: {
                 stdio: 'inherit'
             }
@@ -225,7 +200,7 @@ module.exports = function(grunt) {
     grunt.registerTask('runAPI', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['webAPI.js', '5001'],
+            args: ['webAPI.js', '4001'],
             opts: {
                 stdio: 'inherit'
             }
@@ -235,6 +210,6 @@ module.exports = function(grunt) {
         )
     });
 
-    grunt.registerTask('bbserver', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('server', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
     grunt.registerTask('mariserver', ['compile', 'mari', 'runFrontEnd', 'runAPI', 'watch']);
 }

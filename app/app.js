@@ -52,7 +52,7 @@ LinkManager.on("start", function() {
         console.log("triggering event");
         LinkManager.trigger("links:list");
     }
-    //LinkManager.Common.Views.Menu.Controller.showMenu();
+    
     LinkManager.trigger("show:menu");
     
     console.log("LinkManager has started");
@@ -61,9 +61,9 @@ LinkManager.on("start", function() {
 LinkManager.module("Entities", Entities);
 LinkManager.module("Common.Views", Views);
 
-//LinkManager.module("MenuModule", MenuApp);
-//LinkManager.module("MenuModule.Navigation", MenuView);
-//LinkManager.module("MenuModule.Navigation", MenuController);
+LinkManager.module("MenuModule", MenuApp);
+LinkManager.module("MenuModule.Navigation", MenuView);
+LinkManager.module("MenuModule.Navigation", MenuController);
 
 LinkManager.module("LinksModule", LinksApp);
 LinkManager.module("LinksModule.Common.Views", ListCommonViews);

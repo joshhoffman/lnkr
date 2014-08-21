@@ -1,3 +1,3 @@
-module.exports = function(StaticApp, LinkManager,
+module.exports = function(Pages, LinkManager,
                           Backbone, Marionette, $, _) {
 };

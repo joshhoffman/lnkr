@@ -13,8 +13,8 @@ var NavigationController = require('./apps/menu/navigation/menu_controller');
 var NavigationView = require('./apps/menu/navigation/menu_view');
 
 var StaticApp = require('./apps/static/static_app');
-var HomeController = require('./apps/static/home/home_controller');
-var HomeView = require('./apps/static/home/home_view');
+var PagesController = require('./apps/static/pages/pages_controller');
+var HomeView = require('./apps/static/pages/home_view');
 
 var ListLayout = require('./apps/links/list/list_layout');
 var ListController = require('./apps/links/list/list_controller');
@@ -35,7 +35,8 @@ LinkManager.addRegions({
     dialogRegion: Marionette.Region.Dialog.extend({
         el: "#dialog-region"
     }),
-    menuRegion: "#menu-region"
+    menuRegion: "#menu-region",
+    staticregion: "#static-region"
 });
 
 LinkManager.navigate = function(route, options) {
@@ -53,8 +54,7 @@ LinkManager.on("start", function() {
     }
     
     if(this.getCurrentRoute() === "") {
-        console.log("triggering event");
-        LinkManager.trigger("links:list");
+        LinkManager.trigger("show:home");
     }
     
     LinkManager.trigger("show:menu");
@@ -70,8 +70,8 @@ LinkManager.module("MenuModule.Navigation", NavigationView);
 LinkManager.module("MenuModule.Navigation", NavigationController);
 
 LinkManager.module("StaticModule", StaticApp);
-LinkManager.module("StaticModule.Home", HomeView);
-LinkManager.module("StaticModule.Home", HomeController);
+LinkManager.module("StaticModule.Pages", HomeView);
+LinkManager.module("StaticModule.Pages", PagesController);
 
 LinkManager.module("LinksModule", LinksApp);
 LinkManager.module("LinksModule.Common.Views", ListCommonViews);

@@ -1,3 +1,5 @@
+settings = require('./configure/settings');
+
 module.exports = function(grunt) {
     // load plugins
     [
@@ -187,7 +189,7 @@ module.exports = function(grunt) {
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['frontEnd.js', '3000'],
+            args: ['frontEnd.js', settings.FrontEndPort],
             opts: {
                 stdio: 'inherit'
             }
@@ -200,7 +202,7 @@ module.exports = function(grunt) {
     grunt.registerTask('runAPI', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['webAPI.js', '4001'],
+            args: ['webAPI.js', settings.APIPort],
             opts: {
                 stdio: 'inherit'
             }

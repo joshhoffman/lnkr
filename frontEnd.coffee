@@ -3,12 +3,16 @@ path = require 'path'
 fs = require 'fs'
 config = require './configure/config'
 
+settings = require './configure/settings'
+
 proxy = require('proxy-middleware')
 url = require('url')
 
 app = express()
 
-app.use '/api', proxy(url.parse('http://0.0.0.0:4001/api'))
+APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
+
+app.use settings.APIUri, proxy(url.parse(APIAddress))
 
 config.config(app)
 

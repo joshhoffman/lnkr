@@ -10,7 +10,8 @@ module.exports = function(grunt) {
         'grunt-contrib-jshint',
         'grunt-coffeelint',
         'grunt-browserify',
-        'grunt-contrib-handlebars'
+        'grunt-contrib-handlebars',
+        'grunt-contrib-copy'
     ].forEach(function(task) {
             grunt.loadNpmTasks(task);
     });
@@ -41,6 +42,19 @@ module.exports = function(grunt) {
     ];
 
     grunt.initConfig({
+        copy: {
+            release: {
+                files: [
+                    {expand: true, src:[
+                        'frontEnd.js',
+                        'webAPI.js',
+                        'Gruntfile.js',
+                        'nodemon.json'
+                    ], dest: 'deploy/release'},
+                    {expand: true, src:['public/**'], dest: 'deploy/release'}
+                ]
+            }
+        },
         jshint: {
             files: jsFiles,
             tests: {
@@ -68,12 +82,12 @@ module.exports = function(grunt) {
                 src: mariApp,
                 dest: 'public/static/bundle.js'
             },
-            production: {
+            prod: {
                 options: {
                     debug: false
                 },
                 src: mariApp,
-                dest: 'public/static/bundleprod.js'
+                dest: 'public/static/bundle.js'
             }
         },
         cafemocha: {
@@ -183,8 +197,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
     
-    // TODO: add copying required js files to a release directory
-    grunt.registerTask('release', ['lint', 'compileProd']);
+    grunt.registerTask('release', ['lint', 'compileProd', 'copy']);
 
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({

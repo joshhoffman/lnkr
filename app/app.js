@@ -36,7 +36,7 @@ LinkManager.addRegions({
         el: "#dialog-region"
     }),
     menuRegion: "#menu-region",
-    staticregion: "#static-region"
+    staticRegion: "#static-region"
 });
 
 LinkManager.navigate = function(route, options) {

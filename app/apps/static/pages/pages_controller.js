@@ -1,6 +1,6 @@
 module.exports = function(Pages, LinkManager,
                           Backbone, Marionette, $, _) {
-    Pages.Contoller = {
+    Pages.Controller = {
        showHome: function() {
            var view = new Pages.Home();
            LinkManager.staticRegion.show(view);

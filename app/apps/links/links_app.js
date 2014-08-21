@@ -1,5 +1,3 @@
-var app = require('../../app');
-
 module.exports = function(LinksApp, LinkManager,
                                 Backbone, Marionette, $, _) {
     LinksApp.Router = Marionette.AppRouter.extend({

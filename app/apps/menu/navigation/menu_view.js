@@ -1,8 +1,8 @@
 var menuTemplate = require('./templates/menu.hbs');
 
-module.exports = function(Menu, LinkManager,
+module.exports = function(Navigation, LinkManager,
                           Backbone, Marionette, $, _) {
-    Menu.Menu = Marionette.ItemView.extend({
+    Navigation.Menu = Marionette.ItemView.extend({
         template: menuTemplate,
         
         events: {

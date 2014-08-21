@@ -1,8 +1,8 @@
-module.exports = function(Menu, LinkManager,
+module.exports = function(Navigation, LinkManager,
                           Backbone, Marionette, $, _) {
-    Menu.Controller = {
+    Navigation.Controller = {
         showMenu: function() {
-            var view = new Menu.Menu();
+            var view = new Navigation.Menu();
             LinkManager.menuRegion.show(view);
             
             view.on("childview:navigate:home", function() {

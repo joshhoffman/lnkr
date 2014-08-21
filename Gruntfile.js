@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     var jsFiles = ['app/**/*.js'];
     var qaFiles = ['qa/**/*.js'];
     
-    var mariApp = ['app/app/.js'];
+    var mariApp = ['app/app.js'];
     
     var coffeeScriptCompile = {
         'frontEnd.js': 'frontEnd.coffee',
@@ -187,7 +187,7 @@ module.exports = function(grunt) {
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['frontEnd.js', '4000'],
+            args: ['frontEnd.js', '3000'],
             opts: {
                 stdio: 'inherit'
             }

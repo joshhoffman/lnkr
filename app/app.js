@@ -8,8 +8,9 @@ var LinkManager = new Marionette.Application();
 var LinksApp = require('./apps/links/links_app');
 var Entities = require('./entities/link');
 var Views = require('./common/views');
-var MenuController = require('./common/menu_controller');
-var MenuView = require('./common/menu_view');
+var MenuApp = require('./apps/menu/menu_app');
+var MenuController = require('./apps/menu/navigation/menu_controller');
+var MenuView = require('./apps/menu/navigation/menu_view');
 
 var ListLayout = require('./apps/links/list/list_layout');
 var ListController = require('./apps/links/list/list_controller');
@@ -51,15 +52,18 @@ LinkManager.on("start", function() {
         console.log("triggering event");
         LinkManager.trigger("links:list");
     }
-    LinkManager.Common.Views.Menu.Controller.showMenu();
+    //LinkManager.Common.Views.Menu.Controller.showMenu();
+    LinkManager.trigger("show:menu");
     
     console.log("LinkManager has started");
 });
 
 LinkManager.module("Entities", Entities);
 LinkManager.module("Common.Views", Views);
-LinkManager.module("Common.Views.Menu", MenuView);
-LinkManager.module("Common.Views.Menu", MenuController);
+
+LinkManager.module("MenuModule", MenuApp);
+LinkManager.module("MenuModule.Navigation", MenuView);
+LinkManager.module("MenuModule.Navigation", MenuController);
 
 LinkManager.module("LinksModule", LinksApp);
 LinkManager.module("LinksModule.Common.Views", ListCommonViews);

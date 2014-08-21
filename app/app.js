@@ -9,8 +9,12 @@ var LinksApp = require('./apps/links/links_app');
 var Entities = require('./entities/link');
 var Views = require('./common/views');
 var MenuApp = require('./apps/menu/menu_app');
-var MenuController = require('./apps/menu/navigation/menu_controller');
-var MenuView = require('./apps/menu/navigation/menu_view');
+var NavigationController = require('./apps/menu/navigation/menu_controller');
+var NavigationView = require('./apps/menu/navigation/menu_view');
+
+var StaticApp = require('./apps/static/static_app');
+var HomeController = require('./apps/static/home/home_controller');
+var HomeView = require('./apps/static/home/home_view');
 
 var ListLayout = require('./apps/links/list/list_layout');
 var ListController = require('./apps/links/list/list_controller');
@@ -62,8 +66,12 @@ LinkManager.module("Entities", Entities);
 LinkManager.module("Common.Views", Views);
 
 LinkManager.module("MenuModule", MenuApp);
-LinkManager.module("MenuModule.Navigation", MenuView);
-LinkManager.module("MenuModule.Navigation", MenuController);
+LinkManager.module("MenuModule.Navigation", NavigationView);
+LinkManager.module("MenuModule.Navigation", NavigationController);
+
+LinkManager.module("StaticModule", StaticApp);
+LinkManager.module("StaticModule.Home", HomeView);
+LinkManager.module("StaticModule.Home", HomeController);
 
 LinkManager.module("LinksModule", LinksApp);
 LinkManager.module("LinksModule.Common.Views", ListCommonViews);

@@ -1,5 +1,6 @@
 LinksController = require('../APIControllers/linksController')
 LinkController = require('../APIControllers/linkController')
+LoginController = require('../APIControllers/loginController')
 
 exports.routes = (app, Link, User) ->
     app.get '/api/test', (req, res) ->

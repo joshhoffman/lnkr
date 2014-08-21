@@ -5,3 +5,5 @@ class LoginController extends Controller
         this._name = 'login'
         this.User = User
         super app
+
+module.exports = LoginController

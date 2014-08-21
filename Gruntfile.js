@@ -125,7 +125,7 @@ module.exports = function(grunt) {
             browserify: {
                 files: [
                     'app/**/*.js',
-                    'Marionette/**/*.hbs'
+                    'app/**/*.hbs'
                 ],
                 tasks: [
                     'browserify:dev'

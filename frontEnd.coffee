@@ -8,7 +8,7 @@ url = require('url')
 
 app = express()
 
-app.use '/api', proxy(url.parse('http://0.0.0.0:5001/api'))
+app.use '/api', proxy(url.parse('http://0.0.0.0:4001/api'))
 
 config.config(app)
 

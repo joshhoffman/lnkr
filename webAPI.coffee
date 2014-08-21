@@ -8,6 +8,7 @@ routes = require './APIRoutes/apiRoutes'
 mongoose = require 'mongoose'
 
 Link = require('./models/link').linkModel
+User = require('./models/user').userModel
 
 app = express()
 
@@ -21,7 +22,7 @@ mongoose.connect('mongodb://localhost/lnkr')
 
 config.config app
 
-routes.routes app, Link
+routes.routes app, Link, User
 
 port = app.get 'port'
 ret = app.listen port, () ->

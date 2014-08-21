@@ -31,7 +31,9 @@ module.exports = function(grunt) {
         'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
         'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
         'APIControllers/linksController.js': 'APIControllers/linksController.coffee',
-        'models/link.js': 'models/link.coffee'
+        'APIControllers/loginController.js': 'APIControllers/loginController.coffee',
+        'models/link.js': 'models/link.coffee',
+        'models/user.js': 'models/user.coffee'
     };
     
     var coffeeScriptFiles = [
@@ -49,9 +51,14 @@ module.exports = function(grunt) {
                         'frontEnd.js',
                         'webAPI.js',
                         'Gruntfile.js',
-                        'nodemon.json'
+                        'nodemon.json',
+                        'package.json'
                     ], dest: 'deploy/release'},
-                    {expand: true, src:['public/**'], dest: 'deploy/release'}
+                    {expand: true, src:['public/**'], dest: 'deploy/release'},
+                    {expand: true, src:['APIControllers/*.js'], dest: 'deploy/release'},
+                    {expand: true, src:['configure/*.js'], dest: 'deploy/release'},
+                    {expand: true, src:['APIRoutes/*.js'], dest: 'deploy/release'},
+                    {expand: true, src:['models/*.js'], dest: 'deploy/release'}
                 ]
             }
         },
@@ -192,8 +199,8 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('compile', ['coffee', 'browserify:dev', 'handlebars', 'cafemocha'])
-    grunt.registerTask('compileProd', ['coffee', 'browserify:prod', 'handlebars', 'cafemocha'])
+    grunt.registerTask('compile', ['coffee', 'browserify:dev', 'cafemocha'])
+    grunt.registerTask('compileProd', ['coffee', 'browserify:prod', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
     

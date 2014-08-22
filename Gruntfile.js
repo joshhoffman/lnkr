@@ -249,6 +249,6 @@ module.exports = function(grunt) {
         )
     });
 
-    grunt.registerTask('server', ['lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('server', ['clean', 'lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
     grunt.registerTask('mariserver', ['compile', 'mari', 'runFrontEnd', 'runAPI', 'watch']);
 }

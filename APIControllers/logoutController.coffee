@@ -7,3 +7,5 @@ class LogoutController extends SecureController
     _get: (req, res, next) ->
         console.log 'logging out'
         req.logOut()
+
+module.exports = LogoutController

@@ -2,11 +2,12 @@ localStrategy = require('passport-local').Strategy
 userModel = require '../models/user'
 passwordHash = require 'password-hash'
 
-module.exports = (app, passport) ->
+module.exports = (app, passport, User) ->
     app.use passport.initialize()
     app.use passport.session()
+    console.log 'setup passport'
     passport.use new localStrategy (username, password, done) ->
-        userModel.userModel.findOne {username: username}, (err, user) ->
+        User.findOne {username: username}, (err, user) ->
             if err
                 console.log 'Error in find'
                 return done(err)
@@ -19,6 +20,7 @@ module.exports = (app, passport) ->
 
             console.log 'wow... not logged in'
             console.log 'user password ' + user.password
+            console.log 'password ' + password
             console.log passwordHash.generate(password)
             return done(null, false, {message: 'Incorrect password'})
 
@@ -28,6 +30,6 @@ module.exports = (app, passport) ->
 
     passport.deserializeUser (id, done) ->
         console.log 'in deserialize ' + id
-        userModel.userModel.findById id, (err, user) ->
+        User.findById id, (err, user) ->
             done(err) if err
             done(null, user)

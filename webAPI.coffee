@@ -25,7 +25,7 @@ db.on "error", (err) ->
 mongoose.connect('mongodb://localhost/lnkr')
 
 config app
-configPassport app, passport
+configPassport app, passport, User
 
 routesConfig = {
     Link: Link

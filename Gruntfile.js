@@ -11,7 +11,8 @@ module.exports = function(grunt) {
         'grunt-coffeelint',
         'grunt-browserify',
         'grunt-contrib-handlebars',
-        'grunt-contrib-copy'
+        'grunt-contrib-copy',
+        'grunt-contrib-clean'
     ].forEach(function(task) {
             grunt.loadNpmTasks(task);
     });
@@ -49,6 +50,17 @@ module.exports = function(grunt) {
     ];
 
     grunt.initConfig({
+        clean: {
+            js: [
+                'APIControllers/*.js',
+                'APIRoutes/*.js',
+                'Configure/*.js',
+                '!Configure/settings.js',
+                'models/*.js',
+                'webAPI.js',
+                'frontEnd.js'
+            ]
+        },
         copy: {
             release: {
                 files: [

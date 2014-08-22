@@ -12,6 +12,9 @@ module.exports = function(Navigation, LinkManager,
             
             view.on("navigate:login", function() {
                 console.log('got navigate login');
+                var view = new LinkManager.MenuModule.Login.Login();
+                
+                LinkManager.dialogRegion.show(view);
             });
             
             LinkManager.menuRegion.show(view);

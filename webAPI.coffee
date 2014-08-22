@@ -6,6 +6,7 @@ config = require './configure/config'
 routes = require './APIRoutes/apiRoutes'
 passport = require 'passport'
 hashPassword = require 'password-hash'
+ensureLogin = require('connect-ensure-login').ensureLoggedIn
 
 mongoose = require 'mongoose'
 
@@ -29,6 +30,7 @@ routesConfig = {
     User: User
     Passport: passport
     HashPassword: hashPassword
+    EnsureLogin: ensureLogin
 }
 
 routes.routes app, routesConfig

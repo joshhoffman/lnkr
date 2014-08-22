@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "body-parser": "^1.6.5",
+    "connect-ensure-login": "^0.1.1",
     "cookie-parser": "*",
     "errorhandler": "1.x.x",
     "express": "^4.8.5",

@@ -27,6 +27,7 @@ module.exports = function(grunt) {
         'frontEnd.js': 'frontEnd.coffee',
         'webAPI.js': 'webAPI.coffee',
         'configure/controller.js': 'configure/controller.coffee',
+        'configure/secureController.js': 'configure/secureController.coffee',
         'configure/config.js': 'configure/config.coffee',
         'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
         'APIControllers/linkController.js': 'APIControllers/linkController.coffee',

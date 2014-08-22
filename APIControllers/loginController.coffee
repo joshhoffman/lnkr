@@ -19,7 +19,7 @@ class LoginController extends Controller
             if not user
                 console.log 'not user'
 
-            return res.redirect '/login' if not user
+            return res.redirect '/#login' if not user
             req.logIn user, (err) ->
                 console.log 'in login'
                 return next err if err

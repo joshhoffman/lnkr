@@ -7,7 +7,8 @@ module.exports = function(Navigation, LinkManager,
         
         triggers: {
             "click a.js-home": "navigate:home",
-            "click li a.js-login": "navigate:login"
+            "click li a.js-login": "navigate:login",
+            "click li a.js-register": "navigate:register"
         },
         
         events: {

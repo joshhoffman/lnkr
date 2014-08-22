@@ -17,6 +17,13 @@ module.exports = function(Navigation, LinkManager,
                 LinkManager.dialogRegion.show(view);
             });
             
+            view.on("navigate:register", function() {
+                console.log('got navigate register');
+                var view = new LinkManager.MenuModule.Register.Register();
+                
+                LinkManager.dialogRegion.show(view);
+            });
+            
             LinkManager.menuRegion.show(view);
         }
     };

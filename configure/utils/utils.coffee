@@ -1,0 +1,1 @@
+exports.sify = (s) -> JSON.stringify(s)

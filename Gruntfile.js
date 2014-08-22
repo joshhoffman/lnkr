@@ -29,10 +29,14 @@ module.exports = function(grunt) {
         'configure/controller.js': 'configure/controller.coffee',
         'configure/secureController.js': 'configure/secureController.coffee',
         'configure/config.js': 'configure/config.coffee',
+        'configure/configPassport.js': 'configure/configPassport.coffee',
+        'configure/utils/utils.js': 'configure/utils/utils.coffee',
         'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
         'APIControllers/linkController.js': 'APIControllers/linkController.coffee',
         'APIControllers/linksController.js': 'APIControllers/linksController.coffee',
         'APIControllers/loginController.js': 'APIControllers/loginController.coffee',
+        'APIControllers/registerController.js': 'APIControllers/registerController.coffee',
+        'APIControllers/logoutController.js': 'APIControllers/logoutController.coffee',
         'models/link.js': 'models/link.coffee',
         'models/user.js': 'models/user.coffee'
     };

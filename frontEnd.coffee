@@ -14,7 +14,7 @@ APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
 
 app.use settings.APIUri, proxy(url.parse(APIAddress))
 
-config.config(app)
+config(app)
 
 app.get '/', (req, res) ->
     fs.readFile '/public/index.html', (err, html) ->

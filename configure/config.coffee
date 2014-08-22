@@ -12,7 +12,7 @@ path = require 'path'
 express = require 'express'
 url = require 'url'
 
-exports.config = (app) ->
+module.exports = (app, passport) ->
     app.set 'port', process.env.port || process.argv[2] || 5001
     app.use favicon(path.join(__dirname, '../public/favicon.ico'))
     app.use morgan('dev', {immediate: true})
@@ -29,8 +29,6 @@ exports.config = (app) ->
         resave: true,
         saveUninitialized: false
     })
-    #app.use passport.initialize()
-    #app.use passport.session()
 
     app.use express.static(path.join(__dirname, '../public'))
 

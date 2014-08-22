@@ -7,6 +7,7 @@ routes = require './APIRoutes/apiRoutes'
 passport = require 'passport'
 hashPassword = require 'password-hash'
 ensureLogin = require('connect-ensure-login').ensureLoggedIn
+configPassport = require './configure/configPassport'
 
 mongoose = require 'mongoose'
 
@@ -23,7 +24,8 @@ db.on "error", (err) ->
 
 mongoose.connect('mongodb://localhost/lnkr')
 
-config.config app
+config app
+configPassport app, passport
 
 routesConfig = {
     Link: Link

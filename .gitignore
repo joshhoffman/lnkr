@@ -54,4 +54,5 @@ frontEnd.js
 public/static/*.js
 webAPI.js
 configure/config.js
+configure/utils/utils.js
 deploy

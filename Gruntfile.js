@@ -58,7 +58,8 @@ module.exports = function(grunt) {
                 '!Configure/settings.js',
                 'models/*.js',
                 'webAPI.js',
-                'frontEnd.js'
+                'frontEnd.js',
+                '**/*.map'
             ]
         },
         copy: {
@@ -121,6 +122,9 @@ module.exports = function(grunt) {
             }
         },
         coffee: {
+            options: {
+                sourceMap: true
+            },
             compile: {
                 files: coffeeScriptCompile
             }

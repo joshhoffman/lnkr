@@ -3,7 +3,7 @@ module.exports = function(Pages, LinkManager,
     Pages.Controller = {
        showHome: function() {
            var view = new Pages.Home();
-           LinkManager.staticRegion.show(view);
+           LinkManager.mainRegion.show(view);
        }
     };
 };

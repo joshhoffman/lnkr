@@ -31,11 +31,14 @@ class LinkController extends Controller
                 res.json(data)
 
     _delete: (req, res, next) ->
+        console.log 'in delete'
         this.Link.findOneAndRemove {name: req.body.name}, (err, link) ->
             if err
+                console.log 'delete failed'
                 res.status 404
                 res.json {"status": false}
                 return
+            console.log 'delete success'
             res.json {"status": true}
 
 module.exports = LinkController

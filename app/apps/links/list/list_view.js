@@ -20,11 +20,6 @@ module.exports = function(List, LinkManager,
             this.$el.toggleClass("warning");
         },
         
-        deleteClicked: function(e) {
-            e.stopPropagation();
-            this.trigger("link:delete", this.model);
-        },
-        
         showClicked: function(e) {
             e.preventDefault();
             e.stopPropagation();

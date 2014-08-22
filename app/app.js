@@ -34,12 +34,12 @@ LinkManager.addRegions({
     dialogRegion: Marionette.Region.Dialog.extend({
         el: "#dialog-region"
     }),
-    menuRegion: "#menu-region",
-    staticRegion: "#static-region"
+    menuRegion: "#menu-region"
 });
 
 LinkManager.navigate = function(route, options) {
     options = options || {};
+    console.log(route);
     Backbone.history.navigate(route, options);
 };
 

@@ -227,7 +227,8 @@ describe("linkController", function() {
 
     describe("delete", function() {
         var req = {
-            body: {
+            params: {
+                id: "name",
                 name: "name",
                 link: "link",
                 description: "desc"
@@ -249,14 +250,14 @@ describe("linkController", function() {
         });
 
         it("should use the correct parameter", function() {
-            expect(Link.findOneAndRemove.args[0][0]).to.contain({name: req.body.name});
+            expect(Link.findOneAndRemove.args[0][0]).to.contain({name: req.params.id});
         });
 
         it("should set an error if delete fails", function() {
             retFunc({status: "false"}, null);
 
             expect(res.status.calledOnce).to.be.true;
-            expect(res.status).to.be.calledWith(404);
+            expect(res.status).to.be.calledWith(400);
         });
 
         it("should respond with error on delete failure", function() {

@@ -48,6 +48,7 @@ module.exports = function(List, LinkManager,
                 linksListView.on("childview:link:delete", function(childView, args) {
                     var model = args.model;
                     console.log('in delete');
+                    console.log(model);
                     model.destroy({
                         success: function() {
                             console.log('delete success');

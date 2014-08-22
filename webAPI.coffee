@@ -4,6 +4,8 @@ redis = require 'redis'
 fs = require 'fs'
 config = require './configure/config'
 routes = require './APIRoutes/apiRoutes'
+passport = require 'passport'
+hashPassword = require 'password-hash'
 
 mongoose = require 'mongoose'
 
@@ -22,7 +24,14 @@ mongoose.connect('mongodb://localhost/lnkr')
 
 config.config app
 
-routes.routes app, Link, User
+routesConfig = {
+    Link: Link
+    User: User
+    Passport: passport
+    HashPassword: hashPassword
+}
+
+routes.routes app, routesConfig
 
 port = app.get 'port'
 ret = app.listen port, () ->

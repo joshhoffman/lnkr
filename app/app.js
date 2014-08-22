@@ -24,7 +24,6 @@ var EditView = require('./apps/links/edit/edit_view');
 var NewView = require('./apps/links/new/new_view');
 var ShowController = require('./apps/links/show/show_controller');
 var ShowView = require('./apps/links/show/show_view');
-var ListCommonViews = require('./apps/links/common/form_view');
 
 var dialog = require('./apps/config/marionette/dialog');
 
@@ -74,7 +73,6 @@ LinkManager.module("StaticModule.Pages", HomeView);
 LinkManager.module("StaticModule.Pages", PagesController);
 
 LinkManager.module("LinksModule", LinksApp);
-LinkManager.module("LinksModule.Common.Views", ListCommonViews);
 LinkManager.module("LinksModule.List", ListLayout) ;
 LinkManager.module("LinksModule.List", ListView);
 LinkManager.module("LinksModule.List", ListController);

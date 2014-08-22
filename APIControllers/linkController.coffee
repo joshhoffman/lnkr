@@ -1,9 +1,9 @@
 Controller = require '../configure/controller'
 
 class LinkController extends Controller
-    constructor: (app, Link) ->
+    constructor: (app, config) ->
         this._name = 'links/:id'
-        this.Link = Link
+        this.Link = config.Link
         super app
 
     _get: (req, res, next) ->

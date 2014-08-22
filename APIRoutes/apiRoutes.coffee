@@ -2,10 +2,10 @@ LinksController = require('../APIControllers/linksController')
 LinkController = require('../APIControllers/linkController')
 LoginController = require('../APIControllers/loginController')
 
-exports.routes = (app, Link, User) ->
+exports.routes = (app, routesConfig) ->
     app.get '/api/test', (req, res) ->
         res.json({'test': 'testdata'})
 
-    linkController = new LinkController app, Link
-    linksController = new LinksController app, Link
-    loginController = new LoginController app, User
+    linkController = new LinkController app, routesConfig
+    linksController = new LinksController app, routesConfig
+    loginController = new LoginController app, routesConfig

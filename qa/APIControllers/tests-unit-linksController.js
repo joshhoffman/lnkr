@@ -33,7 +33,11 @@ describe("linkController", function() {
             status: sinon.spy()
         };
 
-        lc = new LinksController(app, Link);
+        config = {
+            Link: Link
+        };
+
+        lc = new LinksController(app, config);
     });
 
     afterEach(function () {

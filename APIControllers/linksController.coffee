@@ -21,7 +21,8 @@ class LinksController extends Controller
             id: req.body.name,
             name: req.body.name,
             link: req.body.link,
-            description: req.body.description
+            description: req.body.description,
+            tags: req.body.tags
         })
 
         newLink.save (err, data) ->

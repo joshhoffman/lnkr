@@ -23,6 +23,7 @@ class LinkController extends Controller
             link.name = req.body.name
             link.link = req.body.link
             link.description = req.body.description
+            link.tags = req.body.tags
             link.save (err, data) ->
                 if err
                     res.status 404

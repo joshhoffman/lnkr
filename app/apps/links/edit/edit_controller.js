@@ -12,6 +12,7 @@ module.exports = function(Edit, LinkManager,
                     });
 
                     view.on("form:submit", function(data) {
+                        data.tags = data.tags.split(" ");
                         if(link.save(data)) {
                             LinkManager.trigger("link:show", link.get("id"));
                         } else {

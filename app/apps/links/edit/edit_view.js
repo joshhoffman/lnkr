@@ -7,6 +7,7 @@ module.exports = function(Edit, LinkManager,
 
         initialize: function () {
             this.title = "Edit " + this.model.get("name");
+            this.model.set("tags", this.model.get("tags").join(" "));
         },
 
         onRender: function() {

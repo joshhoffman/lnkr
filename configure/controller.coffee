@@ -6,7 +6,6 @@ class Controller
         app.post name, (req, res, next) ->
             self._post req, res, next
         app.get name, (req, res, next) ->
-            console.log self._get
             self._get req, res, next
         app.put name, (req, res, next) ->
             self._put req, res, next

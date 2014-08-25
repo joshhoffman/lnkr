@@ -8,7 +8,8 @@ module.exports = function(Entities, LinkManager,
             name: '',
             description: '',
             link: '',
-            createdOn: ''
+            createdOn: '',
+            tags: []
         },
         
         validate: function(attrs, options) {
@@ -35,24 +36,6 @@ module.exports = function(Entities, LinkManager,
         comparator: 'name'
     });
     
-    /*var links;
-    var initializeLinks = function() {
-        var links = new Entities.LinkCollection([
-            {
-                name: 'test',
-                description: 'test desc',
-                link: 'google.com'
-            }
-        ]);
-
-        links.forEach(function(model) {
-            console.log(model);
-            model.save();
-        });
-        
-        return links.models;
-    };*/
-    
     var API = {
         getLinkEntities: function() {
             var links = new Entities.LinkCollection();
@@ -71,6 +54,8 @@ module.exports = function(Entities, LinkManager,
             var defer = $.Deferred();
             link.fetch({
                 success: function(data) {
+                    console.log(data);
+                    
                     defer.resolve(data);
                 },
                 error: function(data) {

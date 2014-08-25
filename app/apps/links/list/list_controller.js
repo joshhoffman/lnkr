@@ -4,7 +4,7 @@ require('jquery-ui');
 module.exports = function(List, LinkManager,
                           Backbone, Marionette, $, _) {
     List.Controller = {
-        listLinks: function() {
+        listLinks: function(criterion) {
             var loadingView = new LinkManager.Common.Views.Loading();
             LinkManager.mainRegion.show(loadingView);
 
@@ -28,11 +28,11 @@ module.exports = function(List, LinkManager,
                     var newLink = new LinkManager.Entities.Link();
 
                     var view = new LinkManager.LinksModule.New.Link({
-                        model: newLink,
-                        asModal: true
+                        model: newLink
                     });
 
                     view.on("form:submit", function(data) {
+                        data.tags = data.tags.split(" ");
                         if(newLink.save(data)) {
                             links.add(newLink);
                             view.trigger("dialog:close");
@@ -70,6 +70,7 @@ module.exports = function(List, LinkManager,
                     });
                     
                     view.on("form:submit", function(data) {
+                        data.tags = data.tags.split(" ");
                         if(model.save(data)) {
                             childView.render();
                             view.trigger("dialog:close");

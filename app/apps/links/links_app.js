@@ -23,6 +23,15 @@ module.exports = function(LinksApp, LinkManager,
         }
     };
 
+    LinkManager.on("links:filter", function(criterion){
+        if(criterion){
+            LinkManager.navigate("links/filter/criterion:" + criterion);
+        }
+        else{
+            LinkManager.navigate("links");
+        }
+    });
+
     LinkManager.on("link:edit", function(id) {
         LinkManager.navigate('links/' + id + '/edit');
         API.editLink(id);

@@ -15,8 +15,42 @@ module.exports = function(List, LinkManager,
             
             $.when(fetchingLinks).done(function(links) {
                 console.log('done fetching');
+                var filteredLinks = LinkManager.Entities.FilteredCollection({
+                    collection: links,
+                    filterFunction: function(filterCriterion){
+                        var criterion = filterCriterion.toLowerCase();
+                        return function(link){
+                            var tags = link.get("tags");
+                            var found = false;
+
+                            tags.forEach(function(item) {
+                                if(item.toLowerCase().indexOf(criterion) != -1) {
+                                    found = true;
+                                }
+                            });
+
+                            if(found) {
+                                return link;
+                            }
+                        };
+                    }
+                });
+
+                if(criterion){
+                    filteredLinks.filter(criterion);
+                    linksListPanel.once("show", function(){
+                        console.log(criterion);
+                        linksListPanel.triggerMethod("set:filter:criterion", criterion);
+                    });
+                }
+
                 var linksListView = new List.Links({
-                    collection: links
+                    collection: filteredLinks
+                });
+
+                linksListPanel.on("links:filter", function(filterCriterion){
+                    filteredLinks.filter(filterCriterion);
+                    LinkManager.trigger("links:filter", filterCriterion);
                 });
 
                 linksLayoutView.on("show", function() {

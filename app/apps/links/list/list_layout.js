@@ -15,6 +15,24 @@ module.exports = function(List, LinkManager,
         template: PanelTemplate,
         triggers: {
             "click button.js-new": "link:new"
+        },
+
+        events: {
+            "submit #filter-form": "filterContacts"
+        },
+
+        ui: {
+            criterion: "input.js-filter-criterion"
+        },
+
+        filterContacts: function(e) {
+            e.preventDefault();
+            var criterion = this.$(".js-filter-criterion").val();
+            this.trigger("links:filter", criterion);
+        },
+
+        onSetFilterCriteron: function (criterion) {
+            this.ui.criterion.val(criterion);
         }
     });
 };

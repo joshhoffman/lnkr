@@ -15,7 +15,7 @@ module.exports = function(List, LinkManager,
         events: {
             "click": "linkClicked"
         },
-        
+
         linkClicked: function() {
             console.log('linkClicked');
             this.$el.toggleClass("warning");

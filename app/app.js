@@ -6,7 +6,8 @@ var Marionette = require('backbone.marionette');
 var LinkManager = new Marionette.Application();
 
 var LinksApp = require('./apps/links/links_app');
-var Entities = require('./entities/link');
+var LinkEntity = require('./entities/link');
+var Header = require('./entities/header');
 var Views = require('./common/views');
 var MenuApp = require('./apps/menu/menu_app');
 var NavigationController = require('./apps/menu/navigation/menu_controller');
@@ -63,7 +64,8 @@ LinkManager.on("start", function() {
     console.log("LinkManager has started");
 });
 
-LinkManager.module("Entities", Entities);
+LinkManager.module("Entities", LinkEntity);
+LinkManager.module("Entities", Header);
 LinkManager.module("Common.Views", Views);
 
 LinkManager.module("MenuModule", MenuApp);

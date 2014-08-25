@@ -1,4 +1,5 @@
 var loadingTemplate = require('./templates/loading.hbs');
+Syphon = require('backbone.syphon');
 
 module.exports = function(Views, LinkManager,
                           Backbone, Marionette, $, _) {

@@ -1,5 +1,6 @@
 var LinkTemplate = require('./templates/link.hbs');
 var LinksTemplate = require('./templates/links.hbs');
+var NoneTemplate = require('./templates/none.hbs');
 
 module.exports = function(List, LinkManager,
                           Backbone, Marionette, $, _) {
@@ -50,12 +51,19 @@ module.exports = function(List, LinkManager,
         }
     });
     
+    var NoContactsView = Marionette.ItemView.extend({
+        template: NoneTemplate,
+        tagName: "tr",
+        className: "alert"
+    });
+    
     List.Links = Marionette.CompositeView.extend({
         tagName: "table",
         className: "table table-hover",
         template: LinksTemplate,
         childView: List.Link,
         childViewContainer: "tbody",
+        emptyView: NoContactsView,
 
         initialize: function() {
             this.listenTo(this.collection, "reset", function() {

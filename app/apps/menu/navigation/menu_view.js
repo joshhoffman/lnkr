@@ -17,7 +17,9 @@ module.exports = function(Navigation, LinkManager,
         },
         
         onRender: function() {
+            console.log('on render');
             if(this.model.selected) {
+                console.log('model seleted');
                 this.$el.addClass("selected");
             }
         }

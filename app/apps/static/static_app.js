@@ -4,7 +4,7 @@
          appRoutes: {
              "/": "showHome",
              "/#": "showHome",
-             "/#about": "showAbout"
+             "about": "showAbout"
          }
      });
 

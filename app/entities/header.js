@@ -18,7 +18,7 @@ module.exports = function(Entities, LinkManager, Backbone, Marionette, $, _){
     var initializeHeaders = function(){
         Entities.headers = new Entities.HeaderCollection([
             { name: "Links", url: "links", navigationTrigger: "links:list" },
-            { name: "About", url: "about", navigationTrigger: "about:show" },
+            { name: "About", url: "about", navigationTrigger: "show:about" },
             { name: "Login", url: "login", navigationTrigger: "navigate:login" },
             { name: "Register", url: "register", navigationTrigger: "navigate:register" }
         ]);

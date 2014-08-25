@@ -19,6 +19,7 @@ var RegisterView = require('./apps/menu/register/register_view');
 var StaticApp = require('./apps/static/static_app');
 var PagesController = require('./apps/static/pages/pages_controller');
 var HomeView = require('./apps/static/pages/home_view');
+var AboutView = require('./apps/static/pages/about_view');
 
 var ListLayout = require('./apps/links/list/list_layout');
 var ListController = require('./apps/links/list/list_controller');
@@ -77,6 +78,7 @@ LinkManager.module("MenuModule.Register", RegisterView);
 
 LinkManager.module("StaticModule", StaticApp);
 LinkManager.module("StaticModule.Pages", HomeView);
+LinkManager.module("StaticModule.Pages", AboutView);
 LinkManager.module("StaticModule.Pages", PagesController);
 
 LinkManager.module("LinksModule", LinksApp);

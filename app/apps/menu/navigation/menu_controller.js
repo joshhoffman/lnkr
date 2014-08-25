@@ -2,29 +2,27 @@ module.exports = function(Navigation, LinkManager,
                           Backbone, Marionette, $, _) {
     Navigation.Controller = {
         
-        showMenu: function() {
-            var view = new Navigation.Menu();
+        listHeader: function() {
+            var links = LinkManager.request("header:entities");
+            var headers = new Navigation.Headers({collection: links});
             
-            view.on("navigate:home", function() {
-                console.log('got navigate home');
+            headers.on("brand:clicked", function() {
                 LinkManager.trigger("show:home");
             });
             
-            view.on("navigate:login", function() {
-                console.log('got navigate login');
-                var view = new LinkManager.MenuModule.Login.Login();
-                
-                LinkManager.dialogRegion.show(view);
+            headers.on("childview:navigate", function(childview, model) {
+                var trigger = model.get("navigationTrigger");
+                LinkManager.trigger(trigger);
             });
             
-            view.on("navigate:register", function() {
-                console.log('got navigate register');
-                var view = new LinkManager.MenuModule.Register.Register();
-                
-                LinkManager.dialogRegion.show(view);
-            });
-            
-            LinkManager.menuRegion.show(view);
+            LinkManager.headerRegion.show(headers);
+        },
+        
+        setActiveHeader: function(headerUrl) {
+            var links = LinkManager.request("header:entities");
+            var headerToSelect = links.find(function(header) { return header.get("url") == headerUrl; });
+            headerToSelect.select();
+            links.trigger("reset");
         }
     };
 };

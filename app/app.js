@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
 var Marionette = require('backbone.marionette');
+Backbone.Picky = require('./vendor/backbone.picky');
 
 var LinkManager = new Marionette.Application();
 
@@ -37,7 +38,7 @@ LinkManager.addRegions({
     dialogRegion: Marionette.Region.Dialog.extend({
         el: "#dialog-region"
     }),
-    menuRegion: "#menu-region"
+    headerRegion: "#menu-region"
 });
 
 LinkManager.navigate = function(route, options) {

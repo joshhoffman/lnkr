@@ -18,7 +18,8 @@
     "password-hash": "^1.2.2",
     "proxy-middleware": "^0.5.0",
     "redis": "^0.12.1",
-    "serve-favicon": "*"
+    "serve-favicon": "*",
+    "validator": "^3.17.0"
   },
   "devDependencies": {
     "backbone": "^1.1.2",

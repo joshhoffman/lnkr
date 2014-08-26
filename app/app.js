@@ -16,6 +16,7 @@ var NavigationController = require('./apps/menu/navigation/menu_controller');
 var NavigationView = require('./apps/menu/navigation/menu_view');
 var LoginView = require('./apps/menu/login/login_view');
 var RegisterView = require('./apps/menu/register/register_view');
+var AuthenticationController = require('./apps/menu/common/authentication_controller');
 
 var StaticApp = require('./apps/static/static_app');
 var PagesController = require('./apps/static/pages/pages_controller');
@@ -77,6 +78,7 @@ LinkManager.module("MenuModule.Navigation", NavigationView);
 LinkManager.module("MenuModule.Navigation", NavigationController);
 LinkManager.module("MenuModule.Login", LoginView);
 LinkManager.module("MenuModule.Register", RegisterView);
+LinkManager.module("MenuModule.Common", AuthenticationController);
 
 LinkManager.module("StaticModule", StaticApp);
 LinkManager.module("StaticModule.Pages", HomeView);

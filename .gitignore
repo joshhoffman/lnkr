@@ -56,3 +56,5 @@ webAPI.js
 configure/config.js
 configure/utils/utils.js
 deploy
+.c9
+mongod

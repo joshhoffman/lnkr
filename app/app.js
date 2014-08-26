@@ -55,6 +55,10 @@ LinkManager.getCurrentRoute = function() {
     return Backbone.history.fragment;
 };
 
+LinkManager.on("login:success", function() {
+    LinkManager.navigate(LinkManager.getCurrentRoute());
+});
+
 LinkManager.on("start", function() {
     if(Backbone.history) {
         Backbone.history.start();

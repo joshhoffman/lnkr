@@ -20,5 +20,9 @@ module.exports = function(MenuApp, LinkManager,
         LinkManager.on("navigate:register", function() {
             MenuApp.Common.AuthenticationController.showRegister();
         });
+        
+        LinkManager.on("login:unauthorized", function(text) {
+            MenuApp.Common.AuthenticationController.showLogin(text);
+        });
     });
 };

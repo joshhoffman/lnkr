@@ -33,7 +33,7 @@ module.exports = function(Entities, LinkManager,
     Entities.LinkCollection = Backbone.Collection.extend({
         url: '/api/links',
         model: Entities.Link,
-        comparator: 'name'
+        comparator: 'createdOn'
     });
     
     var API = {
@@ -43,6 +43,11 @@ module.exports = function(Entities, LinkManager,
             links.fetch({
                 success: function(data) {
                     defer.resolve(data);
+                },
+                error: function(collection, error, options) {
+                    if(error.status === 401) {
+                        LinkManager.trigger('login:unauthorized', error.responseText);
+                    }
                 }
             });
             

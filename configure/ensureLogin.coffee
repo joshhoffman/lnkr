@@ -4,7 +4,7 @@ module.exports = (passport) ->
             next()
         else
             res.status 401
-            res.json { "status": "not logged in" }
+            res.json { status: "not logged in" }
 ###
         passport.authenticate('local', (err, user, info) ->
             console.log 'in authenticate'

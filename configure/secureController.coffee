@@ -6,7 +6,6 @@ class Controller
         app.post name, config.EnsureLogin('/'), (req, res, next) ->
             self._post req, res, next
         app.get name, config.EnsureLogin('/'), (req, res, next) ->
-            console.log self._get
             self._get req, res, next
         app.put name, config.EnsureLogin('/'), (req, res, next) ->
             self._put req, res, next

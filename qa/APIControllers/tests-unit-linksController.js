@@ -33,8 +33,9 @@ describe("linkController", function() {
             status: sinon.spy()
         };
 
-        config = {
-            Link: Link
+        var config = {
+            Link: Link,
+            EnsureLogin: function (t){}
         };
 
         lc = new LinksController(app, config);
@@ -49,12 +50,10 @@ describe("linkController", function() {
 
     describe("constructor", function () {
         it("should set put", function () {
-            //app.get.should.have.been.calledWith("/api/links/:id", lc._get);
             expect(app.put.calledOnce).to.be.true;
         });
 
         it("should set get", function () {
-            //app.get.should.have.been.calledWith("/api/links/:id", lc._get);
             expect(app.get.calledOnce).to.be.true;
         });
 

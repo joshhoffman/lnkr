@@ -14,7 +14,6 @@ describe("linkController", function() {
     var res = {};
 
     var lc;
-
     beforeEach(function() {
         app = {
             post: sinon.spy(),
@@ -33,8 +32,9 @@ describe("linkController", function() {
             status: sinon.spy()
         };
 
-        config = {
-            Link: Link
+        var config = {
+            Link: Link,
+            EnsureLogin: function (t){}
         };
 
         lc = new LinkController(app, config);

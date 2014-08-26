@@ -8,7 +8,7 @@ module.exports = function(Entities, LinkManager,
             name: '',
             description: '',
             link: '',
-            createdOn: '',
+            createdOn: 0,
             tags: []
         },
         

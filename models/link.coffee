@@ -6,7 +6,8 @@ linkSchema = mongoose.Schema {
     link: String,
     description: String,
     createdOn: Date,
-    tags: [String]
+    tags: [String],
+    user: String
 }
 
 exports.linkModel = mongoose.model "LinkSchema", linkSchema

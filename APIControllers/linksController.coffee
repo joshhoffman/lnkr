@@ -1,13 +1,14 @@
-Controller = require '../configure/controller'
+Controller = require '../configure/secureController'
 
 class LinksController extends Controller
     constructor: (app, config) ->
         this._name = 'links'
         this.Link = config.Link
-        super app
+        super app, config
     
     _get: (req, res, next) ->
-        this.Link.find().exec (err, links) ->
+        #this.Link.find().exec (err, links) ->
+        this.Link.find({ user: req.user.email }).exec (err, links) ->
             if err
                 console.log err
                 return
@@ -20,7 +21,9 @@ class LinksController extends Controller
             name: req.body.name,
             link: req.body.link,
             description: req.body.description,
-            tags: req.body.tags
+            tags: req.body.tags,
+            createdOn: new Date().getDate(),
+            user: req.user.email
         })
 
         newLink.save (err, data) ->

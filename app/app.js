@@ -10,6 +10,7 @@ var LinksApp = require('./apps/links/links_app');
 var LinkEntity = require('./entities/link');
 var Header = require('./entities/header');
 var CommonEntities = require('./entities/common');
+var AuthenticationEntities = require('./entities/authentication');
 var Views = require('./common/views');
 var MenuApp = require('./apps/menu/menu_app');
 var NavigationController = require('./apps/menu/navigation/menu_controller');
@@ -71,6 +72,7 @@ LinkManager.on("start", function() {
 LinkManager.module("Entities", LinkEntity);
 LinkManager.module("Entities", Header);
 LinkManager.module("Entities", CommonEntities);
+LinkManager.module("Entities", AuthenticationEntities);
 LinkManager.module("Common.Views", Views);
 
 LinkManager.module("MenuModule", MenuApp);

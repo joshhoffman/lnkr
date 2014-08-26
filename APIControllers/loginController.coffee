@@ -20,13 +20,16 @@ class LoginController extends Controller
 
             if not user
                 console.log 'not user'
+                res.status 401
                 return res.json { 'status' : 'failed' }
 
             req.logIn user, (err) ->
                 console.log 'in login'
-                return res.json { 'status': 'failed' } if err
+                if err
+                    res.status 401
+                    return res.json { 'status': 'failed' }
                 console.log 'about to redirect'
-                res.json { 'status': 'success' }
+                res.json user
         )(req, res, next)
 
     _get: (req, res, next) ->

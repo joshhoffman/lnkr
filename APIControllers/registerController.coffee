@@ -19,9 +19,9 @@ class RegisterController extends Controller
             console.log err if err
             if not foundUser and not err and password is confirmPassword
                 usr = new self.User {
-                    'username': req.body.username
+                    'email': req.body.email
                     'password': self.HashPassword.generate(req.body.password)
-                    'displayname': req.body.displayname
+                    'displayName': req.body.displayName
                 }
                 console.log 'register' + usr.displayname
                 usr.save (err, result) ->
@@ -31,9 +31,11 @@ class RegisterController extends Controller
                         console.log result
                         console.log 'success!'
                     req.logIn usr, (err) ->
-                        return res.end sify({"status":"failed"}) if err
+                        if err
+                            res.status 401
+                            return res.json {"status":"failed"}
                         console.log sify({"status":"success"})
-                        res.end sify({"status":"success"})
+                        res.json usr
                         return
             else
                 console.log foundUser

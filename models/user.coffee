@@ -1,9 +1,9 @@
 mongoose = require 'mongoose'
 
 userSchema = mongoose.Schema {
-    username: String,
+    email: String,
     password: String,
-    displayname: String,
+    displayName: String,
     roles: [String]
 }
 

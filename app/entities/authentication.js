@@ -11,6 +11,14 @@ module.exports = function(Entities, LinkManager,
         urlRoot: '/api/login',
 
         validate: function(attrs, options) {
+            var errors = {};
+            if(!validator.isEmail(attrs.email)) {
+                errors.email = "invalid email";
+            }
+
+            if(!_.isEmpty(errors)) {
+                return errors;
+            }
         }
     });
 
@@ -26,8 +34,6 @@ module.exports = function(Entities, LinkManager,
 
         validate: function(attrs, options) {
             var errors = {};
-            console.log('validate');
-            console.log(attrs);
             if(!validator.isEmail(attrs.email)) {
                 errors.email = "invalid email";
             }

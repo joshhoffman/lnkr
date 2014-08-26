@@ -23,7 +23,7 @@ class RegisterController extends Controller
                     'password': self.HashPassword.generate(req.body.password)
                     'displayName': req.body.displayName
                 }
-                console.log 'register' + usr.email
+
                 usr.save (err, result) ->
                     if not err
                         console.log err
@@ -34,16 +34,10 @@ class RegisterController extends Controller
                         if err
                             res.status 401
                             return res.json {"status":"failed"}
-                        console.log sify({"status":"success"})
                         res.json usr
                         return
             else
-                console.log foundUser
-                console.log password
-                console.log confirmPassword
-                console.log '!!! error' if err
-                res.writeHead 200, {"Content-type": 'application/json'}
-                console.log 'register failed. user already exists'
+                res.status 401
                 res.json {"status":"failed"}
 
 

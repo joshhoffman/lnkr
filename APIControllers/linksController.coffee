@@ -12,8 +12,6 @@ class LinksController extends Controller
                 console.log err
                 return
 
-            console.log 'find success'
-            console.log links.length
             res.json(links)
 
     _post: (req, res, next) ->
@@ -28,6 +26,6 @@ class LinksController extends Controller
         newLink.save (err, data) ->
             console.log err if err
             console.log(data)
-            res.json({'success': true})
+            res.json newLink
 
 module.exports = LinksController

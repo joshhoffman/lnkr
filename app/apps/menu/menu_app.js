@@ -15,12 +15,20 @@ module.exports = function(MenuApp, LinkManager,
         
         LinkManager.on("navigate:login", function() {
             var view = new LinkManager.MenuModule.Login.Login();
-            
+
+            view.on("form:submit", function(data) {
+                console.log(data);
+            });
+
             LinkManager.dialogRegion.show(view);
         });
         
         LinkManager.on("navigate:register", function() {
             var view = new LinkManager.MenuModule.Register.Register();
+
+            view.on("form:submit", function(data) {
+                console.log(data);
+            });
             
             LinkManager.dialogRegion.show(view);
         });

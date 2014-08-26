@@ -19,7 +19,8 @@ describe("linkController", function() {
             post: sinon.spy(),
             get: sinon.spy(),
             put: sinon.spy(),
-            delete: sinon.spy()
+            delete: sinon.spy(),
+            all: sinon.spy()
         };
 
         Link = {
@@ -71,7 +72,7 @@ describe("linkController", function() {
         });
     });
 
-    describe("_get", function() {
+    describe("get", function() {
 
         var expectedSuccess = { data: true };
         var expectedFail = { data: false };
@@ -79,6 +80,9 @@ describe("linkController", function() {
         var req = {
             params: {
                 id: "test"
+            },
+            user: {
+                email: "test@test.com"
             }
         };
 
@@ -91,7 +95,8 @@ describe("linkController", function() {
         it("should use id parameter", function() {
             lc._get(req, res, {});
 
-            expect(Link.findOne.args[0]).to.contain({ name: req.params.id} );
+            expect(Link.findOne.args[0][0]).to.contain({ user: req.user.email } );
+            expect(Link.findOne.args[0][0]).to.contain({ name: req.params.id } );
         });
 
         it("should pass in a function", function() {
@@ -145,6 +150,9 @@ describe("linkController", function() {
                 name: "name",
                 link: "link",
                 description: "desc"
+            },
+            user: {
+                email: "test@test.com"
             }
         };
 
@@ -232,6 +240,9 @@ describe("linkController", function() {
                 name: "name",
                 link: "link",
                 description: "desc"
+            },
+            user: {
+                email: "test@test.com"
             }
         };
 

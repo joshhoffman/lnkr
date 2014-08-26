@@ -30,6 +30,7 @@ module.exports = function(grunt) {
         'configure/controller.js': 'configure/controller.coffee',
         'configure/secureController.js': 'configure/secureController.coffee',
         'configure/config.js': 'configure/config.coffee',
+        'configure/ensureLogin.js': 'configure/ensureLogin.coffee',
         'configure/configPassport.js': 'configure/configPassport.coffee',
         'configure/utils/utils.js': 'configure/utils/utils.coffee',
         'APIRoutes/apiRoutes.js': 'APIRoutes/apiRoutes.coffee',
@@ -54,8 +55,8 @@ module.exports = function(grunt) {
             js: [
                 'APIControllers/*.js',
                 'APIRoutes/*.js',
-                'Configure/*.js',
-                '!Configure/settings.js',
+                'configure/*.js',
+                '!configure/settings.js',
                 'models/*.js',
                 'webAPI.js',
                 'frontEnd.js',

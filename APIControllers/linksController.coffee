@@ -8,6 +8,7 @@ class LinksController extends Controller
     
     _get: (req, res, next) ->
         #this.Link.find().exec (err, links) ->
+        console.log 'in links get'
         this.Link.find({ user: req.user.email }).exec (err, links) ->
             if err
                 console.log err

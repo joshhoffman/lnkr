@@ -20,7 +20,8 @@ describe("linkController", function() {
             post: sinon.spy(),
             get: sinon.spy(),
             put: sinon.spy(),
-            delete: sinon.spy()
+            delete: sinon.spy(),
+            all: sinon.spy()
         };
 
         Link = {
@@ -35,7 +36,10 @@ describe("linkController", function() {
 
         var config = {
             Link: Link,
-            EnsureLogin: function (t){}
+            EnsureLogin: function (t){},
+            Passport: {
+                authenticate: sinon.spy()
+            }
         };
 
         lc = new LinksController(app, config);

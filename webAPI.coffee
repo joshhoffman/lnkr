@@ -6,7 +6,8 @@ config = require './configure/config'
 routes = require './APIRoutes/apiRoutes'
 passport = require 'passport'
 hashPassword = require 'password-hash'
-ensureLogin = require('connect-ensure-login').ensureLoggedIn
+#ensureLogin = require('connect-ensure-login').ensureLoggedIn
+ensureLogin = require('./configure/ensureLogin')
 configPassport = require './configure/configPassport'
 
 mongoose = require 'mongoose'

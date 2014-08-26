@@ -3,13 +3,16 @@ class Controller
         self = this
         name = '/api/' + this._name
         this._name = name
-        app.post name, config.EnsureLogin('/'), (req, res, next) ->
+        #app.all name, config.Passport.authenticate('local')
+        app.all name, config.EnsureLogin(config.Passport)
+        
+        app.post name, (req, res, next) ->
             self._post req, res, next
-        app.get name, config.EnsureLogin('/'), (req, res, next) ->
+        app.get name, (req, res, next) ->
             self._get req, res, next
-        app.put name, config.EnsureLogin('/'), (req, res, next) ->
+        app.put name, (req, res, next) ->
             self._put req, res, next
-        app.delete name, config.EnsureLogin('/'), (req, res, next) ->
+        app.delete name, (req, res, next) ->
             self._delete req, res, next
 
     _get: (req, res, next) ->

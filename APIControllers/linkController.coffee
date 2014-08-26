@@ -1,13 +1,13 @@
-Controller = require '../configure/controller'
+Controller = require '../configure/secureController'
 
 class LinkController extends Controller
     constructor: (app, config) ->
         this._name = 'links/:id'
         this.Link = config.Link
-        super app
+        super app, config
 
     _get: (req, res, next) ->
-        this.Link.findOne {name: req.params.id}, (err, model) ->
+        this.Link.findOne { user: req.user.email, name: req.params.id }, (err, model) ->
             if err
                 res.status 404
                 res.json { "status": false }
@@ -15,7 +15,7 @@ class LinkController extends Controller
             res.json model
 
     _put: (req, res, next) ->
-        this.Link.findOne {name: req.body.name}, (err, link) ->
+        this.Link.findOne { user: req.user.email, name: req.body.name }, (err, link) ->
             if err
                 res.status 404
                 res.json {"status":false}
@@ -32,7 +32,7 @@ class LinkController extends Controller
                 res.json(data)
 
     _delete: (req, res, next) ->
-        this.Link.findOneAndRemove { name: req.params.id }, (err, link) ->
+        this.Link.findOneAndRemove { user: req.user.email, name: req.params.id },(err, link) ->
             if err
                 console.log 'delete failed'
                 res.status 400

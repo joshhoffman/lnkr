@@ -64,7 +64,11 @@ module.exports = function(Entities, LinkManager,
                     defer.resolve(data);
                 },
                 error: function(data) {
-                    defer.resolve(undefined);
+                    if(error.status === 401) {
+                        LinkManager.trigger('login:unauthorized', error.responseText);
+                    } else {
+                        defer.resolve(undefined);
+                    }
                 }
             });
             return defer.promise();

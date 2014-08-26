@@ -1,6 +1,7 @@
 var LinkTemplate = require('./templates/link.hbs');
 var LinksTemplate = require('./templates/links.hbs');
 var NoneTemplate = require('./templates/none.hbs');
+var validator = require('validator');
 
 module.exports = function(List, LinkManager,
                           Backbone, Marionette, $, _) {
@@ -9,11 +10,12 @@ module.exports = function(List, LinkManager,
         template: LinkTemplate,
         triggers: {
             "click button.js-delete": "link:delete",
-            "click td a.js-show": "link:show",
+            "click td a.js-details": "link:show",
             "click td a.js-edit": "link:edit"
         },
         events: {
-            "click": "linkClicked"
+            "click": "linkClicked",
+            "click a.js-show": "showClicked"
         },
 
         linkClicked: function() {
@@ -21,9 +23,16 @@ module.exports = function(List, LinkManager,
         },
         
         showClicked: function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.trigger("link:show", this.model);
+            var url = this.model.get("link");
+            if(validator.isURL(url)) {
+                console.log('is url bland');
+            
+                if(!validator.isURL(url, {require_protocol: true})) {
+                    console.log('is not url protocol');
+                    url = "http://" + url;
+                }
+            }
+            window.open(url);
         },
 
         editClicked: function(e) {

@@ -25,7 +25,6 @@ module.exports = function(Views, LinkManager,
         },
 
         initialize: function () {
-            this.title = "Edit " + this.model.get("name");
         },
 
         submitClicked: function (e) {
@@ -38,17 +37,14 @@ module.exports = function(Views, LinkManager,
             var $view = this.$el;
 
             var clearFormErrors = function () {
-                console.log('form data invalid');
                 var $form = $view.find('form');
                 $form.find(".help-inline.error").each(function () {
-                    $(this.remove);
+                    $(this).remove();
                 });
                 $form.find(".control-group.error").each(function () {
-                    $(this.remove);
+                    $(this).removeClass("error");
                 });
             };
-
-            console.log('errors');
 
             var markError = function (value, key) {
                 var $controlGroup = $view.find("#link-" + key).parent();

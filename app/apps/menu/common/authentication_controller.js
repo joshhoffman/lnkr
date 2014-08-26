@@ -18,6 +18,14 @@ module.exports = function(Common, LinkManager,
 
             view.on("form:submit", function(data) {
                 console.log(data);
+                var model = new LinkManager.Entities.RegisterModel(data);
+
+                if(model.save(data)) {
+                    view.trigger("dialog:close");
+                } else {
+                    console.log(model.validationError);
+                    view.triggerMethod("form:data:invalid", model.validationError);
+                }
             });
 
             LinkManager.dialogRegion.show(view);

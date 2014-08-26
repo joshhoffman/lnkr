@@ -11,11 +11,11 @@ class RegisterController extends Controller
     _post: (req, res) ->
         console.log 'register'
         password = req.body.password
-        confirmPassword = req.body.confirmpassword
+        confirmPassword = req.body.confirmPassword
 
         self = this
 
-        this.User.findOne {username: req.body.username}, (err, foundUser) ->
+        this.User.findOne {email: req.body.email}, (err, foundUser) ->
             console.log err if err
             if not foundUser and not err and password is confirmPassword
                 usr = new self.User {
@@ -23,7 +23,7 @@ class RegisterController extends Controller
                     'password': self.HashPassword.generate(req.body.password)
                     'displayName': req.body.displayName
                 }
-                console.log 'register' + usr.displayname
+                console.log 'register' + usr.email
                 usr.save (err, result) ->
                     if not err
                         console.log err

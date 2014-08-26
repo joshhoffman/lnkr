@@ -18,13 +18,29 @@ module.exports = function(Entities, LinkManager,
         defaults: {
             email: '',
             password: '',
-            confirmpassword: '',
+            confirmPassword: '',
             displayName: ''
         },
 
         urlRoot: '/api/register',
 
         validate: function(attrs, options) {
+            var errors = {};
+            console.log('validate');
+            console.log(attrs);
+            if(!validator.isEmail(attrs.email)) {
+                errors.email = "invalid email";
+            }
+            if(attrs.password !== attrs.confirmPassword) {
+                errors.confirmPassword = "passwords must match";
+            }
+            if(attrs.password.length < 5) {
+                errors.password = "password must be 5 characters";
+            }
+
+            if(!_.isEmpty(errors)) {
+                return errors;
+            }
         }
     });
 };

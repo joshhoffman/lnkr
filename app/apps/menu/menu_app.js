@@ -13,10 +13,7 @@ module.exports = function(MenuApp, LinkManager,
         MenuApp.Navigation.Controller.setActiveHeader(name);
     });
     
-    
-    
-    MenuApp.on("start", function() {
-        var getAuthorized = function(fireEvent) {
+    var getAuthorized = function(fireEvent) {
             $.ajax("api/loggedin", {
                 type: "GET",
                 dataType: "json",
@@ -35,7 +32,8 @@ module.exports = function(MenuApp, LinkManager,
                 }
             });
         };
-        
+    
+    MenuApp.on("start", function() {
         getAuthorized(true);
         
         LinkManager.on("login:success", function() {
@@ -53,6 +51,11 @@ module.exports = function(MenuApp, LinkManager,
         LinkManager.on("authentication:auth", function() {
             API.listAuthHeader();
         });
+
+        LinkManager.on("authentication:loggedOut", function() {
+            LinkManager.trigger("show:home");
+            API.listNotAuthHeader();
+        });
         
         LinkManager.on("navigate:login", function() {
             MenuApp.Common.AuthenticationController.showLogin();
@@ -60,6 +63,18 @@ module.exports = function(MenuApp, LinkManager,
         
         LinkManager.on("navigate:register", function() {
             MenuApp.Common.AuthenticationController.showRegister();
+        });
+        
+        LinkManager.on("navigate:logout", function() {
+            $.ajax("api/logout", {
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    console.log('success');
+                    console.log(data);
+                    LinkManager.trigger("authentication:loggedOut");
+                }
+            });
         });
         
         LinkManager.on("login:unauthorized", function(text) {

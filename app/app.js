@@ -9,6 +9,7 @@ var LinkManager = new Marionette.Application();
 var LinksApp = require('./apps/links/links_app');
 var LinkEntity = require('./entities/link');
 var Header = require('./entities/header');
+var User = require('./entities/user');
 var CommonEntities = require('./entities/common');
 var AuthenticationEntities = require('./entities/authentication');
 var Views = require('./common/views');
@@ -56,7 +57,7 @@ LinkManager.getCurrentRoute = function() {
 };
 
 LinkManager.on("login:success", function() {
-    LinkManager.navigate(LinkManager.getCurrentRoute());
+    LinkManager.navigate(LinkManager.getCurrentRoute(), { trigger: true });
 });
 
 LinkManager.on("start", function() {
@@ -77,6 +78,7 @@ LinkManager.module("Entities", LinkEntity);
 LinkManager.module("Entities", Header);
 LinkManager.module("Entities", CommonEntities);
 LinkManager.module("Entities", AuthenticationEntities);
+LinkManager.module("Entities", User);
 LinkManager.module("Common.Views", Views);
 
 LinkManager.module("MenuModule", MenuApp);

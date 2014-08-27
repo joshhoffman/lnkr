@@ -19,11 +19,16 @@ module.exports = function(Common, LinkManager,
             view.on("form:submit", function(data) {
                 var model = new LinkManager.Entities.LoginModel(data);
                 console.log(model);
-
-                if(model.save(data)) {
+                
+                var ret = model.save(data, {
+                    success: function() {
                     view.trigger("dialog:close");
                     LinkManager.trigger("login:success");
-                } else {
+                    LinkManager.trigger("authentication:auth");
+                    }
+                });
+                
+                if(!ret) {
                     view.triggerMethod("form:data:invalid", model.validationError);
                 }
             });
@@ -36,10 +41,16 @@ module.exports = function(Common, LinkManager,
 
             view.on("form:submit", function(data) {
                 var model = new LinkManager.Entities.RegisterModel(data);
-
-                if(model.save(data)) {
-                    view.trigger("dialog:close");
-                } else {
+                
+                var ret = model.save(data, {
+                    success: function() {
+                        view.trigger("dialog:close");
+                        LinkManager.trigger("register:success");
+                        LinkManager.trigger("authentication:auth");
+                    }
+                });
+                
+                if(!ret) {
                     view.triggerMethod("form:data:invalid", model.validationError);
                 }
             });

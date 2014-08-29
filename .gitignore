@@ -51,6 +51,7 @@ public/static/bundleprod.js
 templates.js
 Marionette_old/apps/links/module.js
 frontEnd.js
+middlewareUsageCheck.js
 public/static/*.js
 webAPI.js
 configure/config.js
@@ -58,3 +59,5 @@ configure/utils/utils.js
 deploy
 .c9
 mongod
+.codio
+.settings

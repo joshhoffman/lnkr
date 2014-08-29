@@ -27,9 +27,11 @@ module.exports = function(grunt) {
     var coffeeScriptCompile = {
         'frontEnd.js': 'frontEnd.coffee',
         'webAPI.js': 'webAPI.coffee',
+        'middlewareUsageCheck.js' : 'middlewareUsageCheck.coffee',
         'configure/controller.js': 'configure/controller.coffee',
         'configure/secureController.js': 'configure/secureController.coffee',
         'configure/config.js': 'configure/config.coffee',
+        'configure/configMiddleware.js': 'configure/configMiddleware.coffee',
         'configure/ensureLogin.js': 'configure/ensureLogin.coffee',
         'configure/configPassport.js': 'configure/configPassport.coffee',
         'configure/utils/utils.js': 'configure/utils/utils.coffee',
@@ -59,6 +61,7 @@ module.exports = function(grunt) {
                 '!configure/settings.js',
                 'models/*.js',
                 'webAPI.js',
+                'middlewareUsageCheck.js',
                 'frontEnd.js',
                 '**/*.map'
             ]
@@ -174,6 +177,8 @@ module.exports = function(grunt) {
             mocha: {
                 files: [
                     'app.js',
+                    'webAPI.js',
+                    'middlewareUsageCheck.js',
                     'APIControllers/**/*.js',
                     'APIRoutes/**/*.js',
                     'configure/*.js',
@@ -253,7 +258,19 @@ module.exports = function(grunt) {
             }
         )
     });
+    
+    grunt.registerTask('runMiddleware', function() {
+        grunt.util.spawn({
+            cmd: 'nodemon',
+            args: ['middlewareUsageCheck.js', settings.MiddlewarePort],
+            opts: {
+                stdio: 'inherit'
+            }
+        }, function() {
+                grunt.fail.fatal(new Error('nodemon quit'));
+            }
+        )
+    });
 
-    grunt.registerTask('server', ['clean', 'lint', 'compile', 'runFrontEnd', 'runAPI', 'watch']);
-    grunt.registerTask('mariserver', ['compile', 'mari', 'runFrontEnd', 'runAPI', 'watch']);
+    grunt.registerTask('server', ['clean', 'lint', 'compile', 'runFrontEnd', 'runMiddleware', 'runAPI', 'watch']);
 }

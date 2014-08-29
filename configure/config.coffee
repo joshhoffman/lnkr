@@ -9,7 +9,6 @@ methodOverride = require 'method-override'
 errorHandler = require 'errorhandler'
 bodyParser = require 'body-parser'
 path = require 'path'
-express = require 'express'
 url = require 'url'
 
 module.exports = (app) ->

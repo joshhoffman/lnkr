@@ -5,8 +5,8 @@ config = require './configure/config'
 
 settings = require './configure/settings'
 
-proxy = require('proxy-middleware')
-url = require('url')
+proxy = require 'proxy-middleware'
+url = require 'url'
 
 app = express()
 

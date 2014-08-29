@@ -34,6 +34,11 @@ var NewView = require('./apps/links/new/new_view');
 var ShowController = require('./apps/links/show/show_controller');
 var ShowView = require('./apps/links/show/show_view');
 
+var UserApp = require('./apps/user/user_app');
+var UserShowController = require('./apps/user/show/show_controller');
+var UserShowView = require('./apps/user/show/show_view');
+var UserShowLayout = require('./apps/user/show/show_layout');
+
 var dialog = require('./apps/config/marionette/dialog');
 
 Marionette.Region.Dialog = Marionette.Region.extend(dialog);
@@ -102,5 +107,10 @@ LinkManager.module("LinksModule.Edit", EditController);
 LinkManager.module("LinksModule.New", NewView);
 LinkManager.module("LinksModule.Show", ShowView);
 LinkManager.module("LinksModule.Show", ShowController);
+
+LinkManager.module("UserModule", UserApp);
+LinkManager.module("UserModule.Show", UserShowLayout);
+LinkManager.module("UserModule.Show", UserShowView);
+LinkManager.module("UserModule.Show", UserShowController);
 
 LinkManager.start();

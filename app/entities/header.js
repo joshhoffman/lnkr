@@ -26,6 +26,10 @@ module.exports = function(Entities, LinkManager, Backbone, Marionette, $, _) {
                 url: "about",
                 navigationTrigger: "show:about"
             }, {
+                name: "User",
+                url: "about",
+                navigationTrigger: "show:user"
+            }, {
                 name: "Logout",
                 url: "Logout",
                 navigationTrigger: "navigate:logout"

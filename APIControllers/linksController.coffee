@@ -9,15 +9,20 @@ class LinksController extends Controller
     _get: (req, res, next) ->
         #this.Link.find().exec (err, links) ->
         console.log 'in links get'
-        this.Link.find({ user: req.user.email }).exec (err, links) ->
+        this.Link.findOne { user: req.user.email }, (err, links) ->
             if err
                 console.log err
+                res.json null
+                return
+            
+            if not links
+                res.json null
                 return
 
-            res.json(links)
+            res.json(links.links)
 
     _post: (req, res, next) ->
-        newLink = new this.Link({
+        newLink = {
             id: req.body.name,
             name: req.body.name,
             link: req.body.link,
@@ -25,15 +30,28 @@ class LinksController extends Controller
             tags: req.body.tags,
             createdOn: new Date().getDate(),
             user: req.user.email
-        })
-        
-        # 1) read links document
-        # 2) if links dont exist, create new one
-        # 3) if links do exist, add new field and return
+        }
 
-        newLink.save (err, data) ->
-            console.log err if err
-            console.log(data)
-            res.json newLink
+        self = this
+
+        this.Link.findOne { user: req.user.email }, (err, links) ->
+            if err
+                console.log err
+                res.json null
+                return
+            
+            if not links
+                links = new self.Link({ user: req.user.email })
+            
+            links.links.push newLink
+        
+            # 1) read links document
+            # 2) if links dont exist, create new one
+            # 3) if links do exist, add new field and return
+
+            links.save (err, data) ->
+                console.log err if err
+                console.log(data)
+                res.json newLink
 
 module.exports = LinksController

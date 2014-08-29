@@ -12,7 +12,8 @@ configPassport = require './configure/configPassport'
 
 mongoose = require 'mongoose'
 
-Link = require('./models/links').linkModel
+Links = require('./models/links').linksModel
+Link = require('./models/link').linkModel
 User = require('./models/user').userModel
 
 app = express()
@@ -29,7 +30,7 @@ config app
 configPassport app, passport, User
 
 routesConfig = {
-    Link: Link
+    Link: Links
     User: User
     Passport: passport
     HashPassword: hashPassword

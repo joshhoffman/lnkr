@@ -1,9 +1,9 @@
 mongoose = require('mongoose')
 
 linksSchema = mongoose.Schema {
-    id: String,
     user: String,
     links: [
+        id: String,
         name: String,
         link: String,
         description: String,

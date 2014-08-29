@@ -18,14 +18,10 @@ module.exports = (app, passport, User) ->
                 console.log 'err pass ' + password + ' ' + user.password
                 return done(null, false, {message: 'Incorrect username'})
 
-            console.log 'wow... not logged in'
-            console.log 'user password ' + user.password
-            console.log 'password ' + password
             console.log passwordHash.generate(password)
             return done(null, user)
 
     passport.serializeUser (user, done) ->
-        console.log 'in serialize '+ user
         done null, user.id
 
     passport.deserializeUser (id, done) ->

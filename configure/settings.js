@@ -6,6 +6,6 @@ module.exports = {
     FrontEndPort: '3000',
     
     MiddlewareAddress: 'http://0.0.0.0',
-    MiddlwarePort: '4002',
+    MiddlewarePort: '4002',
     MiddlewareUri: '/middle'
 };

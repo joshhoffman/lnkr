@@ -175,21 +175,22 @@ module.exports = function(grunt) {
                     'jshint:tests'
                 ]
             },
-            mocha: {
-                files: [
-                    'app.js',
-                    'webAPI.js',
-                    'middlewareUsageCheck.js',
-                    'APIControllers/**/*.js',
-                    'APIRoutes/**/*.js',
-                    'configure/*.js',
-                    'models/*.js',
-                    'qa/**/*.js'
-                ],
-                tasks: [
-                    'cafemocha'
-                ]
-            },
+            
+       //  mocha: {
+       //      files: [
+       //          'app.js',
+       //          'webAPI.js',
+       //          'middlewareUsageCheck.js',
+       //          'APIControllers/**/*.js',
+       //          'APIRoutes/**/*.js',
+       //          'configure/*.js',
+       //          'models/*.js',
+       //          'qa/**/*.js'
+       //      ],
+       //      tasks: [
+       //          'cafemocha'
+       //      ]
+       //  },
             lessCompile: {
                 files: [
                     'static/*.less'

@@ -2,6 +2,7 @@
 #configPassport = require './configurePassport'
 favicon = require 'serve-favicon'
 morgan = require 'morgan'
+express = require 'express'
 cookieParser = require 'cookie-parser'
 session = require 'express-session'
 expressJson = require 'express-json'

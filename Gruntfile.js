@@ -42,6 +42,7 @@ module.exports = function(grunt) {
         'APIControllers/registerController.js': 'APIControllers/registerController.coffee',
         'APIControllers/logoutController.js': 'APIControllers/logoutController.coffee',
         'models/link.js': 'models/link.coffee',
+        'models/links.js': 'models/links.coffee',
         'models/user.js': 'models/user.coffee'
     };
     
@@ -226,7 +227,8 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('compile', ['coffee', 'browserify:dev', 'cafemocha'])
+    //grunt.registerTask('compile', ['coffee', 'browserify:dev', 'cafemocha'])
+    grunt.registerTask('compile', ['coffee', 'browserify:dev'])
     grunt.registerTask('compileProd', ['coffee', 'browserify:prod', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);

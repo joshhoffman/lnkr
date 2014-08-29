@@ -27,6 +27,14 @@ describe("linkController", function() {
             findOne: sinon.spy(),
             findOneAndRemove: sinon.spy()
         };
+        
+        Link.findOne.returnValues = [
+            {
+                links: {
+                    find: sinon.spy()
+                }
+            }
+        ];
 
         res = {
             json: sinon.spy(),
@@ -74,7 +82,12 @@ describe("linkController", function() {
 
     describe("get", function() {
 
-        var expectedSuccess = { data: true };
+        var expectedSuccess = {
+            data: true,
+            links: {
+                find: sinon.spy()
+            }
+        };
         var expectedFail = { data: false };
 
         var req = {
@@ -85,18 +98,23 @@ describe("linkController", function() {
                 email: "test@test.com"
             }
         };
+        
+        beforeEach(function() {
+            lc._get(req, res, {});
+            
+            expectedSuccess.links.find.returnValues = [
+                {
+                    name: "test@test.com"
+                }
+            ];
+        });
 
         it("should call findOne", function() {
-            lc._get(req, res, {});
-
             expect(Link.findOne.calledOnce).to.be.true;
         });
 
-        it("should use id parameter", function() {
-            lc._get(req, res, {});
-
+        it("should use email parameter", function() {
             expect(Link.findOne.args[0][0]).to.contain({ user: req.user.email } );
-            expect(Link.findOne.args[0][0]).to.contain({ name: req.params.id } );
         });
 
         it("should pass in a function", function() {
@@ -106,8 +124,6 @@ describe("linkController", function() {
         });
 
         it("should send res.json the returned model", function() {
-            lc._get(req, res, {});
-
             var retFunc = Link.findOne.args[0][1];
 
             retFunc(null, expectedSuccess);
@@ -117,8 +133,6 @@ describe("linkController", function() {
         });
 
         it("should set status to fail on failure", function() {
-            lc._get(req, res, {});
-
             var retFunc = Link.findOne.args[0][1];
 
             retFunc({fail: "failure"}, expectedFail);
@@ -128,8 +142,6 @@ describe("linkController", function() {
         });
 
         it("should respond with status false", function() {
-            lc._get(req, res, {});
-
             var retFunc = Link.findOne.args[0][1];
 
             retFunc({fail: "failure"}, expectedFail);

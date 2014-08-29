@@ -12,7 +12,7 @@ configPassport = require './configure/configPassport'
 
 mongoose = require 'mongoose'
 
-Link = require('./models/link').linkModel
+Link = require('./models/links').linkModel
 User = require('./models/user').userModel
 
 app = express()

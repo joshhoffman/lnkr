@@ -38,6 +38,8 @@ var UserApp = require('./apps/user/user_app');
 var UserShowController = require('./apps/user/show/show_controller');
 var UserShowView = require('./apps/user/show/show_view');
 var UserShowLayout = require('./apps/user/show/show_layout');
+var UserEditView = require('./apps/user/edit/edit_view');
+var UserEditController = require('./apps/user/edit/edit_controller');
 
 var dialog = require('./apps/config/marionette/dialog');
 
@@ -112,5 +114,7 @@ LinkManager.module("UserModule", UserApp);
 LinkManager.module("UserModule.Show", UserShowLayout);
 LinkManager.module("UserModule.Show", UserShowView);
 LinkManager.module("UserModule.Show", UserShowController);
+LinkManager.module("UserModule.Edit", UserEditView);
+LinkManager.module("UserModule.Edit", UserEditController);
 
 LinkManager.start();

@@ -6,9 +6,7 @@ module.exports = function(Common, LinkManager,
             
             view.on("show", function() {
                 if(errorText) {
-                    console.log(errorText);
                     var $form = this.$el.find('form');
-                    console.log($form);
                     err = JSON.parse(errorText);
                     $form.prepend($('<div>', { class: 'control-group error'}));
                     var $ret = $form.find('div.control-group.error');
@@ -22,9 +20,9 @@ module.exports = function(Common, LinkManager,
                 
                 var ret = model.save(data, {
                     success: function() {
-                    view.trigger("dialog:close");
-                    LinkManager.trigger("login:success");
-                    LinkManager.trigger("authentication:auth");
+                        view.trigger("dialog:close");
+                        LinkManager.trigger("login:success");
+                        LinkManager.trigger("authentication:auth");
                     }
                 });
                 

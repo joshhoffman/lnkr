@@ -12,6 +12,9 @@ module.exports = function(ShowUser, LinkManager,
     });
 
     ShowUser.Form = Marionette.ItemView.extend({
-        template: FormTemplate
+        template: FormTemplate,
+        trigger: {
+            "click button.js-edit": "user:edit"
+        }
     });
 };

@@ -14,6 +14,7 @@ module.exports = function(UserApp, LinkManager,
 
     LinkManager.on("show:user", function() {
         API.showUser();
+        LinkManager.navigate("user");
     });
 
     LinkManager.addInitializer(function() {

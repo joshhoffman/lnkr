@@ -6,7 +6,7 @@ module.exports = function(Views, LinkManager,
     Views.Loading = Marionette.ItemView.extend({
         template: loadingTemplate,
         title: "Loading Data",
-        message: "test loading",
+        message: "Please wait",
         initialize: function() {
             console.log('loading init');
         },

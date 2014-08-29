@@ -14,6 +14,7 @@ class LoginController extends Controller
         this.passport.authenticate('local', (err, user) ->
             if err
                 console.log err
+                res.status 401
                 return res.json { 'status' : 'failed' }
 
             if not user

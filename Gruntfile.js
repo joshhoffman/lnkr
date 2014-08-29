@@ -124,7 +124,7 @@ module.exports = function(grunt) {
         },
         coffee: {
             options: {
-                sourceMap: false
+                sourceMap: true
             },
             compile: {
                 files: coffeeScriptCompile

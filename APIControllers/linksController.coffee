@@ -26,6 +26,10 @@ class LinksController extends Controller
             createdOn: new Date().getDate(),
             user: req.user.email
         })
+        
+        # 1) read links document
+        # 2) if links dont exist, create new one
+        # 3) if links do exist, add new field and return
 
         newLink.save (err, data) ->
             console.log err if err

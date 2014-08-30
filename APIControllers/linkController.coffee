@@ -1,5 +1,5 @@
 Controller = require '../configure/secureController'
-require('array.prototype.find')
+#require('array.prototype.find')
 
 class LinkController extends Controller
     constructor: (app, config) ->
@@ -60,22 +60,26 @@ class LinkController extends Controller
                     return
                 res.json(data.links)
 
-    # TODO: delete functionality
-    # 1) read in links
-    # 2) return error if not found
-    # 3) search links element for correct name
-    # 4) remove that element
-    # 5) save links
     _delete: (req, res, next) ->
-        this.Link.findOneAndRemove { user: req.user.email, name: req.params.id },(err, link) ->
-            if err
-                console.log 'delete failed'
+        this.Link.findOne { user: req.user.email }, (err, links) ->
+            if err or not link
                 res.status 400
-                res.json {"status": false}
+                res.json { status: false }
                 return
-            if not link?
-                res.status 400
-                return res.json {"status": false}
-            res.json {"status": true}
+            linkIndex = -1
+            link = links.links.find (element, index) ->
+                if element.name == req.body.name
+                    linkIndex = index
+                    return true
+                return false
+
+            # TODO: figure out how to remove an element from an array
+            #links.links.remove(linkIndex)
+            links.save (err, data) ->
+                if err
+                    res.status 400
+                    res.json { status: false }
+                    return
+                res.json links.links
 
 module.exports = LinkController

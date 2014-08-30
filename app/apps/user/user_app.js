@@ -8,18 +8,24 @@ module.exports = function(UserApp, LinkManager,
 
     var API = {
         showUser: function() {
+            console.log("show user");
             UserApp.Show.Controller.showUser();
         }
     };
 
-    LinkManager.on("show:user", function() {
-        API.showUser();
-        LinkManager.navigate("user");
+    UserApp.on("start", function () {
     });
 
     LinkManager.addInitializer(function() {
+        console.log('in start');
         new UserApp.Router({
             controller: API
+        });
+
+        LinkManager.on("show:user", function() {
+            console.log("in show user");
+            API.showUser();
+            LinkManager.navigate("user");
         });
     });
 };

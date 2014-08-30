@@ -9,6 +9,9 @@ module.exports = function(ShowUser, LinkManager,
 
             userFormView.on("user:edit", function() {
                 console.log("edit user");
+                console.log(LinkManager.UserModule.Edit);
+
+                LinkManager.UserModule.Edit.Controller.showEdit();
             });
 
             userLayoutView.on("show", function() {

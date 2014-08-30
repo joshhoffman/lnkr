@@ -1,6 +1,6 @@
 module.exports = function(UserEdit, LinkManager,
                           Backbone, Marionette, $, _) {
-    UserEdit.EditController = {
+    UserEdit.Controller = {
         showEdit: function(errorText) {
             if(!LinkManager.User) {
                 LinkManager.trigger("login:unauthorized");

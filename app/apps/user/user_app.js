@@ -13,19 +13,16 @@ module.exports = function(UserApp, LinkManager,
         }
     };
 
-    UserApp.on("start", function () {
+    LinkManager.on("show:user", function() {
+        console.log("in show user");
+        API.showUser();
+        LinkManager.navigate("user");
     });
 
     LinkManager.addInitializer(function() {
         console.log('in start');
         new UserApp.Router({
             controller: API
-        });
-
-        LinkManager.on("show:user", function() {
-            console.log("in show user");
-            API.showUser();
-            LinkManager.navigate("user");
         });
     });
 };

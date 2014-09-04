@@ -68,16 +68,17 @@ app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
         res.json { status: "failed" }
 
 
-app.get '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, res) ->
-    console.log req.params.uri
+app.get '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
+    console.log 'get'
+    req.user.param = req.params.param
+    
+    requestUrl = APIAddress + "/" + req.params.uri
+    requestUrl = requestUrl + '/' + req.params.param if req.params.param
 
     options = {
-        url: APIAddress + "/" + req.params.uri
+        url: requestUrl
         json: req.user
-        #json: JSON.stringify(req.user)
     }
-
-    console.log 'test'
 
     request options, (err, resp, body) ->
         console.log err if err

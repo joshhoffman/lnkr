@@ -1,5 +1,6 @@
-Controller = require '../configure/secureController'
+Controller = require '../configure/controller'
 settings = require '../configure/settings'
+require 'array.prototype.find'
 
 class LinkController extends Controller
     constructor: (app, config) ->
@@ -8,13 +9,15 @@ class LinkController extends Controller
         super app, config
 
     _get: (req, res, next) ->
-        this.Link.findOne { user: req.user.email }, (err, links) ->
+        this.Link.findOne { user: req.body.email }, (err, links) ->
             if err
+                console.log 'err'
                 res.status 404
                 res.json { "status": false }
                 return
             
             if not links
+                console.log 'not links'
                 res.json null
                 return
             
@@ -23,12 +26,11 @@ class LinkController extends Controller
                     retIndex = index
                     return true
                 return false
-            console.log link
             
             res.json link
 
     _put: (req, res, next) ->
-        this.Link.findOne { user: req.user.email }, (err, links) ->
+        this.Link.findOne { user: req.body.email }, (err, links) ->
             #respond with error if there was a problem
             if err or not links
                 res.status 404
@@ -61,14 +63,14 @@ class LinkController extends Controller
                 res.json(data.links)
 
     _delete: (req, res, next) ->
-        this.Link.findOne { user: req.user.email }, (err, links) ->
+        this.Link.findOne { user: req.body.email }, (err, links) ->
             if err or not link
                 res.status 400
                 res.json { status: false }
                 return
             linkIndex = -1
             link = links.links.find (element, index) ->
-                if element.name == req.body.name
+                if element.name == req.params.id
                     linkIndex = index
                     return true
                 return false

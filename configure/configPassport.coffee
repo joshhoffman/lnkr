@@ -7,7 +7,9 @@ module.exports = (app, passport, User) ->
     app.use passport.session()
     console.log 'setup passport'
     passport.use new localStrategy { usernameField: 'email' }, (email, password, done) ->
+        console.log 'before findOne'
         User.findOne {email: email}, (err, user) ->
+            console.log 'in findOne'
             if err
                 console.log 'Error in find'
                 return done(err)

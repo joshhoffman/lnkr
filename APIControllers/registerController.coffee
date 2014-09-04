@@ -5,7 +5,7 @@ settings = require '../configure/settings'
 class RegisterController extends Controller
     constructor: (app, config) ->
         #this._name = settings.MiddlewareUri + '/register'
-        this._name = settings.APIUri + '/register'
+        this._name = 'register'
         this.User = config.User
         this.HashPassword = config.HashPassword
         super app, config
@@ -18,6 +18,7 @@ class RegisterController extends Controller
         self = this
 
         this.User.findOne {email: req.body.email}, (err, foundUser) ->
+            console.log 'in find'
             console.log err if err
             if not foundUser and not err and password is confirmPassword
                 usr = new self.User {

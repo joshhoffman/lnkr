@@ -28,6 +28,9 @@ APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
 
 app = express()
 
+config app
+configPassport app, passport, User
+
 routesConfig = {
     User: User
     Passport: passport
@@ -36,10 +39,8 @@ routesConfig = {
     UriPrefix: settings.MiddlewareUri
 }
 
-config app
-configPassport app, passport, User
-
 configRoutes.routes app, routesConfig
+
 
 app.use (req, res, next) ->
     console.log 'request'
@@ -57,7 +58,7 @@ app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
         res.json { status: "failed" }
 
 
-app.get settings.MiddlewareUri + "/:uri", (req, res) ->
+app.get '/' + settings.MiddlewareUri + "/:uri", (req, res) ->
     console.log req.params.uri
 
     options = {
@@ -72,7 +73,7 @@ app.get settings.MiddlewareUri + "/:uri", (req, res) ->
         res.status resp.statusCode
         res.end body
 
-app.post settings.MiddlewareUri + "/:uri", (req, res)->
+app.post '/' + settings.MiddlewareUri + "/:uri", (req, res)->
     console.log 'post'
     console.log req.body
 

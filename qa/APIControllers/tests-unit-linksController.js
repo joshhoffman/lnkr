@@ -39,7 +39,8 @@ describe("linkController", function() {
             EnsureLogin: function (t){},
             Passport: {
                 authenticate: sinon.spy()
-            }
+            },
+            UriPrefix: '/api'
         };
 
         lc = new LinksController(app, config);

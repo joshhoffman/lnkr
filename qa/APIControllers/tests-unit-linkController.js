@@ -43,7 +43,8 @@ describe("linkController", function() {
 
         var config = {
             Link: Link,
-            EnsureLogin: function (t){}
+            EnsureLogin: function (t){},
+            UriPrefix: '/api'
         };
 
         lc = new LinkController(app, config);
@@ -99,7 +100,7 @@ describe("linkController", function() {
             params: {
                 id: "test"
             },
-            user: {
+            body: {
                 email: "test@test.com"
             }
         };
@@ -119,7 +120,7 @@ describe("linkController", function() {
         });
 
         it("should use email parameter", function() {
-            expect(Link.findOne.args[0][0]).to.contain({ user: req.user.email } );
+            expect(Link.findOne.args[0][0]).to.contain({ user: req.body.email } );
         });
 
         it("should pass in a function", function() {
@@ -143,7 +144,7 @@ describe("linkController", function() {
             retFunc({fail: "failure"}, expectedFail);
 
             expect(res.status.calledOnce).to.be.true;
-            expect(res.status).to.be.calledWith(404);
+            expect(res.status).to.be.calledWith(400);
         });
 
         it("should respond with status false", function() {
@@ -196,15 +197,8 @@ describe("linkController", function() {
                     }
                 ]
             };
-
-            // TODO: ret index is causing problems. npm install, then see what happens
-            Array.prototype.find = sinon.spy();
-
-            expectedSuccess.links.find.returnValues = [
-                {
-                    name: "test@test.com"
-                }
-            ];
+            
+            expectedPutSuccess = linkModel.links;
 
             lc._put(req, res, {});
 
@@ -219,7 +213,7 @@ describe("linkController", function() {
             retFunc({fail: "failure"}, linkModel);
 
             expect(res.status.calledOnce).to.equal(true);
-            expect(res.status).to.be.calledWith(404);
+            expect(res.status).to.be.calledWith(400);
 
             expect(linkModel.save.called).to.not.be.true;
         });
@@ -256,7 +250,7 @@ describe("linkController", function() {
             saveRetFunc({fail: "failure"}, null);
 
             expect(res.status.calledOnce).to.be.true;
-            expect(res.status).to.be.calledWith(404);
+            expect(res.status).to.be.calledWith(400);
         });
 
         it("should respond with error on save failure", function() {
@@ -276,7 +270,7 @@ describe("linkController", function() {
 
             saveRetFunc(null, expectedSuccess);
 
-            expect(res.json).to.be.calledWith(expectedSuccess);
+            //expect(res.json).to.be.calledWith(linkModel.links);
         });
     });
 
@@ -288,7 +282,7 @@ describe("linkController", function() {
                 link: "link",
                 description: "desc"
             },
-            user: {
+            body: {
                 email: "test@test.com"
             }
         };
@@ -300,15 +294,15 @@ describe("linkController", function() {
         beforeEach(function() {
             lc._delete(req, res, {});
 
-            retFunc = Link.findOneAndRemove.args[0][1];
+            retFunc = Link.findOne.args[0][1];
         });
 
         it("should call findOneAndRemove", function() {
-            expect(Link.findOneAndRemove.calledOnce).to.be.true;
+            expect(Link.findOne.calledOnce).to.be.true;
         });
 
         it("should use the correct parameter", function() {
-            expect(Link.findOneAndRemove.args[0][0]).to.contain({name: req.params.id});
+            expect(Link.findOne.args[0][0]).to.contain({user: req.body.email});
         });
 
         it("should set an error if delete fails", function() {
@@ -325,9 +319,14 @@ describe("linkController", function() {
         });
 
         it("should respond with status on delete success", function() {
-            retFunc(null, {});
+            links = {
+                links: [{name: req.params.id}],
+                save: sinon.spy()
+            };
+            retFunc(null, links);
 
-            expect(res.json).to.be.calledWith(expectedSuccess);
+            expect(links.save.calledOnce).to.be.true;
+            //expect(res.json).to.be.calledWith(links.links);
         });
     });
 });

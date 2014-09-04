@@ -12,7 +12,7 @@ class LinkController extends Controller
         this.Link.findOne { user: req.body.email }, (err, links) ->
             if err
                 console.log 'err'
-                res.status 404
+                res.status 400
                 res.json { "status": false }
                 return
             
@@ -33,7 +33,7 @@ class LinkController extends Controller
         this.Link.findOne { user: req.body.email }, (err, links) ->
             #respond with error if there was a problem
             if err or not links
-                res.status 404
+                res.status 400
                 res.json {"status":false}
                 return
             
@@ -46,7 +46,7 @@ class LinkController extends Controller
                 return false
             
             if retIndex == -1 or not link
-                res.status 404
+                res.status 400
                 res.json {"status":false}
                 return
             
@@ -57,10 +57,10 @@ class LinkController extends Controller
             links.links[retIndex] = link
             links.save (err, data) ->
                 if err
-                    res.status 404
+                    res.status 400
                     res.json {"status": false}
                     return
-                res.json(data.links)
+                res.json data.links
 
     _delete: (req, res, next) ->
         this.Link.findOne { user: req.body.email }, (err, links) ->
@@ -81,6 +81,7 @@ class LinkController extends Controller
                     res.status 400
                     res.json { status: false }
                     return
+                console.log links.links
                 res.json links.links
 
 module.exports = LinkController

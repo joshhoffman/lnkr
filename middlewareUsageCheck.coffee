@@ -18,7 +18,7 @@ User = require('./models/user').userModel
 
 client = redis.createClient()
 
-APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
+APIAddress = settings.APIAddress + ':' + settings.APIPort + '/' + settings.APIUri
 
 # all requests coming in should be validated, if the user in the request doesnt
 # exist, it should be rejected. except for requests to /login and /register
@@ -58,20 +58,22 @@ app.use (req, res, next) ->
 app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
     console.log 'in logged in'
     if req.user?
-        console.log 'logged in'
         res.json { email: req.user.email, roles: req.user.roles }
     else
-        console.log 'not logged in'
         res.status 401
         res.json { status: "failed" }
 
 
-app.get '/' + settings.MiddlewareUri + "/:uri", (req, res) ->
+app.get '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, res) ->
     console.log req.params.uri
 
     options = {
         url: APIAddress + "/" + req.params.uri
+        json: req.user
+        #json: JSON.stringify(req.user)
     }
+
+    console.log 'test'
 
     request options, (err, resp, body) ->
         console.log err if err
@@ -79,7 +81,7 @@ app.get '/' + settings.MiddlewareUri + "/:uri", (req, res) ->
         console.log resp.statusCode
 
         res.status resp.statusCode
-        res.end body
+        res.json body
 
 app.post '/' + settings.MiddlewareUri + "/:uri", (req, res)->
     console.log 'post'
@@ -97,7 +99,7 @@ app.post '/' + settings.MiddlewareUri + "/:uri", (req, res)->
         console.log resp.statusCode
 
         res.status resp.statusCode
-        res.end body
+        res.json body
 
 port = app.get 'port'
 ret = app.listen port, () ->

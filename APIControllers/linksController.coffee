@@ -1,4 +1,4 @@
-Controller = require '../configure/secureController'
+Controller = require '../configure/controller'
 settings = require '../configure/settings'
 
 class LinksController extends Controller
@@ -10,7 +10,7 @@ class LinksController extends Controller
     _get: (req, res, next) ->
         #this.Link.find().exec (err, links) ->
         console.log 'in links get'
-        this.Link.findOne { user: req.user.email }, (err, links) ->
+        this.Link.findOne { user: req.body.email }, (err, links) ->
             if err
                 console.log err
                 res.json null

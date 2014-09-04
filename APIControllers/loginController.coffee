@@ -13,7 +13,6 @@ class LoginController extends Controller
         console.log 'in login post top'
         console.log req.body
         this.passport.authenticate('local', (err, user) ->
-            console.log 'in authenticate'
             if err
                 console.log err
                 res.status 401

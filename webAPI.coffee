@@ -1,6 +1,5 @@
 express = require 'express'
 path = require 'path'
-redis = require 'redis'
 fs = require 'fs'
 config = require './configure/config'
 routes = require './APIRoutes/apiRoutes'

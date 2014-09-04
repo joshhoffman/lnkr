@@ -9,6 +9,7 @@ request = require 'request'
 passport = require 'passport'
 hashPassword = require 'password-hash'
 ensureLogin = require('./configure/ensureLogin')
+mongoose = require 'mongoose'
 
 configPassport = require './configure/configPassport'
 configRoutes = require './APIRoutes/middlewareRoutes'
@@ -27,6 +28,13 @@ APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
 
 
 app = express()
+
+db = mongoose.connection
+
+db.on "error", (err) ->
+    console.log("Mongo Error " + err)
+
+mongoose.connect('mongodb://localhost/lnkr')
 
 config app
 configPassport app, passport, User

@@ -23,6 +23,7 @@ class LinksController extends Controller
             res.json(links.links)
 
     _post: (req, res, next) ->
+        console.log req.body
         newLink = {
             id: req.body.name,
             name: req.body.name,
@@ -30,12 +31,12 @@ class LinksController extends Controller
             description: req.body.description,
             tags: req.body.tags,
             createdOn: new Date().getDate(),
-            user: req.user.email
+            user: req.body.email
         }
 
         self = this
 
-        this.Link.findOne { user: req.user.email }, (err, links) ->
+        this.Link.findOne { user: req.body.email }, (err, links) ->
             if err
                 console.log err
                 res.json null

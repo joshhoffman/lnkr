@@ -24,7 +24,11 @@ db = mongoose.connection
 db.on "error", (err) ->
     console.log("Mongo Error " + err)
 
-mongoose.connect('mongodb://localhost/lnkr')
+mongoAddress = 'mongodb://'
+mongoAddress = mongoAddress + settings.MongoServer
+mongoAddress = mongoAddress + '/'
+mongoAddress = mongoAddress + settings.MongoDBName
+mongoose.connect(mongoAddress)
 
 config app
 

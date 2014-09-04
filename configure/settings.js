@@ -7,5 +7,8 @@ module.exports = {
     
     MiddlewareAddress: 'http://0.0.0.0',
     MiddlewarePort: '4002',
-    MiddlewareUri: 'middle'
+    MiddlewareUri: 'middle',
+    
+    MongoServer: 'localhost',
+    MongoDBName: 'lnkr'
 };

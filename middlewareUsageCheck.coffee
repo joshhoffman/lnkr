@@ -34,7 +34,11 @@ db = mongoose.connection
 db.on "error", (err) ->
     console.log("Mongo Error " + err)
 
-mongoose.connect('mongodb://localhost/lnkr')
+mongoAddress = 'mongodb://'
+mongoAddress = mongoAddress + settings.MongoServer
+mongoAddress = mongoAddress + '/'
+mongoAddress = mongoAddress + settings.MongoDBName
+mongoose.connect(mongoAddress)
 
 config app
 configPassport app, passport, User
@@ -77,14 +81,13 @@ app.get '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, res
 
     request options, (err, resp, body) ->
         console.log err if err
-        console.log body
-        console.log resp.statusCode
 
         res.status resp.statusCode
         res.json body
 
-app.post '/' + settings.MiddlewareUri + "/:uri", (req, res)->
+app.post '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, res)->
     console.log 'post'
+    req.body.email = req.user.email
     console.log req.body
 
     options = {
@@ -95,8 +98,6 @@ app.post '/' + settings.MiddlewareUri + "/:uri", (req, res)->
 
     request options, (err, resp, body) ->
         console.log err if err
-        console.log body
-        console.log resp.statusCode
 
         res.status resp.statusCode
         res.json body

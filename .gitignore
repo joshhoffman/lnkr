@@ -51,9 +51,9 @@ public/static/bundleprod.js
 templates.js
 Marionette_old/apps/links/module.js
 frontEnd.js
-middlewareUsageCheck.js
+privateAPI.js
 public/static/*.js
-webAPI.js
+publicAPI.js
 configure/config.js
 configure/utils/utils.js
 deploy

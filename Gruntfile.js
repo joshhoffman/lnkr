@@ -26,8 +26,8 @@ module.exports = function(grunt) {
     
     var coffeeScriptCompile = {
         'frontEnd.js': 'frontEnd.coffee',
-        'webAPI.js': 'webAPI.coffee',
-        'middlewareUsageCheck.js' : 'middlewareUsageCheck.coffee',
+        'privateAPI.js': 'privateAPI.coffee',
+        'publicAPI.js' : 'publicAPI.coffee',
         'configure/controller.js': 'configure/controller.coffee',
         'configure/secureController.js': 'configure/secureController.coffee',
         'configure/config.js': 'configure/config.coffee',
@@ -250,10 +250,10 @@ module.exports = function(grunt) {
         )
     });
 
-    grunt.registerTask('runAPI', function() {
+    grunt.registerTask('runPrivateAPI', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['webAPI.js', settings.APIPort],
+            args: ['privateAPI.js', settings.APIPort],
             opts: {
                 stdio: 'inherit'
             }
@@ -263,10 +263,10 @@ module.exports = function(grunt) {
         )
     });
     
-    grunt.registerTask('runMiddleware', function() {
+    grunt.registerTask('runPublicAPI', function() {
         grunt.util.spawn({
             cmd: 'nodemon',
-            args: ['middlewareUsageCheck.js', settings.MiddlewarePort],
+            args: ['publicAPI.js', settings.MiddlewarePort],
             opts: {
                 stdio: 'inherit'
             }
@@ -276,5 +276,5 @@ module.exports = function(grunt) {
         )
     });
 
-    grunt.registerTask('server', ['clean', 'lint', 'compile', 'runFrontEnd', 'runMiddleware', 'runAPI', 'watch']);
+    grunt.registerTask('server', ['clean', 'lint', 'compile', 'runFrontEnd', 'runPublicAPI', 'runPrivateAPI', 'watch']);
 }

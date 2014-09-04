@@ -64,7 +64,7 @@ class LinkController extends Controller
 
     _delete: (req, res, next) ->
         this.Link.findOne { user: req.body.email }, (err, links) ->
-            if err or not link
+            if err or not links
                 res.status 400
                 res.json { status: false }
                 return
@@ -74,9 +74,8 @@ class LinkController extends Controller
                     linkIndex = index
                     return true
                 return false
+            links.links.splice(linkIndex, 1)
 
-            # TODO: figure out how to remove an element from an array
-            #links.links.remove(linkIndex)
             links.save (err, data) ->
                 if err
                     res.status 400

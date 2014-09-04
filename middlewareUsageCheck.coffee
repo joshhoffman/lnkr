@@ -70,7 +70,6 @@ app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
 
 app.get '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
     console.log 'get'
-    req.user.param = req.params.param
     
     requestUrl = APIAddress + "/" + req.params.uri
     requestUrl = requestUrl + '/' + req.params.param if req.params.param
@@ -94,6 +93,44 @@ app.post '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, re
     options = {
         url: APIAddress + "/" + req.params.uri
         method: "POST"
+        form: req.body
+    }
+
+    request options, (err, resp, body) ->
+        console.log err if err
+
+        res.status resp.statusCode
+        res.json body
+
+app.put '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
+    console.log 'put'
+    
+    requestUrl = APIAddress + "/" + req.params.uri
+    requestUrl = requestUrl + '/' + req.params.param if req.params.param
+    req.body.email = req.user.email
+
+    options = {
+        url: requestUrl
+        method: "PUT"
+        form: req.body
+    }
+
+    request options, (err, resp, body) ->
+        console.log err if err
+
+        res.status resp.statusCode
+        res.json body
+
+app.delete '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
+    console.log 'delete'
+    
+    requestUrl = APIAddress + "/" + req.params.uri
+    requestUrl = requestUrl + '/' + req.params.param if req.params.param
+    req.body.email = req.user.email
+
+    options = {
+        url: requestUrl
+        method: "DELETE"
         form: req.body
     }
 

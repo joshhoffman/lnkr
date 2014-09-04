@@ -7,6 +7,6 @@
         "level": "error"
     },
     "max_line_length": {
-        "value": 95
+        "value": 100
     }
 }

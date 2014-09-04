@@ -3,8 +3,8 @@ class Controller
         self = this
         name = '/' + config.UriPrefix + '/' + this._name
         this._name = name
-        #app.all name, config.Passport.authenticate('local')
-        app.all name, config.EnsureLogin(config.Passport)
+        this._client = config.Client
+        app.all name, config.EnsureLogin(config.Passport, this._client)
         
         app.post name, (req, res, next) ->
             self._post req, res, next

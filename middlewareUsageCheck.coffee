@@ -49,10 +49,10 @@ routesConfig = {
     HashPassword: hashPassword
     EnsureLogin: ensureLogin
     UriPrefix: settings.MiddlewareUri
+    Client: client
 }
 
 configRoutes.routes app, routesConfig
-
 
 app.use (req, res, next) ->
     console.log 'request'
@@ -68,7 +68,7 @@ app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
         res.json { status: "failed" }
 
 
-app.get '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
+app.get '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport, client), (req, res) ->
     console.log 'get'
     
     requestUrl = APIAddress + "/" + req.params.uri
@@ -85,7 +85,7 @@ app.get '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (
         res.status resp.statusCode
         res.json body
 
-app.post '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, res)->
+app.post '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport, client), (req, res)->
     console.log 'post'
     req.body.email = req.user.email
     console.log req.body
@@ -102,7 +102,7 @@ app.post '/' + settings.MiddlewareUri + "/:uri", ensureLogin(passport), (req, re
         res.status resp.statusCode
         res.json body
 
-app.put '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
+app.put '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport, client), (req, res) ->
     console.log 'put'
     
     requestUrl = APIAddress + "/" + req.params.uri
@@ -121,7 +121,7 @@ app.put '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (
         res.status resp.statusCode
         res.json body
 
-app.delete '/' + settings.MiddlewareUri + "/:uri/:param?", ensureLogin(passport), (req, res) ->
+app.delete '/'+settings.MiddlewareUri+"/:uri/:param?", ensureLogin(passport, client), (req, res) ->
     console.log 'delete'
     
     requestUrl = APIAddress + "/" + req.params.uri

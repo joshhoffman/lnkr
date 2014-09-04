@@ -10,5 +10,7 @@ module.exports = {
     MiddlewareUri: 'middle',
     
     MongoServer: 'localhost',
-    MongoDBName: 'lnkr'
+    MongoDBName: 'lnkr',
+    
+    MaxRequestsPerMinute: 10
 };

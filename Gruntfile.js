@@ -244,7 +244,7 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
     
-    grunt.registerTask('release', ['lint', 'compileProd', 'copy']);
+    grunt.registerTask('release', ['clean', 'lint', 'compileProd', 'copy']);
 
     grunt.registerTask('runFrontEnd', function() {
         grunt.util.spawn({

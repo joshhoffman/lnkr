@@ -268,7 +268,7 @@ describe("linkController", function() {
 
             var saveRetFunc = linkModel.save.args[0][0];
 
-            saveRetFunc(null, expectedSuccess);
+            saveRetFunc(null, linkModel.links);
 
             //expect(res.json).to.be.calledWith(linkModel.links);
         });

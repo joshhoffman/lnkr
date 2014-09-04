@@ -12,7 +12,8 @@ module.exports = function(grunt) {
         'grunt-browserify',
         'grunt-contrib-handlebars',
         'grunt-contrib-copy',
-        'grunt-contrib-clean'
+        'grunt-contrib-clean',
+        'grunt-contrib-uglify'
     ].forEach(function(task) {
             grunt.loadNpmTasks(task);
     });
@@ -65,8 +66,16 @@ module.exports = function(grunt) {
                 'webAPI.js',
                 'middlewareUsageCheck.js',
                 'frontEnd.js',
-                '**/*.map'
+                '**/*.map',
+                'deploy/**'
             ]
+        },
+        uglify: {
+            prod: {
+                files: {
+                    'public/static/bundle.js': ['public/static/bundle.js']
+                }
+            }
         },
         copy: {
             release: {
@@ -231,7 +240,7 @@ module.exports = function(grunt) {
 
     //grunt.registerTask('compile', ['coffee', 'browserify:dev', 'cafemocha'])
     grunt.registerTask('compile', ['coffee', 'browserify:dev'])
-    grunt.registerTask('compileProd', ['coffee', 'browserify:prod', 'cafemocha'])
+    grunt.registerTask('compileProd', ['coffee', 'browserify:prod', 'uglify', 'cafemocha'])
     grunt.registerTask('lint', ['jshint', 'coffeelint']);
     grunt.registerTask('default', ['lint', 'compile']);
     

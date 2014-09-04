@@ -81,7 +81,6 @@ class LinkController extends Controller
                     res.status 400
                     res.json { status: false }
                     return
-                console.log links.links
                 res.json links.links
 
 module.exports = LinkController

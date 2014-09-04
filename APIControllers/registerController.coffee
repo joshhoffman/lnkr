@@ -1,12 +1,14 @@
 Controller = require '../configure/controller'
 sify = require('../configure/utils/utils').sify
+settings = require '../configure/settings'
 
 class RegisterController extends Controller
     constructor: (app, config) ->
-        this._name = 'register'
+        #this._name = settings.MiddlewareUri + '/register'
+        this._name = settings.APIUri + '/register'
         this.User = config.User
         this.HashPassword = config.HashPassword
-        super app
+        super app, config
 
     _post: (req, res) ->
         console.log 'register'

@@ -1,16 +1,17 @@
 Controller = require '../configure/controller'
 sift = require '../configure/utils/utils'
+settings = require '../configure/settings'
 
 class LoginController extends Controller
     constructor: (app, config) ->
-        console.log 'login constructor'
         this._name = 'login'
         this.User = config.User
         this.passport = config.Passport
-        super app
+        super app, config
 
     _post: (req, res, next) ->
         console.log 'in login post top'
+        console.log req.body
         this.passport.authenticate('local', (err, user) ->
             if err
                 console.log err

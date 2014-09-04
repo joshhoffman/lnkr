@@ -4,6 +4,16 @@ redis = require 'redis'
 url = require 'url'
 settings = require './configure/settings'
 config = require './configure/configMiddleware'
+http = require 'http'
+request = require 'request'
+passport = require 'passport'
+hashPassword = require 'password-hash'
+ensureLogin = require('./configure/ensureLogin')
+
+configPassport = require './configure/configPassport'
+configRoutes = require './APIRoutes/middlewareRoutes'
+
+User = require('./models/user').userModel
 
 client = redis.createClient()
 
@@ -18,10 +28,67 @@ APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
 
 app = express()
 
+routesConfig = {
+    User: User
+    Passport: passport
+    HashPassword: hashPassword
+    EnsureLogin: ensureLogin
+    UriPrefix: settings.MiddlewareUri
+}
+
 config app
+configPassport app, passport, User
+
+configRoutes.routes app, routesConfig
+
+app.use (req, res, next) ->
+    console.log 'request'
+    console.log req.url
+    next()
+
+app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
+    console.log 'in logged in'
+    if req.user?
+        console.log 'logged in'
+        res.json { email: req.user.email, roles: req.user.roles }
+    else
+        console.log 'not logged in'
+        res.status 401
+        res.json { status: "failed" }
+
 
 app.get settings.MiddlewareUri + "/:uri", (req, res) ->
-    console.log req.uri
+    console.log req.params.uri
+
+    options = {
+        url: APIAddress + "/" + req.params.uri
+    }
+
+    request options, (err, resp, body) ->
+        console.log err if err
+        console.log body
+        console.log resp.statusCode
+
+        res.status resp.statusCode
+        res.end body
+
+app.post settings.MiddlewareUri + "/:uri", (req, res)->
+    console.log 'post'
+    console.log req.body
+
+    options = {
+        url: APIAddress + "/" + req.params.uri
+        method: "POST"
+        form: req.body
+    }
+
+    request options, (err, resp, body) ->
+        console.log err if err
+        console.log body
+        console.log resp.statusCode
+
+        res.status resp.statusCode
+        res.end body
 
 port = app.get 'port'
 ret = app.listen port, () ->

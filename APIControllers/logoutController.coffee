@@ -1,4 +1,5 @@
 SecureController = require '../configure/secureController'
+settings = require '../configure/settings'
 
 class LogoutController extends SecureController
     constructor: (app, configure) ->

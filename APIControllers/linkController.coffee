@@ -1,5 +1,5 @@
 Controller = require '../configure/secureController'
-#require('array.prototype.find')
+settings = require '../configure/settings'
 
 class LinkController extends Controller
     constructor: (app, config) ->

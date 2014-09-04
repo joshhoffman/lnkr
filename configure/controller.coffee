@@ -1,7 +1,7 @@
 class Controller
-    constructor: (app) ->
+    constructor: (app, config) ->
         self = this
-        name = '/api/' + this._name
+        name = '/' + config.UriPrefix +  '/' + this._name
         this._name = name
         app.post name, (req, res, next) ->
             self._post req, res, next

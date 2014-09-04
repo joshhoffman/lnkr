@@ -1,4 +1,5 @@
 Controller = require '../configure/secureController'
+settings = require '../configure/settings'
 
 class LinksController extends Controller
     constructor: (app, config) ->

@@ -10,9 +10,13 @@ url = require 'url'
 
 app = express()
 
-APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
+#APIAddress = settings.APIAddress + ':' + settings.APIPort + settings.APIUri
+APIAddress = settings.MiddlewareAddress + ':'
+APIAddress = APIAddress + settings.MiddlewarePort + '/' + settings.MiddlewareUri
 
-app.use settings.APIUri, proxy(url.parse(APIAddress))
+console.log APIAddress
+
+app.use '/' + settings.APIUri, proxy(url.parse(APIAddress))
 
 config(app)
 

@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 module.exports = function(Entities, LinkManager,
                           Backbone, Marionette, $, _) {
     Entities.Link = Backbone.Model.extend({
@@ -59,8 +57,6 @@ module.exports = function(Entities, LinkManager,
             var defer = $.Deferred();
             link.fetch({
                 success: function(data) {
-                    console.log(data);
-                    
                     defer.resolve(data);
                 },
                 error: function(collection, error, options) {

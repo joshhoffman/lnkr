@@ -5,7 +5,7 @@ module.exports = function(Entities, LinkManager,
     Entities.LoginModel = Backbone.Model.extend({
         defaults: {
             email: '',
-            password: ''
+            password: '',
         },
 
         urlRoot: '/api/login',

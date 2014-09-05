@@ -6,7 +6,7 @@ module.exports = function(UserEdit, LinkManager,
         template: EditTemplate,
 
         initialize: function() {
-            this.title = "Edit " + LinkManager.User.get("displayName");
+            this.title = "Edit " + this.model.get("displayName");
         }
     });
 };

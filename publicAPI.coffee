@@ -62,7 +62,7 @@ app.use (req, res, next) ->
 app.get '/' + settings.MiddlewareUri + '/loggedin', (req, res) ->
     console.log 'in logged in'
     if req.user?
-        res.json { email: req.user.email, roles: req.user.roles }
+        res.json { email: req.user.email, roles: req.user.roles, displayName: req.user.displayName }
     else
         res.status 401
         res.json { status: "failed" }

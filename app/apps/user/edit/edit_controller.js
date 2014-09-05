@@ -7,7 +7,7 @@ module.exports = function(UserEdit, LinkManager,
                 return;
             }
 
-            var view = new LinkManager.EditModule.Edit.Edit({
+            var view = new UserEdit.Edit({
                 model: LinkManager.User
             });
 

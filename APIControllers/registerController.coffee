@@ -29,7 +29,7 @@ class RegisterController extends Controller
                 console.log 'in big if'
 
                 usr.save (err, result) ->
-                    if not err
+                    if err
                         console.log err
                     else
                         console.log result
@@ -41,9 +41,6 @@ class RegisterController extends Controller
                         res.json usr
                         return
             else
-                console.log 'in delse'
-                console.log err if err
-                console.log foundUser
                 res.status 401
                 res.json {"status":"failed"}
 

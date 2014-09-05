@@ -4,11 +4,9 @@ module.exports = function(ShowUser, LinkManager,
         showUser: function() {
             var fetchingLink;
             if(LinkManager.User) {
-                console.log("in if");
                 console.log(LinkManager.User);
                 fetchingLink = LinkManager.request("user:entity", LinkManager.User.get("displayName"));
             } else {
-                console.log("in else");
                 LinkManager.trigger("login:unauthorized");
                 return;
             }

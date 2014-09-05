@@ -17,10 +17,14 @@ class RegisterController extends Controller
 
         self = this
 
-        this.User.findOne {email: req.body.email}, (err, foundUser) ->
+        # this.User.find().or([{email: req.body.email}, {displayName: req.body.displayName}]).exec()
+        query = this.User.find()
+        query.or [{email: req.body.email}, {displayName: req.body.displayName}]
+        query.exec (err, foundUser) ->
             console.log 'in find'
             console.log err if err
-            if not foundUser and not err and password is confirmPassword
+            validUser = foundUser? and foundUser.length == 0
+            if validUser and not err and password is confirmPassword
                 usr = new self.User {
                     'email': req.body.email
                     'password': self.HashPassword.generate(req.body.password)
@@ -31,6 +35,8 @@ class RegisterController extends Controller
                 usr.save (err, result) ->
                     if err
                         console.log err
+                        res.status 401
+                        return res.json {"status":"failed"}
                     else
                         console.log result
                         console.log 'success!'
@@ -43,6 +49,5 @@ class RegisterController extends Controller
             else
                 res.status 401
                 res.json {"status":"failed"}
-
 
 module.exports = RegisterController

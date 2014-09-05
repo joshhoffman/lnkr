@@ -8,8 +8,11 @@ class UserController extends Controller
         super app, config
 
     _get: (req, res, next) ->
-        this.User.findOne { email: req.params.id }, (err, user) ->
-            console.log user if user
+        this.User.findOne { displayName: req.params.id }, (err, user) ->
+            if err
+                console.log err
+                res.status 401
+                return res.json { status: "failed" }
             res.json {
                 id: user.email
                 email: user.email

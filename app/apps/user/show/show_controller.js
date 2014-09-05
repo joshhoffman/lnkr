@@ -4,7 +4,6 @@ module.exports = function(ShowUser, LinkManager,
         showUser: function() {
             var fetchingLink;
             if(LinkManager.User) {
-                console.log(LinkManager.User);
                 fetchingLink = LinkManager.request("user:entity", LinkManager.User.get("displayName"));
             } else {
                 LinkManager.trigger("login:unauthorized");
@@ -19,9 +18,6 @@ module.exports = function(ShowUser, LinkManager,
                     });
 
                     userFormView.on("user:edit", function () {
-                        console.log("edit user");
-                        console.log(LinkManager.UserModule.Edit);
-
                         LinkManager.UserModule.Edit.Controller.showEdit();
                     });
 
@@ -31,6 +27,7 @@ module.exports = function(ShowUser, LinkManager,
                     });
                 } else {
                    // TODO: add missing link view
+                    console.log("missing view");
                 }
 
                 LinkManager.mainRegion.show(userLayoutView);

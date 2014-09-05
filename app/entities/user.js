@@ -61,6 +61,8 @@ module.exports = function(Entities, LinkManager,
                     }
                 }
             });
+            
+            return defer.promise();
         }
     };
     

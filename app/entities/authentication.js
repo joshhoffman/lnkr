@@ -43,6 +43,9 @@ module.exports = function(Entities, LinkManager,
             if(attrs.password.length < 5) {
                 errors.password = "password must be 5 characters";
             }
+            if(!attrs.displayName || attrs.displayName.length < 5) {
+                errors.displayName = "display name must be 5 characters";
+            }
 
             if(!_.isEmpty(errors)) {
                 return errors;

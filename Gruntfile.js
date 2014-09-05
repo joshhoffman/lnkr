@@ -43,6 +43,8 @@ module.exports = function(grunt) {
         'APIControllers/loginController.js': 'APIControllers/loginController.coffee',
         'APIControllers/registerController.js': 'APIControllers/registerController.coffee',
         'APIControllers/logoutController.js': 'APIControllers/logoutController.coffee',
+        'APIControllers/userController.js': 'APIControllers/userController.coffee',
+        'APIControllers/usersController.js': 'APIControllers/usersController.coffee',
         'models/link.js': 'models/link.coffee',
         'models/links.js': 'models/links.coffee',
         'models/user.js': 'models/user.coffee'
@@ -63,8 +65,8 @@ module.exports = function(grunt) {
                 'configure/*.js',
                 '!configure/settings.js',
                 'models/*.js',
-                'webAPI.js',
-                'middlewareUsageCheck.js',
+                'privateAPI.js',
+                'publicAPI.js',
                 'frontEnd.js',
                 '**/*.map',
                 'deploy/**'

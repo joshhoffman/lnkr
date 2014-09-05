@@ -26,6 +26,7 @@ class RegisterController extends Controller
                     'password': self.HashPassword.generate(req.body.password)
                     'displayName': req.body.displayName
                 }
+                console.log 'in big if'
 
                 usr.save (err, result) ->
                     if not err
@@ -40,6 +41,9 @@ class RegisterController extends Controller
                         res.json usr
                         return
             else
+                console.log 'in delse'
+                console.log err if err
+                console.log foundUser
                 res.status 401
                 res.json {"status":"failed"}
 

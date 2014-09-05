@@ -4,9 +4,13 @@ module.exports = function(ShowUser, LinkManager,
         showUser: function() {
             var fetchingLink;
             if(LinkManager.User) {
-                fetchingLink = LinkManager.request("user:entity", LinkManager.User.email);
+                console.log("in if");
+                console.log(LinkManager.User);
+                fetchingLink = LinkManager.request("user:entity", LinkManager.User.get("displayName"));
             } else {
-                fetchingLink = LinkManager.request("user:entity", "");
+                console.log("in else");
+                LinkManager.trigger("login:unauthorized");
+                return;
             }
             $.when(fetchingLink).done(function(user){
                 var userLayoutView = new ShowUser.Layout();
